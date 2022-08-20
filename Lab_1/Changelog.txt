@@ -5,3 +5,5 @@ Informe:
 Código:
 	20/08/2022: Agregado TDA pixbit
 	20/08/2022: Agregado TDA pixhex
+	20/08/2022: Agregado TDA pixrgb
+	20/08/2022: TDAs pixeles pulidos y comentados
