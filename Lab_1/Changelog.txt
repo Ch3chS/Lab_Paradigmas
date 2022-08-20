@@ -1,6 +1,7 @@
 Informe:
-    19/08/2022: Se iniciaron los puntos 1 y 2 del informe, aunque falta pulirlos.
+	19/08/2022: Se iniciaron los puntos 1 y 2 del informe, aunque falta pulirlos.
     
 
 Código:
-    20/08/2022: Agregado TDA pixbit
+	20/08/2022: Agregado TDA pixbit
+	20/08/2022: Agregado TDA pixhex
