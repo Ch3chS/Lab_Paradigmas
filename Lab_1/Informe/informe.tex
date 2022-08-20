@@ -1,0 +1,66 @@
+\documentclass[10pt,letterpaper,openany]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage[left=2.54cm, right=2.54cm, top=2.54cm, bottom=2.54cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{apacite}
+
+\title{Informe}
+\author{Sergio Espinoza}
+
+\begin{document}
+    \include{Contenido/Portada.tex}
+    
+    
+    \tableofcontents
+    \newpage
+
+    %------------------------------------------------------------------------
+
+    
+    \section{Introducción}
+    En este informe se abordará el laboratorio número 1 del ramo paradigmas de programación
+    con el formato expuesto en el indice del mismo. A continuación se darán breves descripciones
+    de los dos grandes pilares a ver para encontrar la posterior resolución.  
+        \subsection{Descripción del problema}
+            \input{Contenido/Capitulos/Introduccion/D_problema.tex}
+        \subsection{Descripción del paradigma}
+            \input{Contenido/Capitulos/Introduccion/D_paradigma.tex}
+
+    %------------------------------------------------------------------------
+
+    \section{Análisis del problema}
+        \input{Contenido/Capitulos/Desarrollo/A_problema.tex}
+
+    \section{Diseño de la solución}
+        \input{Contenido/Capitulos/Desarrollo/D_solucion.tex}
+    (presentar su enfoque de solución, describir, diagramar, descomposición de problemas, algoritmos o técnicas empleados para problemas particulares, recursos empleados) (max. 2.5 páginas. Puede incluir diagramas como anexos fuera del límite de las 10 páginas) (30\%)
+
+    \section{Consideraciones de implementación}
+    (estructura del proyecto, bibliotecas empleadas, razones de su elección, compilador o interprete usado, etc.) (max 1 página) (10\%)
+
+    \section{Instrucciones de uso}
+    (ejemplos, resultados esperados, posibles errores) (max 1 página. Complementar con ejemplos detallados en anexos que están fuera del límite de 10 páginas) (15\%)
+
+    \section{Resultados obtenidos}
+    Esto puede abordarse listando todos los requerimientos del proyecto en una tabla indicando el grado de alcance. Indicar que tipos de pruebas se hicieron. Cuantas de las pruebas fueron exitosas, cuantas fracasaron, razones de fallos. Especificar que funciones no se completaron y el porque no se completaron. (máximo 1 página) (10\%)
+
+    \section{Evaluación completa}
+    \cite{einstein}
+
+    \section{Conclusión}
+    (respecto de los alcances, limitaciones, dificultades de usar el paradigma para abordar el problema. Para los informes 2 en adelante, contrastar resultados alcanzados con el paradigma de turno con los anteriores) (máximo 1 página) (10\%)
+
+    \newpage
+    \bibliographystyle{apacite}
+    \bibliography{Bibliografia.bib}
+    
+    \section*{Anexos}
+        \input{Anexos.tex}
+
+\end{document}

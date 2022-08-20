@@ -1,0 +1,13 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{2}{}%
+\contentsline {subsection}{\numberline {1.1}Descripción del problema}{2}{}%
+\contentsline {subsection}{\numberline {1.2}Descripción del paradigma}{2}{}%
+\contentsline {subsubsection}{\numberline {1.2.1}Paradigma funcional}{2}{}%
+\contentsline {section}{\numberline {2}Análisis del problema}{2}{}%
+\contentsline {section}{\numberline {3}Diseño de la solución}{3}{}%
+\contentsline {section}{\numberline {4}Consideraciones de implementación}{3}{}%
+\contentsline {section}{\numberline {5}Instrucciones de uso}{3}{}%
+\contentsline {section}{\numberline {6}Resultados obtenidos}{3}{}%
+\contentsline {section}{\numberline {7}Evaluación completa}{3}{}%
+\contentsline {section}{\numberline {8}Conclusión}{3}{}%
+\contentsline {section}{Referencias}{4}{}%
