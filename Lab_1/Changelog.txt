@@ -1,5 +1,6 @@
 Informe:
 	19/08/2022: Se iniciaron los puntos 1 y 2 del informe, aunque falta pulirlos.
+	21/08/2022: Importantes avances en informe (Pre-Lab), falta pulirlos.
     
 
 Código:

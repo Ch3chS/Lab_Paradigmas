@@ -1,1 +1,41 @@
-Listas.
+Comenzando ahora con el diseño de la solución para la problemática de este semestre
+ deberiamos partir definiendo que tipos de dato abstracto o TDAs, los cuales serán los que 
+ nos permitirán una mejor representación para este editor de imagenes.
+
+ \subsection{TDAs e implementación}
+ El objeto central con el que trabajaremos en un editor de imagenes es bastante predecible, 
+ las imagenes, pero a su vez bien es sabido que las imagenes están subdivididas en 
+  pixeles con los que trabajar si se quieren realizar
+ cambios en esta; así que, para este trabajo definiremos 3 tipos de pixeles y su implementación para que 
+ podamos trabajar correctamente las imagenes en un archivo principal.\\
+
+Los pixeles en sí estarán un poco más adelante, pero algo que los 3 tipos de estos tendrán en común, es que serán implementados con listas 
+donde los 2 primeros elementos corresponden a la posición (x,y) del pixel y el último elemento de la lista
+ corresponderá a la profundidad del pixel, donde, estos 3 valores mencionados son enteros positivos.\\
+
+ La gran diferencia se encontrará en los datos que hay entre medio de los valores (x,y) y depth (profundidad) que
+ serán de la siguiente forma:
+ \begin{itemize}
+    \item Pixbit-d: Este tipo de pixel tendrá un bit entre medio de tipo entero, el cual solo podrá 
+    tomar los valores 0 y 1. De esta forma un pixbit-d será una lista de la forma
+    \begin{equation*}
+        '(int, int, int, int) = (x \geq 0, y \geq 0, bit(0|1), depth \geq 0) 
+    \end{equation*}
+     
+    \item Pixrgb-d: Este tipo de pixel tendrá además tendrá 3 enteros entre 0 y 255 que representarán la 
+    cantidad de cada color que tiene el pixel siendo r = rojo (red), g = verde (green) y b = azul (green)
+    quedandonos una lista de la forma
+    \begin{equation*}
+        '(int, int, int, int, int, int) = (x \geq 0, y \geq 0, 0 \leq r \leq 255, 0 \leq g \leq 255, 0 \leq b \leq 255, depth \geq 0) 
+    \end{equation*}
+    
+    \item Pixhex-d: Este tipo de pixel tendrá un string con formato \#XXXXXX donde las X pueden tomar valores de un dígito hexadecimal (entre 0 y F(15))
+    donde las 2 primeras X es la cantidad de rojo, las 2 de al medio son de verde y las 2 últimas son de azul; la representación quedaría de la forma
+    \begin{equation*}
+        '(int, int, string, int) = (x \geq 0, y \geq 0, hex, depth \geq 0) 
+    \end{equation*}
+ \end{itemize}
+
+ presentar su enfoque de solución, describir, diagramar, 
+ descomposición de problemas, algoritmos o técnicas empleados para
+  problemas particulares, recursos empleados
