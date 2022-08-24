@@ -11,3 +11,4 @@ Código:
 	21/08/2022: Funciones TDAs agregadas al archivo de pruebas
 	24/08/2022: Agregado identificador a todos los TDA
 	24/08/2022: Función image agregada
+	25/08/2022: Funciones bitmap?, pixmap? y pixhex? agregadas
