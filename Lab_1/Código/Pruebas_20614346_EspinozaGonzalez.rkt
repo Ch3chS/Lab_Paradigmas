@@ -19,7 +19,7 @@
 ;Constructor pixbit-d
 (define pixbit1 (pixbit-d 4 2 1 3))
 (define pixbit2 (pixbit-d 2 5 0 1))
-(define pixbit3 (pixbit-d 1 3 5 2))  ;Este nos devolverá la representación de un pixbit-d erroneo porque el bit no puede ser 5 '(-1 -1 -1 -1)
+(define pixbit3 (pixbit-d 1 3 5 2))  ;Este nos devolverá la representación de un pixbit-d erroneo porque el bit no puede ser 5 '(-1 -1 -1 -1 -1)
 
 ;Pertenencia pixbit-d
 (define pixbit?1 (pixbit-d? pixbit1))
@@ -53,22 +53,22 @@
 ;modificador x
 (define changepixbit.x1 (changepixbit.x pixbit1 1))
 (define changepixbit.x2 (changepixbit.x pixbit2 "a")) ;Al ingresar un string en lugar de un entero nos devolvera la lista sin cambios
-(define changepixbit.x3 (changepixbit.x pixbit3 7))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1)
+(define changepixbit.x3 (changepixbit.x pixbit3 7))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1)
 
 ;modificador y
 (define changepixbit.y1 (changepixbit.y pixbit1 7))
 (define changepixbit.y2 (changepixbit.y pixbit2 "hola")) ;Al ingresar un string en lugar de un entero nos devolvera la lista sin cambios
-(define changepixbit.y3 (changepixbit.y pixbit3 2))      ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1)
+(define changepixbit.y3 (changepixbit.y pixbit3 2))      ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1)
 
 ;modificador bit
 (define changepixbit.bit1 (changepixbit.bit pixbit1 0))
 (define changepixbit.bit2 (changepixbit.bit pixbit2 8))   ;Al ingresar un número distinto de 0 o 1 nos devolvera la lista sin cambios
-(define changepixbit.bit3 (changepixbit.bit pixbit3 27))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1)
+(define changepixbit.bit3 (changepixbit.bit pixbit3 27))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1)
 
 ;modificador depth
 (define changepixbit.depth1 (changepixbit.depth pixbit1 1))
 (define changepixbit.depth2 (changepixbit.depth pixbit2 "adiós")) ;Al ingresar un string en lugar de un entero nos devolvera la lista sin cambios
-(define changepixbit.depth3 (changepixbit.depth pixbit3 9))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1)
+(define changepixbit.depth3 (changepixbit.depth pixbit3 9))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1)
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -78,7 +78,7 @@
 ;Constructor pixbit-d
 (define pixrgb1 (pixrgb-d 4 2 124 222 152 3))
 (define pixrgb2 (pixrgb-d 2 5 52 15 52 1))
-(define pixrgb3 (pixrgb-d 1 3 45 636 335 2))  ;Este nos devolverá la representación de un pixbit-d erroneo por el g,b mayores de 255 '(-1 -1 -1 -1 -1 -1)
+(define pixrgb3 (pixrgb-d 1 3 45 636 335 2))  ;Este nos devolverá la representación de un pixbit-d erroneo por el g,b mayores de 255 '(-1 -1 -1 -1 -1 -1 -1)
 
 ;Pertenencia pixbit-d
 (define pixrgb?1 (pixrgb-d? pixrgb1))
@@ -122,32 +122,32 @@
 ;modificador x
 (define changepixrgb.x1 (changepixrgb.x pixrgb1 1))
 (define changepixrgb.x2 (changepixrgb.x pixrgb2 "a")) ;Al ingresar un string en lugar de un entero nos devolvera la lista sin cambios
-(define changepixrgb.x3 (changepixrgb.x pixrgb3 7))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1)
+(define changepixrgb.x3 (changepixrgb.x pixrgb3 7))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1 -1)
 
 ;modificador y
 (define changepixrgb.y1 (changepixrgb.y pixrgb1 7))
 (define changepixrgb.y2 (changepixrgb.y pixrgb2 "hola")) ;Al ingresar un string en lugar de un entero nos devolvera la lista sin cambios
-(define changepixrgb.y3 (changepixrgb.y pixrgb3 2))      ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1)
+(define changepixrgb.y3 (changepixrgb.y pixrgb3 2))      ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1 -1)
 
 ;modificador r
 (define changepixrgb.r1 (changepixrgb.r pixrgb1 0))
 (define changepixrgb.r2 (changepixrgb.r pixrgb2 685))   ;Al ingresar un número mayor a 255 nos devolvera la lista sin cambios
-(define changepixrgb.r3 (changepixrgb.r pixrgb3 27))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1)
+(define changepixrgb.r3 (changepixrgb.r pixrgb3 27))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1 -1)
 
 ;modificador g
 (define changepixrgb.g1 (changepixrgb.g pixrgb1 0))
 (define changepixrgb.g2 (changepixrgb.g pixrgb2 9238))   ;Al ingresar un número mayor a 255 nos devolvera la lista sin cambios
-(define changepixrgb.g3 (changepixrgb.g pixrgb3 217))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1)
+(define changepixrgb.g3 (changepixrgb.g pixrgb3 217))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1 -1)
 
 ;modificador b
 (define changepixrgb.b1 (changepixrgb.b pixrgb1 0))
 (define changepixrgb.b2 (changepixrgb.b pixrgb2 -5))   ;Al ingresar un número menor a 0 nos devolvera la lista sin cambios
-(define changepixrgb.b3 (changepixrgb.b pixrgb3 127))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1)
+(define changepixrgb.b3 (changepixrgb.b pixrgb3 127))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1 -1)
 
 ;modificador depth
 (define changepixrgb.depth1 (changepixrgb.depth pixrgb1 1))
 (define changepixrgb.depth2 (changepixrgb.depth pixrgb2 "adiós")) ;Al ingresar un string en lugar de un entero nos devolvera la lista sin cambios
-(define changepixrgb.depth3 (changepixrgb.depth pixrgb3 9))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1)
+(define changepixrgb.depth3 (changepixrgb.depth pixrgb3 9))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 -1 -1 -1 -1)
 
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@
 ;Constructor pixhex-d
 (define pixhex1 (pixhex-d 4 2 "#D245F2" 3))
 (define pixhex2 (pixhex-d 2 5 "#A3B4D2" 1))
-(define pixhex3 (pixhex-d 1 3 5 2))  ;Este nos devolverá la representación de un pixbit-d erroneo porque hex no puede ser un número '(-1 -1 "" -1)
+(define pixhex3 (pixhex-d 1 3 5 2))  ;Este nos devolverá la representación de un pixbit-d erroneo porque hex no puede ser un número '(-1 -1 -1 "" -1)
 
 ;Pertenencia pixbit-d
 (define pixhex?1 (pixhex-d? pixhex1))
@@ -192,22 +192,22 @@
 ;modificador x
 (define changepixhex.x1 (changepixhex.x pixhex1 1))
 (define changepixhex.x2 (changepixhex.x pixhex2 "a")) ;Al ingresar un string en lugar de un entero nos devolvera la lista sin cambios
-(define changepixhex.x3 (changepixhex.x pixhex3 7))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 "" -1)
+(define changepixhex.x3 (changepixhex.x pixhex3 7))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 "" -1)
 
 ;modificador y
 (define changepixhex.y1 (changepixhex.y pixhex1 7))
 (define changepixhex.y2 (changepixhex.y pixhex2 "hola")) ;Al ingresar un string en lugar de un entero nos devolvera la lista sin cambios
-(define changepixhex.y3 (changepixhex.y pixhex3 2))      ;Al ser un pixbit erroneo nos devolvera '(-1 -1 "" -1)
+(define changepixhex.y3 (changepixhex.y pixhex3 2))      ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 "" -1)
 
 ;modificador hex
 (define changepixhex.hex1 (changepixhex.hex pixhex1 "#52F3A5"))
 (define changepixhex.hex2 (changepixhex.hex pixhex2 8))           ;Al ingresar un número nos devolvera la lista sin cambios
-(define changepixhex.hex3 (changepixhex.hex pixhex3 "#721352"))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 "" -1)
+(define changepixhex.hex3 (changepixhex.hex pixhex3 "#721352"))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 "" -1)
 
 ;modificador depth
 (define changepixhex.depth1 (changepixhex.depth pixhex1 1))
 (define changepixhex.depth2 (changepixhex.depth pixhex2 "adiós")) ;Al ingresar un string en lugar de un entero nos devolvera la lista sin cambios
-(define changepixhex.depth3 (changepixhex.depth pixhex3 9))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 "" -1)
+(define changepixhex.depth3 (changepixhex.depth pixhex3 9))   ;Al ser un pixbit erroneo nos devolvera '(-1 -1 -1 "" -1)
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------
 
