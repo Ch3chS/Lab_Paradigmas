@@ -47,20 +47,34 @@
 ;Recorrido: booleano
 (define pixrgb-d? (lambda (pixrgb-d)
                     ;Comprobar que sea una lista y que no sea igual a la representación de un pixrgb erroneo
-                   (if (and (list? pixrgb-d) (not (equal? pixrgb-d (list -1 -1 -1 -1 -1 -1 -1))))
-                       
-                       ;Comprobar que todos sean números
-                       (if (and (number? (car pixrgb-d)) (and (number? (cadr pixrgb-d)) (and (number? (caddr pixrgb-d)) (and (number? (cadddr pixrgb-d)) (and (number? (car(cddddr pixrgb-d))) (and (number? (cadr(cddddr pixrgb-d))) (number? (caddr(cddddr pixrgb-d)))))))))
+                    (if (and (list? pixrgb-d) (not (equal? pixrgb-d (list -1 -1 -1 -1 -1 -1 -1))))
+                        (if (= (length pixrgb-d) 7)
+                            ;Comprobar que todos sean números
+                            (if (and (number? (car pixrgb-d)) (and (number? (cadr pixrgb-d)) (and (number? (caddr pixrgb-d)) (and (number? (cadddr pixrgb-d)) (and (number? (car(cddddr pixrgb-d))) (and (number? (cadr(cddddr pixrgb-d))) (number? (caddr(cddddr pixrgb-d)))))))))
 
-                           ;Comprobar que r,g,b esten entre 0 y 255 y que x,y,depth sean iguales o mayores que 0
-                           (if (and (= 2 (car pixrgb-d)) (and (and (and (<= 0 (cadr pixrgb-d)) (<= 0 (caddr pixrgb-d))) (and (<= 0 (cadddr pixrgb-d)) (>= 255 (cadddr pixrgb-d)))) (and (and (<= 0 (car (cddddr pixrgb-d))) (>= 255 (car (cddddr pixrgb-d)))) (and (and (<= 0 (cadr(cddddr pixrgb-d))) (>= 255 (cadr(cddddr pixrgb-d)))) (<= 0 (caddr(cddddr pixrgb-d)))))))
-                            #t
+                                ;Comprobar que r,g,b esten entre 0 y 255 y que x,y,depth sean iguales o mayores que 0
+                                (if (and (= 2 (car pixrgb-d)) (and (and (and (<= 0 (cadr pixrgb-d)) (<= 0 (caddr pixrgb-d))) (and (<= 0 (cadddr pixrgb-d)) (>= 255 (cadddr pixrgb-d)))) (and (and (<= 0 (car (cddddr pixrgb-d))) (>= 255 (car (cddddr pixrgb-d)))) (and (and (<= 0 (cadr(cddddr pixrgb-d))) (>= 255 (cadr(cddddr pixrgb-d)))) (<= 0 (caddr(cddddr pixrgb-d)))))))
+                                    #t
+                                    #f
+                                    )
+                                #f
+                                )
                             #f
                             )
-                           #f
-                           )
-                       #f
-                   )))
+                        #f)))
+
+;Función que verifica que una lista contenga solo pixbit-d
+;Recursión
+;Entrada: Lista de pixrgb-ds
+;Salida: booleano
+(define pixrgb-dlist? (lambda (list)
+                        (if (equal? list null)
+                            #t
+                         (if (and (pixrgb-d? (car list)) (pixrgb-dlist? (cdr list)))
+                             #t
+                             #f
+                             )
+                         )))
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 

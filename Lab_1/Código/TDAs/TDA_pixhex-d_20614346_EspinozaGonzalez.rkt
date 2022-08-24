@@ -46,18 +46,34 @@
 ;Recorrido: booleano
 (define pixhex-d? (lambda (pixhex-d)
                     ;Comprobar que la entrada sea una lista y que no corresponda a la representación de un pixhex erroneo
-                   (if (and (list? pixhex-d) (not (equal? pixhex-d (list -1 -1 -1 "" -1))))
-                       ;Comprobar que x,y,depth sean números y hex sea un string
-                       (if (and (number? (car pixhex-d)) (and (number? (cadr pixhex-d)) (and (number? (caddr pixhex-d)) (and (string? (cadddr pixhex-d)) (number? (car (cddddr pixhex-d)))))))
-                           ;Comprobar que x,y,depth sean mayores o iguales a 0
-                           (if (and (= 3 (car pixhex-d)) (and (<= 0 (cadr pixhex-d)) (and (<= 0 (caddr pixhex-d)) (<= 0 (car (cddddr pixhex-d))))))
-                               #t
-                               #f
-                               )
-                           #f
-                           )
-                   #f
-                   )))
+                    (if (and (list? pixhex-d) (not (equal? pixhex-d (list -1 -1 -1 "" -1))))
+                        (if (= (length pixhex-d) 5)
+                            ;Comprobar que x,y,depth sean números y hex sea un string
+                            (if (and (number? (car pixhex-d)) (and (number? (cadr pixhex-d)) (and (number? (caddr pixhex-d)) (and (string? (cadddr pixhex-d)) (number? (car (cddddr pixhex-d)))))))
+                                ;Comprobar que x,y,depth sean mayores o iguales a 0
+                                (if (and (= 3 (car pixhex-d)) (and (<= 0 (cadr pixhex-d)) (and (<= 0 (caddr pixhex-d)) (<= 0 (car (cddddr pixhex-d))))))
+                                    #t
+                                    #f
+                                    )
+                                #f
+                                )
+                            #f
+                            )
+                        #f
+                        )))
+
+;Función que verifica que una lista contenga solo pixbit-d
+;Recursión
+;Entrada: Lista de pixhex-ds
+;Salida: booleano
+(define pixhex-dlist? (lambda (list)
+                        (if (equal? list null)
+                            #t
+                         (if (and (pixhex-d? (car list)) (pixhex-dlist? (cdr list)))
+                             #t
+                             #f
+                             )
+                         )))
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 

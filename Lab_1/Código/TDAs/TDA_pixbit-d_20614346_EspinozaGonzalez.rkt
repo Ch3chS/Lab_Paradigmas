@@ -49,18 +49,34 @@
 ;Recorrido: booleano
 (define pixbit-d? (lambda (pixbit-d)
                     ;Comprobar que la entrada sea una lista y que no corresponda a la representación de un pixbit erroneo
-                   (if (and (list? pixbit-d) (not (equal? pixbit-d (list -1 -1 -1 -1 -1))))
-                       ;Comprobar que todos sean números
-                       (if (and (number? (car pixbit-d)) (and (number? (cadr pixbit-d)) (and (number? (caddr pixbit-d)) (and (number? (cadddr pixbit-d)) (number? (car (cddddr pixbit-d)))))))
-                           ;Comprobar que x,y,depth sean mayores o iguales a 0 y que el bit sea 0 o 1
-                           (if (and (= 1 (car pixbit-d)) (and (<= 0 (cadr pixbit-d)) (and (<= 0 (caddr pixbit-d)) (and (or (= 0 (cadddr pixbit-d)) (= 1 (cadddr pixbit-d))) (<= 0 (car (cddddr pixbit-d)))))))
-                            #t
+                    (if (and (list? pixbit-d) (not (equal? pixbit-d (list -1 -1 -1 -1 -1))))
+                        (if (= (length pixbit-d) 5)
+                            ;Comprobar que todos sean números
+                            (if (and (number? (car pixbit-d)) (and (number? (cadr pixbit-d)) (and (number? (caddr pixbit-d)) (and (number? (cadddr pixbit-d)) (number? (car (cddddr pixbit-d)))))))
+                                ;Comprobar que x,y,depth sean mayores o iguales a 0 y que el bit sea 0 o 1
+                                (if (and (= 1 (car pixbit-d)) (and (<= 0 (cadr pixbit-d)) (and (<= 0 (caddr pixbit-d)) (and (or (= 0 (cadddr pixbit-d)) (= 1 (cadddr pixbit-d))) (<= 0 (car (cddddr pixbit-d)))))))
+                                    #t
+                                    #f
+                                    )
+                                #f
+                                )
                             #f
                             )
-                           #f
-                           )
-                   #f
-                   )))
+                        #f
+                        )))
+
+;Función que verifica que una lista contenga solo pixbit-d
+;Recursión
+;Entrada: Lista de pixbit-ds
+;Salida: booleano
+(define pixbit-dlist? (lambda (list)
+                        (if (equal? list null)
+                            #t
+                         (if (and (pixbit-d? (car list)) (pixbit-dlist? (cdr list)))
+                             #t
+                             #f
+                             )
+                         )))
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
