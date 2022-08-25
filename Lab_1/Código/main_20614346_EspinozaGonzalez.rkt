@@ -5,6 +5,7 @@
 (require "TDAs/TDA_pixbit-d_20614346_EspinozaGonzalez.rkt")  ;TDA pixbit-d
 (require "TDAs/TDA_pixrgb-d_20614346_EspinozaGonzalez.rkt")  ;TDA pixrgb-d
 (require "TDAs/TDA_pixhex-d_20614346_EspinozaGonzalez.rkt")  ;TDA pixhex-d
+(require "TDAs/TDA_image_20614346_EspinozaGonzalez.rkt")  ;TDA image
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -34,21 +35,56 @@
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
-#|
+
 ;-------------------------------------------------- 3.TDA image - bitmap? ----------------------------------------------------------------------------
 
 ;Función que dice si una imagen es o no u  bitmap
 ;Entrada: image
 ;Salida: booleano
 (define bitmap? (lambda (image)
-                  (if)))
-|#
-
+                  (if (image? image)
+                      (if (not (equal? (getpixels image) null))
+                          (pixbit-dlist? (getpixels image))
+                          #f
+                          )
+                      #f
+                      )))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+;-------------------------------------------------- 4.TDA image - pixmap? ----------------------------------------------------------------------------
 
+;Función que dice si una imagen es o no u  bitmap
+;Entrada: image
+;Salida: booleano
+(define pixmap? (lambda (image)
+                  (if (image? image)
+                      (if (not (equal? (getpixels image) null))
+                          (pixrgb-dlist? (getpixels image))
+                          #f
+                          )
+                      #f
+                      )))
+
+;-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+;-------------------------------------------------- 5.TDA image - hexmap? ----------------------------------------------------------------------------
+
+;Función que dice si una imagen es o no u  bitmap
+;Entrada: image
+;Salida: booleano
+(define hexmap? (lambda (image)
+                  (if (image? image)
+                      (if (not (equal? (getpixels image) null))
+                          (pixhex-dlist? (getpixels image))
+                          #f
+                          )
+                      #f
+                      )))
+
+;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
