@@ -63,19 +63,6 @@
                             )
                         #f)))
 
-;Función que verifica que una lista contenga solo pixbit-d
-;Recursión
-;Entrada: Lista de pixrgb-ds
-;Salida: booleano
-(define pixrgb-dlist? (lambda (list)
-                        (if (equal? list null)
-                            #t
-                         (if (and (pixrgb-d? (car list)) (pixrgb-dlist? (cdr list)))
-                             #t
-                             #f
-                             )
-                         )))
-
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
 

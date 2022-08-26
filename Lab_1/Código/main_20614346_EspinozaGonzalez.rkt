@@ -6,6 +6,7 @@
 (require "TDAs/TDA_pixbit-d_20614346_EspinozaGonzalez.rkt")  ;TDA pixbit-d
 (require "TDAs/TDA_pixrgb-d_20614346_EspinozaGonzalez.rkt")  ;TDA pixrgb-d
 (require "TDAs/TDA_pixhex-d_20614346_EspinozaGonzalez.rkt")  ;TDA pixhex-d
+(require "TDAs/TDA_pixels_20614346_EspinozaGonzalez.rkt")  ;TDA pixels
 (require "TDAs/TDA_image_20614346_EspinozaGonzalez.rkt")  ;TDA image
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -33,7 +34,7 @@
                     (if (equal? pixels null)
                         (list 0 Width Height pixels 0)
                         (if (pixbit-dlist? pixels)
-                            (list 0 Width Height pixels (mostusedbit (list 0 Width Height pixels 0)))   
+                            (list 0 Width Height pixels (mostusedbit Width Height pixels))   
                             (if (pixhex-dlist? pixels)
                                 (list 0 Width Height pixels 0)
                                 (if (pixrgb-dlist? pixels)
@@ -102,10 +103,15 @@
 
 ;-------------------------------------------------- 6.TDA image - compressed? ------------------------------------------------------------------------
 
-;Función que determina si una imagen esta comprimida
+;Función que determina si una imagen esta comprimida (Por la especificación del TDA imagen se vuelve bastante sencilla)
 ;Entrada: image
 ;Salida: booleano
-
+(define compressed? (lambda (image)
+                      (if (= 1 (getcompressed image))   ;Si el primer elemento de la imagen (compressed) es 1 significa que la imagen esta comprimida
+                          #t
+                          #f                            ;Si este fuera 0 o -1 significa que la imagen no esta comprimida o que nisiquiera es una imagen por lo que tampoco lo estaría
+                          )
+                      ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -115,7 +121,12 @@
 ;Función que permite invertir una imagen horizontalmente
 ;Entrada: image
 ;Salida: image
-
+(define flipH (lambda (image)
+                (if (not (compressed? image))
+                    (list 0 (getwidth image) (getheight image) (flippixels 1 (getwidth image) (getpixels image)) (getmostused image))
+                    image
+                    )
+                ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -125,7 +136,12 @@
 ;Función que permite invertir una imagen verticalmente
 ;Entrada: image
 ;Salida: image
-
+(define flipV (lambda (image)
+                (if (not (compressed? image))
+                    (list 0 (getwidth image) (getheight image) (flippixels 2 (getheight image) (getpixels image)) (getmostused image))
+                    image
+                    )
+                ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -135,7 +151,11 @@
 ;Función que permite recortar una imagen a partir de un cuadrante
 ;Entrada: image x X1(int) x Y1(int) x X2(int) x Y2(int) 
 ;Salida: image
-
+(define crop (lambda (image x1 y1 x2 y2)
+               (if (not (compressed? image))
+                   (list 0 (- x2 x1) (- y2 y1) (discardpixels x2 x1 y2 y1 (getpixels image)) (mostused (discardpixels x2 x1 y2 y1 (getpixels image))))
+                   image
+                   )))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -145,11 +165,11 @@
 ;Función que transforma un pixmap a hexmap
 ;Entrada: image
 ;Salida: image
-
 (define imgRGB->imgHEX (lambda (image)
-                         (list 0 (getwidth image) (getheight image) (pixelsrgb->pixelshex (getpixels image)) (mostusedrgb->mostusedhex image)
-                               )
-                         ))
+                         (if (not (compressed? image))
+                             (list 0 (getwidth image) (getheight image) (pixelsrgb->pixelshex (getpixels image)) (mostusedrgb->mostusedhex image))
+                             image  ;Si la imagen esta comprimida entonces no podemos operar sobre esta
+                             )))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -158,9 +178,12 @@
 
 ;Función que crea un histograma de frecuencias a partir de los colores de cada imagen
 ;Entrada: image
-;Salida: histogram (crear TDA)
-
-
+;Salida: histogram
+#|
+(define histogram (lambda (image)
+                    
+                    ))
+|#
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
