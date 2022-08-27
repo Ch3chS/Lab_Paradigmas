@@ -14,3 +14,4 @@ Código:
 	25/08/2022: Funciones bitmap?, pixmap? y pixhex? agregadas
 	26/08/2022: Funciones compressed? y imgRGB->imgHEX agregadas
 	26/08/2022: Funciones flipH, flipV y crop agregadas
+	27/08/2022: Función histogram agregada
