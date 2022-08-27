@@ -179,11 +179,45 @@
 ;Función que crea un histograma de frecuencias a partir de los colores de cada imagen
 ;Entrada: image
 ;Salida: histogram
-#|
 (define histogram (lambda (image)
-                    
+                    (filtrorep (histogramcont (getwidth image) (getheight image) (getpixels image))) ;Creamos el histograma en sí y filtramos los colores repetidos para una versión pulida del mismo
                     ))
-|#
+
+(define filtrorep (lambda (histogram)
+                    (if (not (equal? histogram null))
+                        (cons (car (filtrorepfirst histogram)) (filtrorep (cdr (filtrorepfirst histogram))))
+                        null
+                        )
+                    ))
+
+;Función que descarta los elementos donde se repite el color del primero y retorna una lista sin estos
+;Entrada: histogram
+;Salida: histogram
+(define filtrorepfirst (lambda (histogram)
+                    (if (not (equal? histogram null))
+                        (cons (car histogram) (filter (lambda (element) (not (equal? (car (car histogram)) (car element)))) (cdr histogram)))
+                        null
+                        )
+                    ))
+
+
+;Función que crea el histograma en si contando cuantas veces se repite un pixel de un color (Pero vuelve a contar el mismo con un elemento menos si este se repite)
+;Entrada:
+(define histogramcont (lambda (width height pixels)
+                             (if (not (equal? pixels null))
+                                 (if (pixbit-dlist? pixels)
+                                     (list (list 0 (- (* width height) (countbit1 pixels))) (list 1 (countbit1 pixels)))
+                                     (if (pixrgb-dlist? pixels)
+                                         (cons (list (list (getpixrgb.r (car pixels)) (getpixrgb.g (car pixels)) (getpixrgb.b (car pixels))) (countfirstpixrgbcolor pixels)) (histogramcont width height (cdr pixels)))
+                                         (cons (list (getpixhex.hex (car pixels)) (countfirstpixhexcolor pixels)) (histogramcont width height (cdr pixels)))
+                                         )
+                                     )
+                                 null
+                                 )
+                             ))
+
+
+
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -192,7 +226,33 @@
 ;Función que permite rotar una imagen 90° a la derecha
 ;Entrada: image
 ;Salida: image
+;Haciendo reiterados ejemplos en papel llegue a la conclusión de que los pixeles se rotan a la derecha de la forma x = y antigua invertida  e  y = x(antigua)
+;Por supuesto el width y el height se invierten entre si al rotar 90 grados.
+(define rotate90 (lambda (image)
+                   (list 0 (getheight image) (getwidth image) (rotatepixels (getpixels (flipV image))) (getmostused image))  ;Notar que se invirtieron width y height; además la coordenada y se invirtio antes de pasar los pixeles a la siguiente función
+                   ))
 
+;Función que invierte las coordenadas x e y de los pixeles
+;Entrada: pixels (puede ser pixbit-dlist, pixrgb-dlist o pixhex-dlist dependiendo de la imagen)
+;Salida: pixels
+(define rotatepixels (lambda (pixels)
+                       (if (not (equal? pixels null))
+                       (cons (rotatepixel (car pixels)) (rotatepixels (cdr pixels)))
+                       null
+                       )))
+
+;Función que intercambia las coordenadas x e y de un pixel
+;Entrada: pixel (pixbit-d, pixrgb-d o pixhex-d)
+;Salida: pixel (del mismo tipo)
+(define rotatepixel (lambda (pixel)
+                      (if (pixbit-d? pixel)
+                          (pixbit-d (getpixbit.y pixel) (getpixbit.x pixel) (getpixbit.bit pixel) (getpixbit.depth pixel))
+                          (if (pixrgb-d? pixel)
+                              (pixrgb-d (getpixrgb.y pixel) (getpixrgb.x pixel) (getpixrgb.r pixel) (getpixrgb.g pixel) (getpixrgb.b pixel) (getpixrgb.depth pixel))
+                              (pixhex-d (getpixhex.y pixel) (getpixhex.x pixel) (getpixhex.hex pixel) (getpixhex.depth pixel))
+                              )
+                          )
+                      ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 

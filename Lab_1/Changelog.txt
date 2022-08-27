@@ -15,3 +15,4 @@ Código:
 	26/08/2022: Funciones compressed? y imgRGB->imgHEX agregadas
 	26/08/2022: Funciones flipH, flipV y crop agregadas
 	27/08/2022: Función histogram agregada
+	27/08/2022: Función rotate90 agregada
