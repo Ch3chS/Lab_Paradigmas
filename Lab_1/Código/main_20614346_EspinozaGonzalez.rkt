@@ -36,7 +36,7 @@
                         (if (pixbit-dlist? pixels)
                             (list 0 Width Height pixels (mostusedbit Width Height pixels))   
                             (if (pixhex-dlist? pixels)
-                                (list 0 Width Height pixels 0)
+                                (list 0 Width Height pixels (car (mostusedhex pixels)))
                                 (if (pixrgb-dlist? pixels)
                                     (list 0 Width Height pixels (car (mostusedrgb pixels)))
                                     (list -1 -1 -1 null -1)    ;Esta será la representación de una imagen erronea '(-1 -1 () -1)
@@ -262,7 +262,17 @@
 ;Función que permite comprimir una imagen eliminando los pixeles con el color más frecuente
 ;Entrada: image
 ;Salida: image  (Esta imagen debe ser descomprimida antes de poder ser manipulada)
-
+(define compress (lambda (image)
+                   (list 1 (getwidth image) (getheight image) (filter (lambda (pixel) ;Comienza la función de filtro
+                                                                        (if (pixrgb-d? pixel)
+                                                                            (not (and (and (= (car (getmostused image)) (getpixrgb.r pixel)) (= (cadr (getmostused image)) (getpixrgb.g pixel))) (= (caddr (getmostused image)) (getpixrgb.b pixel))))
+                                                                            (if (pixbit-d? pixel)
+                                                                                (not (= (getpixbit.bit pixel) (getmostused image)))
+                                                                                (not (equal? (getpixhex.hex pixel) (getmostused image)))
+                                                                                ))
+                                                                        ) ;Aquí termina la función de filtro
+                                                                      (getpixels image)) (getmostused image))
+                   ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
