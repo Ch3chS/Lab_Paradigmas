@@ -16,3 +16,5 @@ Código:
 	26/08/2022: Funciones flipH, flipV y crop agregadas
 	27/08/2022: Función histogram agregada
 	27/08/2022: Función rotate90 agregada
+	27/08/2022: Función compress agregada
+	28/08/2022: Funciones edit, invertColorBit, invertColorRGB y adjust channel agregadas

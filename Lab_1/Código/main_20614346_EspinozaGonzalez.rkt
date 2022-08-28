@@ -279,10 +279,27 @@
 
 ;-------------------------------------------------- 14.TDA image - edit ------------------------------------------------------------------------------
 
+;;FALTA MEJORAR PARA FILTRAR LA APLICACION DE LA FUNCION
+
 ;Función que permite aplicar otras funciones especiales
 ;Entrada: f x image
 ;Salida: image
+(define edit (lambda (f image)
+               (if (not (compressed? image))
+               (list 0 (getwidth image) (getheight image) (apply f (getpixels image)) (getmostused image))
+               image
+               )))
 
+;Función que hace la aplicación en sí del filtro a los pixeles
+;Recursión:
+;Entrada: f x pixels
+;Salida: pixels
+(define apply (lambda (f pixels)
+                (if (not (equal? pixels null))
+                    (cons (f (car pixels)) (apply f (cdr pixels)))
+                    null
+                    )
+                ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -292,7 +309,12 @@
 ;Función que cambia el valor del bit de un pixbit-d por el opuesto
 ;Entrada: pixbit-d
 ;Salida: pixbit-d
-
+(define invertColorBit (lambda (pixbit-d)
+                         (if (= (getpixbit.bit pixbit-d) 0)
+                             (changepixbit.bit pixbit-d 1)
+                             (changepixbit.bit pixbit-d 0)
+                             )
+                         ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -302,7 +324,9 @@
 ;Función que cambia el valor rgb por el simetricamente opuesto en cada canal(r, g y b)
 ;Entrada: pixrgb-d
 ;Salida: pixrgb-d
-
+(define invertColorRGB (lambda (pixrgb-d)
+                         (changepixrgb.b (changepixrgb.g (changepixrgb.r pixrgb-d (- 255 (getpixrgb.r pixrgb-d))) (- 255 (getpixrgb.g pixrgb-d))) (- 255 (getpixrgb.b pixrgb-d)))
+                         ))
 
 ;----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -312,7 +336,18 @@
 ;Función que permite ajustar un canal de un pixel rgb a través de su funcion selectora, modificadora y la función con el cambio a aplicar en este
 ;Entrada: f1 x f2 x f3 x pixrgb-d
 ;Salida: pixrgb-d
+(define adjustChannel (curry (lambda (f1 f2 f3  pixrgb-d)
+                        (f2 pixrgb-d (f3 (f1 pixrgb-d)))
+                        )))
 
+;Función que incrementa el valor de un canal en una unidad
+;Entrada: int
+;Salida: int
+(define incChR (lambda (int)
+                 (if (= int 255)
+                     0          ;Esto suponiendo que de 255 pase a 0 al incrementarse (no nos debe quedar 256 ya que no sería correcto)
+                     (+ 1 int)
+                     )))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
