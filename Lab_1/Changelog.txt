@@ -18,3 +18,4 @@ Código:
 	27/08/2022: Función rotate90 agregada
 	27/08/2022: Función compress agregada
 	28/08/2022: Funciones edit, invertColorBit, invertColorRGB y adjust channel agregadas
+	30/08/2022: Función image->string agregada

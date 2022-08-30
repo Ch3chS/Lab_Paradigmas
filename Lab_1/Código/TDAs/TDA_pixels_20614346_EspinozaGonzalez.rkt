@@ -68,6 +68,13 @@
 
 ;-------------------------------------------------- Selectores ------------------------------------------------------------------------------------
 
+(define getpixel.x (lambda (pixel)
+                     (cadr pixel)
+                     ))
+
+(define getpixel.y (lambda (pixel)
+                     (caddr pixel)
+                     ))
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -110,6 +117,8 @@
 ;-------------------------------------------------- Otras funciones ----------------------------------------------------------------------------------
 
 ;Retorna el color más usado en una lista de pixeles
+;Entrada: int x int x pixels
+;Salida: Depende del tipo de pixeles
 (define mostused (lambda (width height pixels)
                    (if (pixbit-dlist? pixels)
                        (mostusedbit width height pixels)

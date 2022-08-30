@@ -286,7 +286,7 @@
 ;Salida: image
 (define edit (lambda (f image)
                (if (not (compressed? image))
-               (list 0 (getwidth image) (getheight image) (apply f (getpixels image)) (getmostused image))
+               (list 0 (getwidth image) (getheight image) (apply f (getpixels image)) (getmostused image)) ;Falta actualizar el most used
                image
                )))
 
@@ -357,7 +357,65 @@
 ;Función que transforma una imagen a su representación en string dependiendo de su tipo de pixeles
 ;Entrada: image x f  (f puede ser pixbit->string, pixrgb->string, pixhex->string)
 ;Salida: string
+(define image->string (lambda (image f)
+                       (string-append (organicerow (mappingrow (- (getwidth image) 1) (- (getheight image) 1) (getpixels image) f)))
+                        ))
 
+(define organicerow (lambda (stringlist)
+                      (if (not (equal? stringlist null))
+                       (string-append (organicerow (cdr stringlist)) (car stringlist) "\n")
+                       ""
+                       )
+                      ))
+
+;Ordena y convierte en string una fila de pixeles
+;Entrada: int x int x image x f
+;Salida: string-list
+(define mappingrow (lambda (width height pixels f)
+                     (if (not (= height -1))
+                         (cons (organicecol (mappingcol width (filter (lambda (pixel) (= height (getpixel.y pixel))) pixels) f)) (mappingrow width (- height 1) pixels f))
+                         null
+                         )
+                  ))
+
+(define organicecol (lambda (stringlist)
+                   (if (not (equal? stringlist null))
+                       (string-append (organicecol (cdr stringlist)) (car stringlist) "\t")
+                       ""
+                       )
+                   ))
+
+;Ordena y convierte en string una columna de pixeles
+;Entrada: int x int x image x f
+;Salida: string-list
+(define mappingcol (lambda (width pixels f)
+                     (if (not (= width -1))
+                         (if (not (equal? (filter (lambda (pixel) (= width (getpixel.x pixel))) pixels) null))
+                         (cons (f (car (filter (lambda (pixel) (= width (getpixel.x pixel))) pixels))) (mappingcol (- width 1) pixels f))
+                         (cons (f null) (mappingcol (- width 1) pixels f))
+                         )
+                         null
+                         )
+                  ))
+
+(define pixbit->string (lambda (pixbit-d)
+                         (if (not (equal? pixbit-d null))
+                             (number->string (getpixbit.bit pixbit-d))
+                             "0"
+                             )))
+
+(define pixrgb->string (lambda (pixrgb-d)
+                         (if (not (equal? pixrgb-d null))
+                             (string-append "(" (number->string (getpixrgb.r pixrgb-d)) " " (number->string (getpixrgb.g pixrgb-d)) " " (number->string (getpixrgb.b pixrgb-d)) ")")
+                             "(255 255 255)"
+                             )))
+
+
+(define pixhex->string (lambda (pixhex-d)
+                         (if (not (equal? pixhex-d null))
+                         (getpixhex.hex pixhex-d)
+                         "#FFFFFF"
+                         )))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
