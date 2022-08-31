@@ -426,7 +426,31 @@
 ;Entrada: image
 ;Salida: image list
 
+(define depthLayers (lambda (image)
+                      (layerpixels image (getpixels image) (getmaxdepth (getpixels image)))
+                      ))
 
+(define getmaxdepth (lambda (pixels)
+                      (if (not (equal? pixels null))
+                          (if (> (getpixel.depth (car pixels)) (getmaxdepth (cdr pixels)))
+                              (getpixel.depth (car pixels))
+                              (getmaxdepth (cdr pixels))
+                              )
+                          0
+                          )
+                      ))
+
+(define layerpixels (lambda (image pixels maxdepth)
+                      (if (not (= maxdepth -1))
+                      (cons (list 0 (getwidth image) (getheight image) (getlayer pixels maxdepth) 0) (layerpixels image pixels (- maxdepth 1)))
+                      null
+                      )))
+
+(define getlayer (lambda (pixels depth)
+                   (filter (lambda (pixel) (= depth (getpixel.depth pixel))) pixels)
+                   ))
+
+(define getpixel.depth (lambda (pixel) (car (cddddr pixel))))
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
