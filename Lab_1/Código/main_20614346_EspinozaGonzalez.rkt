@@ -459,6 +459,33 @@
 ;Función que permite descomprimir una imagen comprimida tomando como referencia el valor que era más frecuente
 ;Entrada: image
 ;Salida: image
+(define decompress (lambda (image)
+                     (if (compressed? image)
+                         (list 0 (getwidth image) (getheight image) (fillwithcolor (getwidth image) (getheight image) (getpixels image) (getmostused image)) (getmostused image))
+                         image ;Si la imagen no esta comprimida la retornamos tal como está
+                         )))
 
+(define fillwithcolor (lambda (width height pixels color)
+                         (if (not (= height -1))
+                         (append (fillwithcolor2 width height pixels color) (fillwithcolor width (- height 1) pixels color))
+                         null
+                         )
+                        ))
+
+(define fillwithcolor2 (lambda (width height pixels color)
+                         (if (not (= width -1))
+                             (if (equal? (filter (lambda (pixel) (and (= width (getpixel.x pixel)) (= height (getpixel.y pixel)))) pixels) null)
+                                         (if (string? color)
+                                             (cons (pixhex-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
+                                             (if (number? color)
+                                                 (cons (pixbit-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
+                                                 (cons (pixrgb-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
+                                                 )
+                                             )
+                                         (cons (car (filter (lambda (pixel) (and (= width (getpixel.x pixel))) (= height (getpixel.y pixel))) pixels)) (fillwithcolor2 (- width 1) height pixels color))
+                                         )
+                                 null
+                                 )
+                             ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------

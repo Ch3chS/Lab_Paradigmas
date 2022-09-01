@@ -20,3 +20,4 @@ Código:
 	28/08/2022: Funciones edit, invertColorBit, invertColorRGB y adjust channel agregadas
 	30/08/2022: Función image->string agregada
 	31/08/2022: Función depthLayers agregada
+	01/09/2022: Función decompress agregada
