@@ -4,11 +4,164 @@
 ;-------------------------------------------------------- Funciones principales -----------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------------------------------------------------------
 
+;2. Constructor image
+(define img1 (image 2 2 (pixrgb-d 0 0 255 0 0 10) (pixrgb-d 0 1 0 255 0 20) (pixrgb-d 1 0 0 0 255 10) (pixrgb-d 1 1 255 255 255  1)))
+(define img2 (image 2 2 (pixbit-d 0 0 0 10) (pixbit-d 0 1 1 20) (pixbit-d 1 0 1 10) (pixbit-d 1 1 0 255)))
+(define img3 (imgRGB->imgHex img1))
+
+;3. bitmap?
+(define bitmap?1 (bitmap? img1))
+(define bitmap?2 (bitmap? img2))
+(define bitmap?3 (bitmap? img3))
+
+;4. pixmap?
+(define pixmap?1 (pixmap? img1))
+(define pixmap?2 (pixmap? img2))
+(define pixmap?3 (pixmap? img3))
+
+;5. hexmap?
+(define hexmap?1 (hexmap? img1))
+(define hexmap?2 (hexmap? img2))
+(define hexmap?3 (hexmap? img3))
+
+;9. crop
+(define img4 (crop img1 0 0 0 0)) ; debería retornar una imágen con un pixel
+(define img5 (crop img2 0 0 0 1)) ; debería retornar una imágen con dos pixeles
+(define img6 (crop img1 0 1 1 1)) ; debería retornar una imágen con dos pixeles
+(define img7 (crop img2 0 0 1 1)) ; debería retornar la misma imagen
+
+;13. compress
+(define img8 (compress img1))
+(define img9 (compress img2))
+(define img10 (compress img3))
+(define img11 (compress img4))
+(define img12 (compress img5))
+(define img13 (compress img6))
+(define img14 (compress img7))
+
+;6. compressed?
+(define compressed?1 (compressed? img1))
+(define compressed?2 (compressed? img2))
+(define compressed?3 (compressed? img3))
+(define compressed?4 (compressed? img8))  ; la respuesta debería ser #t
+(define compressed?5 (compressed? img9))  ; la respuesta debería ser #t
+(define compressed?6 (compressed? img10))  ; la respuesta debería ser #t
+(define compressed?7 (compressed? img11))  ; la respuesta debería ser #t
+(define compressed?8 (compressed? img12))  ; la respuesta debería ser #t
+(define compressed?9 (compressed? img13))  ; la respuesta debería ser #t
+(define compressed?10 (compressed? img14))  ; la respuesta debería ser #t
+
+
+;7. flipH
+(define flipH1 (flipH img1))
+(define flipH2 (flipH img2))
+(define flipH3 (flipH img3))
+
+;8. flipV
+(define flipV1 (flipV img1))
+(define flipV2 (flipV img2))
+(define flipV3 (flipV img3))
+
+
+
+;10. imgRGB->imgHex
+(define imgRGB->imgHex1 (imgRGB->imgHex img1))
+(define imgRGB->imgHex2 (imgRGB->imgHex img6))
+(define imgRGB->imgHex3 (imgRGB->imgHex (image 2 2 (pixrgb-d 0 0 25 15 25 10) (pixrgb-d 0 1 72 225 56 20) (pixrgb-d 1 0 46 63 55 10) (pixrgb-d 1 1 75 55 25  1))))
+
+;11. histogram
+(define histogram1 (histogram img1))
+(define histogram2 (histogram img2))
+(define histogram3 (histogram img3))
+(define histogram4 (histogram img4))
+(define histogram5 (histogram img5))
+(define histogram6 (histogram img6))
+(define histogram7 (histogram img7))
+
+;12. rotate90
+(define img20 (rotate90 img3))
+(define img21 (rotate90 img4))
+(define img22 (rotate90 img5))
+(define img23 (rotate90 img6))
+(define img24 (rotate90 img7))
+
+
+; 14. -------------- Edit --------------
+;15. invertColorBit
+(define img15 (edit invertColorBit img2))
+
+;16. invertColorRGB
+(define img16 (edit invertColorRGB img1))
+
+;17. adjustChannel 
+(define img17 (edit (adjustChannel getpixrgb.r changepixrgb.r incCh) img1))
+(define img18 (edit (adjustChannel getpixrgb.g changepixrgb.g incCh) img1))
+(define img19 (edit (adjustChannel getpixrgb.b changepixrgb.b incCh) img1))
+;---------------------------------------
+
+;18. image->string
+;imágenes no comprimidas
+;(display (image->string img1 pixrgb->string))
+;(display (image->string img2 pixbit->string))
+;(display (image->string img3 pixhex->string))
+;(display (image->string img4 pixrgb->string))
+;(display (image->string img5 pixbit->string))
+;(display (image->string img6 pixhex->string))
+;(display (image->string img7 pixrgb->string))
+;(display (image->string img15 pixrgb->string))
+;(display (image->string img16 pixrgb->string))
+;(display (image->string img17 pixrgb->string))
+;(display (image->string img18 pixrgb->string))
+;(display (image->string img19 pixbit->string))
+;(display (image->string img20 pixhex->string))
+;(display (image->string img21 pixrgb->string))
+;(display (image->string img22 pixbit->string))
+;(display (image->string img23 pixrgb->string))
+;(display (image->string img24 pixbit->string))
+
+;imagenes comprimidas, podrían internamente descomprimirlas para convertir a string ;(opcional)
+;(display (image->string img8 pixrgb->string))
+;(display (image->string img9 pixbit->string))
+;(display (image->string img10 pixhex->string)) 
+;(display (image->string img11 pixrgb->string))
+;(display  (image->string img12 pixbit->string))
+;(display (image->string img13 pixrgb->string))
+;(display (image->string img14 pixbit->string))
+
+;19. depthLayers
+(define depthLayers1 (depthLayers img1))
+(define depthLayers2 (depthLayers img2))
+(define depthLayers3 (depthLayers img3))
+(define depthLayers4 (depthLayers img4))
+(define depthLayers5 (depthLayers img5))
+(define depthLayers6 (depthLayers img6))
+(define depthLayers7 (depthLayers img7))
+
+;20. decompress
+(define img25 (decompress img8))
+(define img26 (decompress img9))
+(define img27 (decompress img10))
+(define img29 (decompress img11))
+(define img30 (decompress img12))
+(define img31 (decompress img13))
+(define img32 (decompress img14))
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------------------------------------------------------
 
+;--------------------------------------------------------- Extras -------------------------------------------------------------------------------------
 
+;las siguientes comparaciones deberían arrojar #t
+(define extra1 (equal? img25 img1))
+(define extra2 (equal? img26 img2))
+(define extra3 (equal? img27 img3))
+(define extra4 (equal? img29 img5))
+(define extra5 (equal? img30 img6))
+(define extra6 (equal? img31 img7))
+
+;las siguientes comparaciones deberían arrojar #f
+(define extra7 (equal? img25 img2))
+(define extra8 (equal? img26 img1))
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------ Funciones TDAs --------------------------------------------------------------------------
@@ -214,6 +367,9 @@
 ;------------------------------------------------------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------------------------------------------------------
 
-(require "TDAs/TDA_pixbit-d_20614346_EspinozaGonzalez.rkt")
-(require "TDAs/TDA_pixrgb-d_20614346_EspinozaGonzalez.rkt")
-(require "TDAs/TDA_pixhex-d_20614346_EspinozaGonzalez.rkt")
+(require "TDAs/TDA_pixbit-d_20614346_EspinozaGonzalez.rkt")  ;TDA pixbit-d
+(require "TDAs/TDA_pixrgb-d_20614346_EspinozaGonzalez.rkt")  ;TDA pixrgb-d
+(require "TDAs/TDA_pixhex-d_20614346_EspinozaGonzalez.rkt")  ;TDA pixhex-d
+(require "TDAs/TDA_pixels_20614346_EspinozaGonzalez.rkt")  ;TDA pixels
+(require "TDAs/TDA_image_20614346_EspinozaGonzalez.rkt")  ;TDA image
+(require "main_20614346_EspinozaGonzalez.rkt")  ;main

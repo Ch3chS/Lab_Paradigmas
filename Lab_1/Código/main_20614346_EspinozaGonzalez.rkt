@@ -1,5 +1,6 @@
 #lang racket
 
+(provide (all-defined-out))
 
 ;-------------------------------------------------- Importaciones ------------------------------------------------------------------------------------
 
@@ -153,19 +154,19 @@
 ;Salida: image
 (define crop (lambda (image x1 y1 x2 y2)
                (if (not (compressed? image))
-                   (list 0 (- x2 x1) (- y2 y1) (discardpixels x2 x1 y2 y1 (getpixels image)) (mostused (discardpixels x2 x1 y2 y1 (getpixels image))))
+                   (list 0 (+ 1(- x2 x1)) (+ 1 (- y2 y1)) (discardpixels x2 x1 y2 y1 (getpixels image)) (mostused (getwidth image) (getheight image) (discardpixels x2 x1 y2 y1 (getpixels image))))
                    image
                    )))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-;-------------------------------------------------- 10.TDA image - imgRGB->imgHEX --------------------------------------------------------------------
+;-------------------------------------------------- 10.TDA image - imgRGB->imgHex --------------------------------------------------------------------
 
 ;Función que transforma un pixmap a hexmap
 ;Entrada: image
 ;Salida: image
-(define imgRGB->imgHEX (lambda (image)
+(define imgRGB->imgHex (lambda (image)
                          (if (not (compressed? image))
                              (list 0 (getwidth image) (getheight image) (pixelsrgb->pixelshex (getpixels image)) (mostusedrgb->mostusedhex image))
                              image  ;Si la imagen esta comprimida entonces no podemos operar sobre esta
@@ -343,7 +344,7 @@
 ;Función que incrementa el valor de un canal en una unidad
 ;Entrada: int
 ;Salida: int
-(define incChR (lambda (int)
+(define incCh (lambda (int)
                  (if (= int 255)
                      0          ;Esto suponiendo que de 255 pase a 0 al incrementarse (no nos debe quedar 256 ya que no sería correcto)
                      (+ 1 int)
@@ -425,7 +426,6 @@
 ;Función que separa la imagen en capas a partir de la profundidad (los pixeles faltantes en una capa son reemplazados por pixeles blancos)
 ;Entrada: image
 ;Salida: image list
-
 (define depthLayers (lambda (image)
                       (layerpixels image (getpixels image) (getmaxdepth (getpixels image)))
                       ))
@@ -479,7 +479,7 @@
                                              (cons (pixhex-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
                                              (if (number? color)
                                                  (cons (pixbit-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
-                                                 (cons (pixrgb-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
+                                                 (cons (pixrgb-d width height (car color) (cadr color) (caddr color) 0) (fillwithcolor2 (- width 1) height pixels color))
                                                  )
                                              )
                                          (cons (car (filter (lambda (pixel) (and (= width (getpixel.x pixel))) (= height (getpixel.y pixel))) pixels)) (fillwithcolor2 (- width 1) height pixels color))
