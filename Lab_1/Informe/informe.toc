@@ -5,10 +5,12 @@
 \contentsline {subsubsection}{\numberline {1.2.1}Paradigma funcional}{2}{}%
 \contentsline {section}{\numberline {2}Análisis del problema}{2}{}%
 \contentsline {section}{\numberline {3}Diseño de la solución}{3}{}%
-\contentsline {subsection}{\numberline {3.1}TDAs e implementación}{3}{}%
-\contentsline {section}{\numberline {4}Consideraciones de implementación}{3}{}%
+\contentsline {subsection}{\numberline {3.1}TDAs}{3}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Definición}{3}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Especificación}{3}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}Implementación}{4}{}%
+\contentsline {section}{\numberline {4}Consideraciones de implementación}{4}{}%
 \contentsline {section}{\numberline {5}Instrucciones de uso}{4}{}%
-\contentsline {section}{\numberline {6}Resultados obtenidos}{4}{}%
-\contentsline {section}{\numberline {7}Evaluación completa}{4}{}%
-\contentsline {section}{\numberline {8}Conclusión}{4}{}%
-\contentsline {section}{Referencias}{5}{}%
+\contentsline {section}{\numberline {6}Resultados obtenidos}{5}{}%
+\contentsline {section}{\numberline {7}Conclusión}{5}{}%
+\contentsline {section}{Referencias}{6}{}%

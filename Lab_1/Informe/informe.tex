@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{lipsum}
 \usepackage{apacite}
+\usepackage{float}
 
 \title{Informe}
 \author{Sergio Espinoza}
@@ -18,6 +19,7 @@
     
     
     \tableofcontents
+    \listoftables
     \newpage
 
     %------------------------------------------------------------------------
@@ -44,22 +46,19 @@
         \input{Contenido/Capitulos/Desarrollo/C_implementación.tex}
 
     \section{Instrucciones de uso}
-    (ejemplos, resultados esperados, posibles errores) (max 1 página. Complementar con ejemplos detallados en anexos que están fuera del límite de 10 páginas) (15\%)
+        \input{Contenido/Capitulos/Resultados/I_uso.tex}
 
     \section{Resultados obtenidos}
-    Esto puede abordarse listando todos los requerimientos del proyecto en una tabla indicando el grado de alcance. Indicar que tipos de pruebas se hicieron. Cuantas de las pruebas fueron exitosas, cuantas fracasaron, razones de fallos. Especificar que funciones no se completaron y el porque no se completaron. (máximo 1 página) (10\%)
-
-    \section{Evaluación completa}
-    \cite{einstein}
+        \input{Contenido/Capitulos/Resultados/R_obtenidos.tex}
 
     \section{Conclusión}
-    (respecto de los alcances, limitaciones, dificultades de usar el paradigma para abordar el problema. Para los informes 2 en adelante, contrastar resultados alcanzados con el paradigma de turno con los anteriores) (máximo 1 página) (10\%)
+        \input{Contenido/Capitulos/Resultados/Conclusión.tex}
 
     \newpage
     \bibliographystyle{apacite}
     \bibliography{Bibliografia.bib}
-    
-    \section*{Anexos}
-        \input{Anexos.tex}
+    \newpage
+      
+    \input{Anexos.tex}
 
 \end{document}
