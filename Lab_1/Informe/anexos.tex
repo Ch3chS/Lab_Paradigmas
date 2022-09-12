@@ -16,32 +16,64 @@
     \end{center}
 \end{table}
 
+
 \begin{table}[H]
     \begin{center}
-    \begin{tabular}{| c | c | c | c | c | c | c | }
+    \scalebox{0.7}{
+    \begin{tabular}{|c|c|c|}
     \hline
-    X & Image & Histogram & Pixels & Pixbit-d & Pixrgb-d & Pixhex-d \\ \hline
-    Constructor & Sí & Sí & No & Sí & Sí & Sí \\
-    Pertenencia & Sí & No & No & Sí & Sí & Sí \\
-    Selectores & Sí & No & Sí & Sí & Sí & Sí \\
-    Modificadores & No & No & Sí & Sí & Sí & Sí \\
-    Otras funciones & Sí & No & Sí & No & No & No \\ \hline
-    \end{tabular}
+    Función & Uso & Resultado esperado \\ \hline
+    2. image & (image 2 1 (pixbit-d 0 0 0 0) (pixbit-d 1 0 0 0)) & '(0 2 1 (0 0 1 0) (1 0 1 0) 1) \\ \hline
+    3. bitmap? & (bitmap? (img1)) donde img1 & \#f \\ \hline
+    4. pixmap? & (pixmap? (img1)) & \#t \\ \hline
+    5. hexmap? & (hexmap? (img1)) & \#f \\ \hline
+    6. compressed? & (compressed? img1) & \#f \\ \hline
+    7. flipH & (flipH img2) & '(0 1 2 (0 0 0 0) (0 1 0 0) 0) \\ \hline
+    8. flipV & (flipV img2) & '(0 1 2 (0 1 0 0) (0 0 0 0) 0) \\ \hline
+    9. crop & (crop img2 0 0 0 0) & '(0 1 1 (0 0 0 0) 0) \\ \hline
+    10. imgRGB-$>$imgHex & (imgRGB-$>$imgHex img1) &  '(0 2 1 (0 0 \#008CFF 0) (1 0 \#8C00FF 0) \#008CFF)\\ \hline
+    11. histogram & (histogram img2) & '((0 2) (1 0)) \\ \hline
+    12. rotate90 & (rotate90 img2) & '(0 2 1 ((1 0 0 0) (0 0 0 0)) 0) \\ \hline
+    13. compress & (compress img2) & '(1 1 2 () 0) \\ \hline
+    14. edit & Esta función se usa en conjunto con otras & N/A \\ \hline
+    15. invertColorBit & (edit invertColorBit img2) & '(0 1 2 (0 0 1 0) (0 1 1 0) 0) \\ \hline
+    16. invertColorRGB & (edit invertColorRGB img2) & '(0 2 1 (0 0 255 115 0 0) (1 0 115 255 0 0) (0 140 255)) \\ \hline
+    17. adjustChannel & (edit  (adjustChannel getpixrgb.r changepixrgb.r incCh) img1)  & '(0 2 1 (0 0 1 141 0 0) (1 0 141 1 0 0) (1 141 0)) \\ \hline
+    18. image-$>$string & (image-$>$string img2 pixbit-$>$string) & "0\textbackslash{t}\textbackslash{n0}\textbackslash{t}\textbackslash{n}" \\ \hline
+    19. depthLayers & (depthLayers img2) & '((0 1 2 (0 0 0 0) (0 1 0 0) 0)) \\  \hline
+    20. decompress & (decompress (compress img2)) & '(0 1 2 (0 0 0 0) (0 1 0 0) 0) \\ \hline
+    \end{tabular}}
     \caption{Ejemplos de uso}
     \label{tab:Ejemplos}
     \end{center}
 \end{table}
 
+
 \begin{table}[H]
     \begin{center}
-    \begin{tabular}{| c | c | c | c | c | c | c | }
+    \begin{tabular}{| c | c | c | c |}
     \hline
-    X & Image & Histogram & Pixels & Pixbit-d & Pixrgb-d & Pixhex-d \\ \hline
-    Constructor & Sí & Sí & No & Sí & Sí & Sí \\
-    Pertenencia & Sí & No & No & Sí & Sí & Sí \\
-    Selectores & Sí & No & Sí & Sí & Sí & Sí \\
-    Modificadores & No & No & Sí & Sí & Sí & Sí \\
-    Otras funciones & Sí & No & Sí & No & No & No \\ \hline
+    Requisito & Completado? & Puntaje autoevaluación & Posible razón fallos \\ \hline \hline
+    1. TDAs & Sí & 1 & N/A \\ \hline
+    2. image & Sí & 1 & N/A \\ \hline
+    3. bitmap? & Sí & 1 & N/A \\ \hline
+    4. pixmap? & Sí & 1 & N/A \\ \hline
+    5. hexmap? & Sí & 1 & N/A \\ \hline
+    6. compressed? & Sí & 1 & N/A \\ \hline
+    7. flipH & Sí & 1 & N/A \\ \hline
+    8. flipV & Sí & 1 & N/A \\ \hline
+    9. crop & Sí & 1 & N/A \\ \hline
+    10. imgRGB-$>$imgHex & Sí & 1 & N/A \\ \hline
+    11. histogram & Sí & 1 & N/A \\ \hline
+    12. rotate90 & Sí & 1 & N/A \\ \hline
+    13. compress & Sí & 1 & N/A \\ \hline
+    14. edit & Sí & 1 & N/A \\ \hline
+    15. invertColorBit & Sí & 1 & N/A \\ \hline
+    16. invertColorRGB & Sí & 1 & N/A \\ \hline
+    17. adjustChannel & Sí & 1 & N/A \\ \hline
+    18. image-$>$string & Sí & 1 & N/A \\ \hline
+    19. depthLayers & Sí & 0.25 & N/A \\  \hline
+    20. decompress & Sí & 0.25 & N/A \\ \hline
     \end{tabular}
     \caption{Resultados obtenidos}
     \label{tab:Resultados}

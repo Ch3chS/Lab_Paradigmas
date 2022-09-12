@@ -18,6 +18,30 @@
 
 ;(2, coordenada x>0, coordenada y>0, 0 <= r <= 255, 0 <= g <= 255, 0 <= b <= 255, profundidad>0)     ;El primer 2 indica que el pixel se trata de un pixrgb.
 
+;Especificación:
+;constructor: pixrgb-d(x y r g b depth)
+
+;Pertenencia: pixrgb-d?(pixrgb-d)
+
+;Selectores
+;   getpixrgb.x(pixrgb-d)
+;   getpixrgb.y(pixrgb-d)
+;   getpixrgb.r(pixrgb-d)
+;   getpixrgb.g(pixrgb-d)
+;   getpixrgb.b(pixrgb-d)
+;   getpixrgb.depth(pixrgb-d)
+
+;Modificadores
+;   changepixrgb.x(pixrgb-d x)
+;   changepixrgb.y(pixrgb-d y)
+;   changepixrgb.r(pixrgb-d r)
+;   changepixrgb.g(pixrgb-d g)
+;   changepixrgb.b(pixrgb-d b)
+;   changepixrgb.depth(pixrgb-d depth)
+
+;Otras funciones:
+;pixrgb->string(pixrgb-d)
+
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -219,5 +243,18 @@
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+;------------------------------------------------- Otras Funciones --------------------------------------------------------------------------------
+
+;Función que convierte el color de un pixrgb-d a string
+;Entrada: pixrgb-d
+;Salida: string
+(define pixrgb->string (lambda (pixrgb-d)
+                         (if (not (equal? pixrgb-d null))
+                             (string-append "(" (number->string (getpixrgb.r pixrgb-d)) " " (number->string (getpixrgb.g pixrgb-d)) " " (number->string (getpixrgb.b pixrgb-d)) ")")
+                             "(255 255 255)"
+                             )))
+
+;--------------------------------------------------------------------------------------------------------------------------------------------------
 
 

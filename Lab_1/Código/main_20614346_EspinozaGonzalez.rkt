@@ -181,43 +181,38 @@
 ;Entrada: image
 ;Salida: histogram
 (define histogram (lambda (image)
+                    ;Función que crea el histograma en si contando cuantas veces se repite un pixel de un color (Pero vuelve a contar el mismo con un elemento menos si este se repite)
+                    ;Entrada: width X height x pixels
+                    ;Salida: histogram
+                    (define histogramcont (lambda (width height pixels)
+                                            (if (not (equal? pixels null))
+                                                (if (pixbit-dlist? pixels)
+                                                    (list (list 0 (- (* width height) (countbit1 pixels))) (list 1 (countbit1 pixels)))
+                                                    (if (pixrgb-dlist? pixels)
+                                                        (cons (list (list (getpixrgb.r (car pixels)) (getpixrgb.g (car pixels)) (getpixrgb.b (car pixels))) (countfirstpixrgbcolor pixels)) (histogramcont width height (cdr pixels)))
+                                                        (cons (list (getpixhex.hex (car pixels)) (countfirstpixhexcolor pixels)) (histogramcont width height (cdr pixels)))
+                                                        )
+                                                    )
+                                                null
+                                                )
+                                            ))
+                    (define filtrorep (lambda (histogram)
+                                        ;Función que descarta los elementos donde se repite el color del primero y retorna una lista sin estos
+                                        ;Entrada: histogram
+                                        ;Salida: histogram
+                                        (define filtrorepfirst (lambda (histogram)
+                                                                 (if (not (equal? histogram null))
+                                                                     (cons (car histogram) (filter (lambda (element) (not (equal? (car (car histogram)) (car element)))) (cdr histogram)))
+                                                                     null
+                                                                     )
+                                                                 ))
+                                        (if (not (equal? histogram null))
+                                            (cons (car (filtrorepfirst histogram)) (filtrorep (cdr (filtrorepfirst histogram))))
+                                            null
+                                            )
+                                        ))
                     (filtrorep (histogramcont (getwidth image) (getheight image) (getpixels image))) ;Creamos el histograma en sí y filtramos los colores repetidos para una versión pulida del mismo
                     ))
-
-(define filtrorep (lambda (histogram)
-                    (if (not (equal? histogram null))
-                        (cons (car (filtrorepfirst histogram)) (filtrorep (cdr (filtrorepfirst histogram))))
-                        null
-                        )
-                    ))
-
-;Función que descarta los elementos donde se repite el color del primero y retorna una lista sin estos
-;Entrada: histogram
-;Salida: histogram
-(define filtrorepfirst (lambda (histogram)
-                    (if (not (equal? histogram null))
-                        (cons (car histogram) (filter (lambda (element) (not (equal? (car (car histogram)) (car element)))) (cdr histogram)))
-                        null
-                        )
-                    ))
-
-
-;Función que crea el histograma en si contando cuantas veces se repite un pixel de un color (Pero vuelve a contar el mismo con un elemento menos si este se repite)
-;Entrada:
-(define histogramcont (lambda (width height pixels)
-                             (if (not (equal? pixels null))
-                                 (if (pixbit-dlist? pixels)
-                                     (list (list 0 (- (* width height) (countbit1 pixels))) (list 1 (countbit1 pixels)))
-                                     (if (pixrgb-dlist? pixels)
-                                         (cons (list (list (getpixrgb.r (car pixels)) (getpixrgb.g (car pixels)) (getpixrgb.b (car pixels))) (countfirstpixrgbcolor pixels)) (histogramcont width height (cdr pixels)))
-                                         (cons (list (getpixhex.hex (car pixels)) (countfirstpixhexcolor pixels)) (histogramcont width height (cdr pixels)))
-                                         )
-                                     )
-                                 null
-                                 )
-                             ))
-
-
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -230,30 +225,28 @@
 ;Haciendo reiterados ejemplos en papel llegue a la conclusión de que los pixeles se rotan a la derecha de la forma x = y antigua invertida  e  y = x(antigua)
 ;Por supuesto el width y el height se invierten entre si al rotar 90 grados.
 (define rotate90 (lambda (image)
+                   ;Función que invierte las coordenadas x e y de los pixeles
+                   ;Entrada: pixels (puede ser pixbit-dlist, pixrgb-dlist o pixhex-dlist dependiendo de la imagen)
+                   ;Salida: pixels
+                   (define rotatepixels (lambda (pixels)
+                                          ;Función que intercambia las coordenadas x e y de un pixel
+                                          ;Entrada: pixel (pixbit-d, pixrgb-d o pixhex-d)
+                                          ;Salida: pixel (del mismo tipo)
+                                          (define rotatepixel (lambda (pixel)
+                                                                (if (pixbit-d? pixel)
+                                                                    (pixbit-d (getpixbit.y pixel) (getpixbit.x pixel) (getpixbit.bit pixel) (getpixbit.depth pixel))
+                                                                    (if (pixrgb-d? pixel)
+                                                                        (pixrgb-d (getpixrgb.y pixel) (getpixrgb.x pixel) (getpixrgb.r pixel) (getpixrgb.g pixel) (getpixrgb.b pixel) (getpixrgb.depth pixel))
+                                                                        (pixhex-d (getpixhex.y pixel) (getpixhex.x pixel) (getpixhex.hex pixel) (getpixhex.depth pixel))
+                                                                        )
+                                                                    )
+                                                                ))
+                                          (if (not (equal? pixels null))
+                                              (cons (rotatepixel (car pixels)) (rotatepixels (cdr pixels)))
+                                              null
+                                              )))
                    (list 0 (getheight image) (getwidth image) (rotatepixels (getpixels (flipV image))) (getmostused image))  ;Notar que se invirtieron width y height; además la coordenada y se invirtio antes de pasar los pixeles a la siguiente función
                    ))
-
-;Función que invierte las coordenadas x e y de los pixeles
-;Entrada: pixels (puede ser pixbit-dlist, pixrgb-dlist o pixhex-dlist dependiendo de la imagen)
-;Salida: pixels
-(define rotatepixels (lambda (pixels)
-                       (if (not (equal? pixels null))
-                       (cons (rotatepixel (car pixels)) (rotatepixels (cdr pixels)))
-                       null
-                       )))
-
-;Función que intercambia las coordenadas x e y de un pixel
-;Entrada: pixel (pixbit-d, pixrgb-d o pixhex-d)
-;Salida: pixel (del mismo tipo)
-(define rotatepixel (lambda (pixel)
-                      (if (pixbit-d? pixel)
-                          (pixbit-d (getpixbit.y pixel) (getpixbit.x pixel) (getpixbit.bit pixel) (getpixbit.depth pixel))
-                          (if (pixrgb-d? pixel)
-                              (pixrgb-d (getpixrgb.y pixel) (getpixrgb.x pixel) (getpixrgb.r pixel) (getpixrgb.g pixel) (getpixrgb.b pixel) (getpixrgb.depth pixel))
-                              (pixhex-d (getpixhex.y pixel) (getpixhex.x pixel) (getpixhex.hex pixel) (getpixhex.depth pixel))
-                              )
-                          )
-                      ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -359,64 +352,47 @@
 ;Entrada: image x f  (f puede ser pixbit->string, pixrgb->string, pixhex->string)
 ;Salida: string
 (define image->string (lambda (image f)
-                       (string-append (organicerow (mappingrow (- (getwidth image) 1) (- (getheight image) 1) (getpixels image) f)))
+                        ;Ordena y convierte en string una fila de pixeles
+                        ;Entrada: int x int x image x f
+                        ;Salida: string-list
+                        (define mappingrow (lambda (width height pixels f)
+                                             ;Ordena y convierte en string una columna de pixeles
+                                             ;Entrada: int x int x image x f
+                                             ;Salida: string-list
+                                             (define mappingcol (lambda (width pixels f)
+                                                                  (if (not (= width -1))
+                                                                      (if (not (equal? (filter (lambda (pixel) (= width (getpixel.x pixel))) pixels) null))
+                                                                          (cons (f (car (filter (lambda (pixel) (= width (getpixel.x pixel))) pixels))) (mappingcol (- width 1) pixels f))
+                                                                          (cons (f null) (mappingcol (- width 1) pixels f))
+                                                                          )
+                                                                      null
+                                                                      )
+                                                                  ))
+                                             ;Función que organiza una columna y agrega un "\t" entre elementos para dar formato
+                                             ;Entrada: stringlist
+                                             ;Salida: string
+                                             (define organicecol (lambda (stringlist)
+                                                                   (if (not (equal? stringlist null))
+                                                                       (string-append (organicecol (cdr stringlist)) (car stringlist) "\t")
+                                                                       ""
+                                                                       )
+                                                                   ))
+                                             (if (not (= height -1))
+                                                 (cons (organicecol (mappingcol width (filter (lambda (pixel) (= height (getpixel.y pixel))) pixels) f)) (mappingrow width (- height 1) pixels f))
+                                                 null
+                                                 )
+                                             ))
+                        ;Función que organiza una fila y agrega un "\n" al final para dar formato
+                        ;Entrada: stringlist
+                        ;Salida: string
+                        (define organicerow (lambda (stringlist)
+                                              (if (not (equal? stringlist null))
+                                                  (string-append (organicerow (cdr stringlist)) (car stringlist) "\n")
+                                                  ""
+                                                  )
+                                              ))
+                        (string-append (organicerow (mappingrow (- (getwidth image) 1) (- (getheight image) 1) (getpixels image) f)))
                         ))
-
-(define organicerow (lambda (stringlist)
-                      (if (not (equal? stringlist null))
-                       (string-append (organicerow (cdr stringlist)) (car stringlist) "\n")
-                       ""
-                       )
-                      ))
-
-;Ordena y convierte en string una fila de pixeles
-;Entrada: int x int x image x f
-;Salida: string-list
-(define mappingrow (lambda (width height pixels f)
-                     (if (not (= height -1))
-                         (cons (organicecol (mappingcol width (filter (lambda (pixel) (= height (getpixel.y pixel))) pixels) f)) (mappingrow width (- height 1) pixels f))
-                         null
-                         )
-                  ))
-
-(define organicecol (lambda (stringlist)
-                   (if (not (equal? stringlist null))
-                       (string-append (organicecol (cdr stringlist)) (car stringlist) "\t")
-                       ""
-                       )
-                   ))
-
-;Ordena y convierte en string una columna de pixeles
-;Entrada: int x int x image x f
-;Salida: string-list
-(define mappingcol (lambda (width pixels f)
-                     (if (not (= width -1))
-                         (if (not (equal? (filter (lambda (pixel) (= width (getpixel.x pixel))) pixels) null))
-                         (cons (f (car (filter (lambda (pixel) (= width (getpixel.x pixel))) pixels))) (mappingcol (- width 1) pixels f))
-                         (cons (f null) (mappingcol (- width 1) pixels f))
-                         )
-                         null
-                         )
-                  ))
-
-(define pixbit->string (lambda (pixbit-d)
-                         (if (not (equal? pixbit-d null))
-                             (number->string (getpixbit.bit pixbit-d))
-                             "0"
-                             )))
-
-(define pixrgb->string (lambda (pixrgb-d)
-                         (if (not (equal? pixrgb-d null))
-                             (string-append "(" (number->string (getpixrgb.r pixrgb-d)) " " (number->string (getpixrgb.g pixrgb-d)) " " (number->string (getpixrgb.b pixrgb-d)) ")")
-                             "(255 255 255)"
-                             )))
-
-
-(define pixhex->string (lambda (pixhex-d)
-                         (if (not (equal? pixhex-d null))
-                         (getpixhex.hex pixhex-d)
-                         "#FFFFFF"
-                         )))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -425,32 +401,37 @@
 
 ;Función que separa la imagen en capas a partir de la profundidad (los pixeles faltantes en una capa son reemplazados por pixeles blancos)
 ;Entrada: image
-;Salida: image list
+;Salida: imagelist
 (define depthLayers (lambda (image)
+                      ;Función que consigue la profundidad máxima de una lista de pixeles
+                      ;Entrada: pixels
+                      ;Salida: int
+                      (define getmaxdepth (lambda (pixels)
+                                            (if (not (equal? pixels null))
+                                                (if (> (getpixel.depth (car pixels)) (getmaxdepth (cdr pixels)))
+                                                    (getpixel.depth (car pixels))
+                                                    (getmaxdepth (cdr pixels))
+                                                    )
+                                                0
+                                                )
+                                            ))
+                      ;Función que crea una lista de imagenes con las distintas capas
+                      ;Entrada: imagen
+                      ;Salida: imagelist
+                      (define layerpixels (lambda (image pixels maxdepth)
+                                            ;Obtiene todos los pixeles de una capa
+                                            ;Entrada: pixels depth
+                                            ;Salida: pixels
+                                            (define getlayer (lambda (pixels depth)
+                                                               (filter (lambda (pixel) (= depth (getpixel.depth pixel))) pixels)
+                                                               ))
+                                            (if (not (= maxdepth -1))
+                                                (cons (list 0 (getwidth image) (getheight image) (getlayer pixels maxdepth) 0) (layerpixels image pixels (- maxdepth 1)))
+                                                null
+                                                )))
                       (layerpixels image (getpixels image) (getmaxdepth (getpixels image)))
                       ))
 
-(define getmaxdepth (lambda (pixels)
-                      (if (not (equal? pixels null))
-                          (if (> (getpixel.depth (car pixels)) (getmaxdepth (cdr pixels)))
-                              (getpixel.depth (car pixels))
-                              (getmaxdepth (cdr pixels))
-                              )
-                          0
-                          )
-                      ))
-
-(define layerpixels (lambda (image pixels maxdepth)
-                      (if (not (= maxdepth -1))
-                      (cons (list 0 (getwidth image) (getheight image) (getlayer pixels maxdepth) 0) (layerpixels image pixels (- maxdepth 1)))
-                      null
-                      )))
-
-(define getlayer (lambda (pixels depth)
-                   (filter (lambda (pixel) (= depth (getpixel.depth pixel))) pixels)
-                   ))
-
-(define getpixel.depth (lambda (pixel) (car (cddddr pixel))))
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -460,32 +441,36 @@
 ;Entrada: image
 ;Salida: image
 (define decompress (lambda (image)
+                     ;Recorre las filas de los pixeles para despues rellenar los que falten con el color indicado
+                     ;Entrada: width X height X pixels X color
+                     ;Salida: pixels
+                     (define fillwithcolor (lambda (width height pixels color)
+                                             ;Rellena las distintas columnas de una fila con el color indicado
+                                             ;Entrada: width X height X pixels X color
+                                             ;Salida: pixels
+                                             (define fillwithcolor2 (lambda (width height pixels color)
+                                                                      (if (not (= width -1))
+                                                                          (if (equal? (filter (lambda (pixel) (and (= width (getpixel.x pixel)) (= height (getpixel.y pixel)))) pixels) null)
+                                                                              (if (string? color)
+                                                                                  (cons (pixhex-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
+                                                                                  (if (number? color)
+                                                                                      (cons (pixbit-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
+                                                                                      (cons (pixrgb-d width height (car color) (cadr color) (caddr color) 0) (fillwithcolor2 (- width 1) height pixels color))
+                                                                                      )
+                                                                                  )
+                                                                              (cons (car (filter (lambda (pixel) (and (= width (getpixel.x pixel))) (= height (getpixel.y pixel))) pixels)) (fillwithcolor2 (- width 1) height pixels color))
+                                                                              )
+                                                                          null
+                                                                          )
+                                                                      ))
+                                             (if (not (= height -1))
+                                                 (append (fillwithcolor2 width height pixels color) (fillwithcolor width (- height 1) pixels color))
+                                                 null
+                                                 )
+                                             ))
                      (if (compressed? image)
                          (list 0 (getwidth image) (getheight image) (fillwithcolor (getwidth image) (getheight image) (getpixels image) (getmostused image)) (getmostused image))
                          image ;Si la imagen no esta comprimida la retornamos tal como está
                          )))
-
-(define fillwithcolor (lambda (width height pixels color)
-                         (if (not (= height -1))
-                         (append (fillwithcolor2 width height pixels color) (fillwithcolor width (- height 1) pixels color))
-                         null
-                         )
-                        ))
-
-(define fillwithcolor2 (lambda (width height pixels color)
-                         (if (not (= width -1))
-                             (if (equal? (filter (lambda (pixel) (and (= width (getpixel.x pixel)) (= height (getpixel.y pixel)))) pixels) null)
-                                         (if (string? color)
-                                             (cons (pixhex-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
-                                             (if (number? color)
-                                                 (cons (pixbit-d width height color 0) (fillwithcolor2 (- width 1) height pixels color))
-                                                 (cons (pixrgb-d width height (car color) (cadr color) (caddr color) 0) (fillwithcolor2 (- width 1) height pixels color))
-                                                 )
-                                             )
-                                         (cons (car (filter (lambda (pixel) (and (= width (getpixel.x pixel))) (= height (getpixel.y pixel))) pixels)) (fillwithcolor2 (- width 1) height pixels color))
-                                         )
-                                 null
-                                 )
-                             ))
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------

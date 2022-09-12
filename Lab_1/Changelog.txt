@@ -3,6 +3,7 @@ Informe:
 	21/08/2022: Importantes avances en informe (Pre-Lab), falta pulirlos.
     24/08/2022: TDAs actualizados
 	11/09/2022: Avances importantes en todo el informe (solo falta completar las tablas)
+	12/09/2022: Informe terminado (falta pulir)
 
 Código:
 	20/08/2022: Agregado TDA pixbit
@@ -23,3 +24,4 @@ Código:
 	31/08/2022: Función depthLayers agregada
 	01/09/2022: Función decompress agregada
 	10/09/2022: Archivo de pruebas terminado
+	12/09/2022: Proyecto terminado (falta pulir)

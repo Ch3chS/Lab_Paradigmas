@@ -51,7 +51,6 @@
 (define compressed?9 (compressed? img13))  ; la respuesta debería ser #t
 (define compressed?10 (compressed? img14))  ; la respuesta debería ser #t
 
-
 ;7. flipH
 (define flipH1 (flipH img1))
 (define flipH2 (flipH img2))
@@ -61,8 +60,6 @@
 (define flipV1 (flipV img1))
 (define flipV2 (flipV img2))
 (define flipV3 (flipV img3))
-
-
 
 ;10. imgRGB->imgHex
 (define imgRGB->imgHex1 (imgRGB->imgHex img1))

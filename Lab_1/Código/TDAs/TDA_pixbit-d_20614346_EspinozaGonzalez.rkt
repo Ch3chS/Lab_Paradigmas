@@ -17,6 +17,27 @@
 
 ;(1 ,coordenada x>0, coordenada y>0, bit(0|1), profundidad>0)   ;El primer 1 indica que el pixel se trata de un pixbit.
 
+
+;Especificación:
+;constructor: pixbit-d(x y bit depth)
+
+;Pertenencia: pixbit-d?(pixbit-d)
+
+;Selectores
+;   getpixbit.x(pixbit-d)
+;   getpixbit.y(pixbit-d)
+;   getpixbit.bit(pixbit-d)
+;   getpixbit.depth(pixbit-d)
+
+;Modificadores
+;   changepixbit.x(pixbit-d x)
+;   changepixbit.y(pixbit-d y)
+;   changepixbit.bit(pixbit-d bit)
+;   changepixbit.depth(pixbit-d depth)
+
+;Otras funciones:
+;pixbit->string(pixbit-d)
+
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -172,4 +193,15 @@
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+;------------------------------------------------- Otras Funciones --------------------------------------------------------------------------------
 
+;Función que convierte el color de un pixbit-d a string
+;Entrada: pixbit-d
+;Salida: string
+(define pixbit->string (lambda (pixbit-d)
+                         (if (not (equal? pixbit-d null))
+                             (number->string (getpixbit.bit pixbit-d))
+                             "0"
+                             )))
+
+;--------------------------------------------------------------------------------------------------------------------------------------------------

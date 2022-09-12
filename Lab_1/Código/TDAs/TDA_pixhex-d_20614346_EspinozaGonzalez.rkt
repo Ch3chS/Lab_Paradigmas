@@ -17,6 +17,26 @@
 
 ;(3, coordenada x>0, coordenada y>0, hex, profundidad>0)            ;El primer 3 indica que el pixel se trata de un pixhex.
 
+;Especificación:
+;constructor: pixhex-d(x y hex depth)
+
+;Pertenencia: pixhex-d?(pixhex-d)
+
+;Selectores
+;   getpixhex.x(pixhex-d)
+;   getpixhex.y(pixhex-d)
+;   getpixhex.hex(pixhex-d)
+;   getpixhex.depth(pixhex-d)
+
+;Modificadores
+;   changepixhex.x(pixhex-d x)
+;   changepixhex.y(pixhex-d y)
+;   changepixhex.hex(pixhex-d hex)
+;   changepixhex.depth(pixhex-d depth)
+
+;Otras funciones:
+;pixhex->string(pixhex-d)
+
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -165,5 +185,19 @@
                              (list -1 -1 -1 "" -1)
                              )))
 
+
+;--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+;------------------------------------------------- Otras Funciones --------------------------------------------------------------------------------
+
+;Función que convierte el color de un pixhex-d a string
+;Entrada: pixhex-d
+;Salida: string
+(define pixhex->string (lambda (pixhex-d)
+                         (if (not (equal? pixhex-d null))
+                         (getpixhex.hex pixhex-d)
+                         "#FFFFFF"
+                         )))
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------

@@ -16,9 +16,24 @@
 ;-----------------------------------------------------------pixels----------------------------------------------------------------------------------
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
-;Este TDA consiste en una lista de pixeles de un solo tipo, pudiendo ser pixbit-dlist, pixrgb-dlist o pixhex-dlist
+;Este TDA consiste en una lista de pixeles de un solo tipo, pudiendo ser pixbit-dlist, pixrgb-dlist o pixhex-dlist, o el encargado de las funciones
+;entre 2 o más tipos de pixel
 
-;Como se ingresa en el argumento de la función image no requiere constructor
+;Especificación:
+;Pertenencias:
+;pixbit-dlist?(pixels)
+;pixrgb-dlist?(pixels)
+;pixhex-dlist?(pixels)
+
+;Selectores (estas serán solo para agilizar las últimas funciones)
+;   getpixel.x(pixel)
+;   getpixel.y(pixel)
+
+;Modificadores
+;   changepixbit.x(pixbit-d x)
+;   changepixbit.y(pixbit-d y)
+;   changepixbit.bit(pixbit-d bit)
+;   changepixbit.depth(pixbit-d depth)
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -67,14 +82,33 @@
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
 ;-------------------------------------------------- Selectores ------------------------------------------------------------------------------------
-#|
+
+;Función que obtiene la coordenada x de cualquier tipo de pixel
+;Entrada: pixel
+;Salida: int
 (define getpixel.x (lambda (pixel)
                      (cadr pixel)
                      ))
-|#
+
+;Función que obtiene la coordenada y de cualquier tipo de pixel
+;Entrada: pixel
+;Salida: int
 (define getpixel.y (lambda (pixel)
                      (caddr pixel)
                      ))
+
+;Función que obtiene la profundidad de cualquier tipo de pixel
+;Entrada: pixel
+;Salida: int
+(define getpixel.depth (lambda (pixel)
+                         (if (pixbit-d? pixel)
+                             (getpixbit.depth pixel)
+                             (if (pixhex-d? pixel)
+                                 (getpixhex.depth pixel)
+                                 (getpixrgb.depth pixel)
+                                 )
+                             )
+                         ))
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -190,6 +224,9 @@
                           )
                       ))
 
+;Cuenta la cantidad de veces que se repite el primer color en una pixhex-dlist
+;Entrada: pixhex-dlist
+;Salida: int
 (define countfirstpixhexcolor (lambda (pixels)
                              (if (not (equal? pixels null))
                                  (length (filter (lambda (pixhex-d) (equal? (getpixhex.hex (car pixels)) (getpixhex.hex pixhex-d))) pixels))  ;Revisamos cuantas veces se repite el color del primer pixel en la lista
@@ -202,44 +239,70 @@
 ;Entrada: int(fliph = 1/ flipv = 2) x int(width o height dependiendo del caso) x pixels
 ;Salida: pixels
 (define flippixels (lambda (op valor pixels)
-                           (if (not (equal? pixels null))
-                           (if (= op 1)
-                               (cons (fliphpixel valor (car pixels)) (flippixels op valor (cdr pixels))) ;Si op es 1 fliph
-                               (cons (flipvpixel valor (car pixels)) (flippixels op valor (cdr pixels))) ;Sino flipv
-                               )
+                     ;Función que invierte la x de un pixel horizontalmente (dependiendo del ancho de la imagen)
+                     ;Entrada: pixel  (pudiendo ser pixbit-d, pixrgb-d o pixhex-d)
+                     ;Salida: pixel   (del mismo tipo que ingreso)
+                     (define fliphpixel (lambda (width pixel)
+                                          (if (pixbit-d? pixel)
+                                              (changepixbit.x pixel (- width (getpixbit.x pixel) 1))  ;Notar que se resta 1 (esto para tener cuenta la los 0 en el ancho de la imagen)
+                                              (if (pixrgb-d? pixel)
+                                                  (changepixrgb.x pixel (- width (getpixrgb.x pixel) 1))
+                                                  (changepixhex.x pixel (- width (getpixhex.x pixel) 1))
+                                                  )
+                                              )
+                                          ))
+                     ;Función que invierte la x de un pixel horizontalmente (dependiendo del ancho de la imagen)
+                     ;Entrada: pixel  (pudiendo ser pixbit-d, pixrgb-d o pixhex-d)
+                     ;Salida: pixel   (del mismo tipo que ingreso)
+                     (define flipvpixel (lambda (height pixel)
+                                          (if (pixbit-d? pixel)
+                                              (changepixbit.y pixel (- height (getpixbit.y pixel) 1))
+                                              (if (pixrgb-d? pixel)
+                                                  (changepixrgb.y pixel (- height (getpixrgb.y pixel) 1))
+                                                  (changepixhex.y pixel (- height (getpixhex.y pixel) 1))
+                                                  ))
+                                          ))
+                     (if (not (equal? pixels null))
+                         (if (= op 1)
+                             (cons (fliphpixel valor (car pixels)) (flippixels op valor (cdr pixels))) ;Si op es 1 fliph
+                             (cons (flipvpixel valor (car pixels)) (flippixels op valor (cdr pixels))) ;Sino flipv
+                             )
                            
-                           null
+                         null
                            )))
 
-;Función que invierte la x de un pixel horizontalmente (dependiendo del ancho de la imagen)
-;Entrada: pixel  (pudiendo ser pixbit-d, pixrgb-d o pixhex-d)
-;Salida: pixel   (del mismo tipo que ingreso)
-(define fliphpixel (lambda (width pixel)
-                     (if (pixbit-d? pixel)
-                         (changepixbit.x pixel (- width (getpixbit.x pixel) 1))  ;Notar que se resta 1 (esto para tener cuenta la los 0 en el ancho de la imagen)
-                         (if (pixrgb-d? pixel)
-                             (changepixrgb.x pixel (- width (getpixrgb.x pixel) 1))
-                             (changepixhex.x pixel (- width (getpixhex.x pixel) 1))
-                             )
-                         )
-                     ))
 
-;Función que invierte la x de un pixel horizontalmente (dependiendo del ancho de la imagen)
-;Entrada: pixel  (pudiendo ser pixbit-d, pixrgb-d o pixhex-d)
-;Salida: pixel   (del mismo tipo que ingreso)
-(define flipvpixel (lambda (height pixel)
-                     (if (pixbit-d? pixel)
-                         (changepixbit.y pixel (- height (getpixbit.y pixel) 1))
-                         (if (pixrgb-d? pixel)
-                             (changepixrgb.y pixel (- height (getpixrgb.y pixel) 1))
-                             (changepixhex.y pixel (- height (getpixhex.y pixel) 1))
-                         ))
-                     ))
+
+
 
 ;Funcion que descarta los pixeles que no esten entre los límites
 ;Entrada: pixels
 ;Salida: pixels
 (define discardpixels (lambda (x2 x1 y2 y1 pixels)
+                        ;Función que retorna si un pixel está en los limites establecidos
+                        ;Entrada: x2(int) X x1(int) X y2(int) X X1(int) X pixel
+                        ;Salida: boolean
+                        (define validpixel? (lambda (x2 x1 y2 y1 pixel)
+                                              (if (pixbit-d? pixel)
+                                                  (if (and (and (<= x1 (getpixbit.x pixel)) (<= (getpixbit.x pixel) x2)) (and (<= y1 (getpixbit.y pixel)) (<= (getpixbit.y pixel) y2)))
+                                                      #t
+                                                      #f
+                                                      )
+                                                  (if (pixrgb-d? pixel)
+                                                      (if (and (and (<= x1 (getpixrgb.x pixel)) (<= (getpixrgb.x pixel) x2)) (and (<= y1 (getpixrgb.y pixel)) (<= (getpixrgb.y pixel) y2)))
+                                                          #t
+                                                          #f
+                                                          )
+                                                      (if (pixhex-d? pixel)
+                                                          (if (and (and (<= x1 (getpixhex.x pixel)) (<= (getpixhex.x pixel) x2)) (and (<= y1 (getpixhex.y pixel)) (<= (getpixhex.y pixel) y2)))
+                                                              #t
+                                                              #f
+                                                              )
+                                                          #f
+                                                          )
+                                                      )
+                                                  )
+                                              ))
                         (if (not (equal? pixels null))
                             (if (validpixel? x2 x1 y2 y1 (car pixels))
                                 (cons (car pixels) (discardpixels x2 x1 y2 y1 (cdr pixels)))
@@ -249,62 +312,35 @@
                             )
                         ))
 
-;Función que retorna si un pixel está en los limites establecidos
-(define validpixel? (lambda (x2 x1 y2 y1 pixel)
-                      (if (pixbit-d? pixel)
-                          (if (and (and (<= x1 (getpixbit.x pixel)) (<= (getpixbit.x pixel) x2)) (and (<= y1 (getpixbit.y pixel)) (<= (getpixbit.y pixel) y2)))
-                          #t
-                          #f
-                          )
-                          (if (pixrgb-d? pixel)
-                              (if (and (and (<= x1 (getpixrgb.x pixel)) (<= (getpixrgb.x pixel) x2)) (and (<= y1 (getpixrgb.y pixel)) (<= (getpixrgb.y pixel) y2)))
-                                  #t
-                                  #f
-                                  )
-                              (if (pixhex-d? pixel)
-                                  (if (and (and (<= x1 (getpixhex.x pixel)) (<= (getpixhex.x pixel) x2)) (and (<= y1 (getpixhex.y pixel)) (<= (getpixhex.y pixel) y2)))
-                                      #t
-                                      #f
-                                      )
-                                  #f
-                                  )
-                              )
-                          )
-                      ))
-
-;Las siguientes 2 funciones nos permiten transformar un un número entero entre 0 y 255 a un string hexadecimal
 
 ;Función que transforma un número de 0 a 255 a una lista con 2 decimales listos para ser transformados a 2 digitos hexadecimales
 ;Entrada: int
 ;Salida: list: '(int, int)
 (define rgb->hex (lambda (num)
+                   ;Toma una lista de 2 digitos en hexadecimal y los junta en un string hexadecimal
+                   ;Entrada: list: '(int, int)
+                   ;Salida: string
+                   (define num->hex (lambda (num)
+                                      (if (< num 10)
+                                          (number->string num)
+                                          (if (= num 10) "A"
+                                              (if (= num 11) "B"
+                                                  (if (= num 12) "C"
+                                                      (if (= num 13) "D"
+                                                          (if (= num 14) "E"
+                                                              (if (= num 15) "F"
+                                                                  "?"
+                                                                  )
+                                                              )
+                                                          )
+                                                      )
+                                                  )
+                                              )
+                                          )))
                    (if (> num 15)
                        (list (num->hex (/ (- num (modulo num 16)) 16)) (num->hex (modulo num 16)))
                        (list "0" (num->hex (modulo num 16)))
                        )
                    ))
-
-;Toma una lista de 2 digitos en hexadecimal y los junta en un string hexadecimal
-;Entrada: list: '(int, int)
-;Salida: string
-(define num->hex (lambda (num)
-                   (if (< num 10)
-                       (number->string num)
-                       (if (= num 10) "A"
-                           (if (= num 11) "B"
-                               (if (= num 12) "C"
-                                   (if (= num 13) "D"
-                                       (if (= num 14) "E"
-                                           (if (= num 15) "F"
-                                               "?"
-                                               )
-                                           )
-                                       )
-                                   )
-                               )
-                           )
-                       )))
-
-
 
 ;-----------------------------------------------------------------------------------------------------------------------------------------------------

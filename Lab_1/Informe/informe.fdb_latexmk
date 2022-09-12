@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex informe"] 1662925495 "informe.aux" "informe.bbl" "informe" 1662925852
+["bibtex informe"] 1662936271 "informe.aux" "informe.bbl" "informe" 1662936909
   "Bibliografia.bib" 1660966825 1121 86cdade362a49a34f48753f621111806 ""
   "C:/Users/Donex/AppData/Local/Programs/MiKTeX/bibtex/bst/apacite/apacite.bst" 1374956328 146156 9d7b79dbf9d91133318126032cff8c27 ""
-  "Contenido/Portada.aux" 1662925852 540 b4ae4c3842cb01d2e668dc43fb65418b "pdflatex"
-  "informe.aux" 1662925852 2358 ae2362f368b60c0e0bf4da73aee23f2b "pdflatex"
+  "Contenido/Portada.aux" 1662936909 540 b4ae4c3842cb01d2e668dc43fb65418b "pdflatex"
+  "informe.aux" 1662936909 2358 1b30a92ca56c4f0c3a33966fc3145df8 "pdflatex"
   (generated)
   "informe.bbl"
   "informe.blg"
-["pdflatex"] 1662925851 "c:/Users/Donex/Desktop/Lab_Paradigmas/Lab_1/Informe/informe.tex" "informe.pdf" "informe" 1662925852
-  "Anexos.tex" 1662925493 1747 a211a68ace669cb8d3a72c8be900889f ""
+["pdflatex"] 1662936908 "c:/Users/Donex/Desktop/Lab_Paradigmas/Lab_1/Informe/informe.tex" "informe.pdf" "informe" 1662936909
+  "Anexos.tex" 1662936907 3701 23997a0fa69b44b4dea808a2e3532b4d ""
   "C:/Users/Donex/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1662919135 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Donex/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1661041891 11548 753f7a66dd23511f84f5504cbe050061 ""
   "C:/Users/Donex/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1661041863 10329961 32ef0b11dac3ae81fc9041fdff597453 ""
@@ -54,6 +54,7 @@
   "C:/Users/Donex/AppData/Local/Programs/MiKTeX/tex/latex/babel-spanish/spanish.ldf" 1622283180 26965 3b6d1655ad716f98e788b1fb9f2e87b8 ""
   "C:/Users/Donex/AppData/Local/Programs/MiKTeX/tex/latex/base/article.cls" 1657045032 20144 7555b7429d80bef287ebb82117811acc ""
   "C:/Users/Donex/AppData/Local/Programs/MiKTeX/tex/latex/base/inputenc.sty" 1657045032 5048 84b05796b49b69e2d4257d537721c960 ""
+  "C:/Users/Donex/AppData/Local/Programs/MiKTeX/tex/latex/base/omscmr.fd" 1657045032 2469 5cf30656b812a1b3bb0f58f4a07885f2 ""
   "C:/Users/Donex/AppData/Local/Programs/MiKTeX/tex/latex/base/size10.clo" 1657045032 8448 e0391042ca0932ede1098ae14ada60ba ""
   "C:/Users/Donex/AppData/Local/Programs/MiKTeX/tex/latex/csquotes/csquotes.cfg" 1613979084 7068 06f8d141725d114847527a66439066b6 ""
   "C:/Users/Donex/AppData/Local/Programs/MiKTeX/tex/latex/csquotes/csquotes.def" 1613979084 20781 dc1bec6693d5466d8972ecc6b81f9f0b ""
@@ -80,17 +81,17 @@
   "Contenido/Capitulos/Introduccion/D_paradigma.tex" 1660966825 626 e342674422684f0c59eb4b46708579d7 ""
   "Contenido/Capitulos/Introduccion/D_problema.tex" 1660966825 224 5a954e0d6aeb6fa148e0f1a9322fd2fd ""
   "Contenido/Capitulos/Resultados/Conclusión.tex" 1662921802 977 362535d5f627711569ac0e29d0198dc6 ""
-  "Contenido/Capitulos/Resultados/I_uso.tex" 1662922593 462 4022f1219a7efe5647e3d9fbb045a4ed ""
-  "Contenido/Capitulos/Resultados/R_obtenidos.tex" 1662925850 376 153e76829e546941ce7d3346ac145196 ""
+  "Contenido/Capitulos/Resultados/I_uso.tex" 1662935330 789 2066c645433d55926b8bc009b2b22c6e ""
+  "Contenido/Capitulos/Resultados/R_obtenidos.tex" 1662928129 409 8f3bf3765ba771783847eb5fe4ffa1fd ""
   "Contenido/Imagenes/Logo color.png" 1660966825 28777 29ae04311183277b3a9b0f56d3ecdda0 ""
-  "Contenido/Portada.aux" 1662925852 540 b4ae4c3842cb01d2e668dc43fb65418b "pdflatex"
+  "Contenido/Portada.aux" 1662936909 540 b4ae4c3842cb01d2e668dc43fb65418b "pdflatex"
   "Contenido/Portada.tex" 1662828819 877 6d546c258cf5cc7d5471f62ca4175508 ""
   "c:/Users/Donex/Desktop/Lab_Paradigmas/Lab_1/Informe/informe.tex" 1662919125 2011 c5731a7b2cc2355304016f0d5fc77571 ""
-  "informe.aux" 1662925852 2358 ae2362f368b60c0e0bf4da73aee23f2b "pdflatex"
-  "informe.bbl" 1662925495 52 0eba253fc001332e731e8aba3f23127b "bibtex informe"
-  "informe.lot" 1662925852 271 de5af81070777e63ca2f472bf6651752 "pdflatex"
+  "informe.aux" 1662936909 2358 1b30a92ca56c4f0c3a33966fc3145df8 "pdflatex"
+  "informe.bbl" 1662936271 52 0eba253fc001332e731e8aba3f23127b "bibtex informe"
+  "informe.lot" 1662936909 271 3bbe98f0a7ddaa2162dbbc5a49e51426 "pdflatex"
   "informe.tex" 1662919125 2011 c5731a7b2cc2355304016f0d5fc77571 ""
-  "informe.toc" 1662925852 1044 e4b423f78d4929682c975107f7995752 "pdflatex"
+  "informe.toc" 1662936909 1044 e4b423f78d4929682c975107f7995752 "pdflatex"
   (generated)
   "Contenido/Portada.aux"
   "informe.aux"

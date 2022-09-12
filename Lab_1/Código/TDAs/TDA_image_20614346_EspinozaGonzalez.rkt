@@ -20,6 +20,17 @@
 
 ;(compressed?(0|1) ,x>0, y>0, pixels, muc(most-used-color))
 
+;Pertenencia: image?(image)
+
+;Selectores
+;   getcompressed(image)
+;   getwidth(image)
+;   getheight(image)
+;   getpixels(image)
+;   getmostused(image)
+
+;El resto de funciones como el constructor, etc... son las del enunciado tal cual estan ahí (implementadas en el main).
+
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -92,12 +103,5 @@
 
 
 
-;-------------------------------------------------- Otras funciones ----------------------------------------------------------------------------------
-
-
-
-
-
-;-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
