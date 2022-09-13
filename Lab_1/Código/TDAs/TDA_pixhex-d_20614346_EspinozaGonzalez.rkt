@@ -15,7 +15,7 @@
 
 ;La representación estará dada por una lista la cual constara con el formato (int x int x int x string x int) de la siguiente forma:
 
-;(3, coordenada x>0, coordenada y>0, hex, profundidad>0)            ;El primer 3 indica que el pixel se trata de un pixhex.
+;(coordenada x>0, coordenada y>0, hex, profundidad>0)            ;El primer 3 indica que el pixel se trata de un pixhex.
 
 ;Especificación:
 ;constructor: pixhex-d(x y hex depth)
@@ -48,13 +48,13 @@
 (define pixhex-d (lambda (x y hex depth)
                    (if (pixhex-d? (pixhexcont x y hex depth))
                        (pixhexcont x y hex depth)
-                       (list -1 -1 -1 "" -1)               ;Esta será la representación de un pixhex erroneo (para cumplir con el recorrido)
+                       (list -1 -1 "" -1)               ;Esta será la representación de un pixhex erroneo (para cumplir con el recorrido)
                        )))
 
 ;Función que crea una lista a partir de ciertos parametros (idealmente un pixhex-d)
 ;Dominio: int x int x string x int
 ;Recorrido: lista
-(define pixhexcont (lambda (x y hex depth) (list 3 x y hex depth)))
+(define pixhexcont (lambda (x y hex depth) (list x y hex depth)))
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -66,12 +66,12 @@
 ;Recorrido: booleano
 (define pixhex-d? (lambda (pixhex-d)
                     ;Comprobar que la entrada sea una lista y que no corresponda a la representación de un pixhex erroneo
-                    (if (and (list? pixhex-d) (not (equal? pixhex-d (list -1 -1 -1 "" -1))))
-                        (if (= (length pixhex-d) 5)
+                    (if (and (list? pixhex-d) (not (equal? pixhex-d (list -1 -1 "" -1))))
+                        (if (= (length pixhex-d) 4)
                             ;Comprobar que x,y,depth sean números y hex sea un string
-                            (if (and (number? (car pixhex-d)) (and (number? (cadr pixhex-d)) (and (number? (caddr pixhex-d)) (and (string? (cadddr pixhex-d)) (number? (car (cddddr pixhex-d)))))))
+                            (if (and (number? (car pixhex-d)) (and (number? (cadr pixhex-d)) (and (string? (caddr pixhex-d)) (number? (cadddr pixhex-d)))))
                                 ;Comprobar que x,y,depth sean mayores o iguales a 0
-                                (if (and (= 3 (car pixhex-d)) (and (<= 0 (cadr pixhex-d)) (and (<= 0 (caddr pixhex-d)) (<= 0 (car (cddddr pixhex-d))))))
+                                (if (and (<= 0 (car pixhex-d)) (and (<= 0 (cadr pixhex-d)) (<= 0 (cadddr pixhex-d))))
                                     #t
                                     #f
                                     )
@@ -92,7 +92,7 @@
 ;Recorrido: int
 (define getpixhex.x (lambda (pixhex-d)
                       (if (pixhex-d? pixhex-d)      ;Comprobamos que la entrada sea un pixhex-d
-                          (cadr pixhex-d)            ;Si lo es, entregamos lo requerido
+                          (car pixhex-d)            ;Si lo es, entregamos lo requerido
                           -1                        ;Caso contrario entregamos un -1
                           )))                       ;Esto se repite en las funciones getpixhex.y y getpixhex.depth
 
@@ -101,7 +101,7 @@
 ;Recorrido: int
 (define getpixhex.y (lambda (pixhex-d)
                       (if (pixhex-d? pixhex-d)
-                          (caddr pixhex-d)
+                          (cadr pixhex-d)
                           -1
                           )))
 
@@ -110,7 +110,7 @@
 ;Recorrido: string
 (define getpixhex.hex (lambda (pixhex-d)
                       (if (pixhex-d? pixhex-d)      ;Comprobamos que la entrada sea un pixhex-d
-                          (cadddr pixhex-d)          ;Si lo es, entregamos lo requerido
+                          (caddr pixhex-d)          ;Si lo es, entregamos lo requerido
                           ""                        ;Caso contrario entregamos un string vacio
                           )))
 
@@ -119,7 +119,7 @@
 ;Recorrido: int
 (define getpixhex.depth (lambda (pixhex-d)
                       (if (pixhex-d? pixhex-d)
-                          (car (cddddr pixhex-d))
+                          (cadddr pixhex-d)
                           -1
                           )))
 
@@ -135,12 +135,12 @@
                          (if (pixhex-d? pixhex-d)      ;Comprobamos que la entrada 1 sea un pixhex-d
                              (if (number? x)           ;Comprobamos que la entrada 2 sea un número para no agregar algo que no debe agregarse
                                  (if (<= 0 x)          ;Comprobamos que además este número sea mayor o igual a 0
-                                     (list 3 x (getpixhex.y pixhex-d) (getpixhex.hex pixhex-d) (getpixhex.depth pixhex-d))   ;Si todo se cumple retornamos el pixhex-d con el valor cambiado
+                                     (list x (getpixhex.y pixhex-d) (getpixhex.hex pixhex-d) (getpixhex.depth pixhex-d))   ;Si todo se cumple retornamos el pixhex-d con el valor cambiado
                                      pixhex-d
                                      )
                                  pixhex-d           ;Si el valor o no es un número o, de serlo, no es mayor o igual a 0, entonces se retorna el mismo pixhex-d que entro
                                  )
-                             (list -1 -1 -1 "" -1)     ;Si lo que entro no es un pixhex-d entonces retornamos la representación de pixhex-d erroneo
+                             (list -1 -1 "" -1)     ;Si lo que entro no es un pixhex-d entonces retornamos la representación de pixhex-d erroneo
                              )))                    ;Todo lo anterior se repite en las funciones changepixhex.y y changepixhex.depth
 
 ;Función que cambia el valor y de un pixhex-d
@@ -150,7 +150,7 @@
                          (if (pixhex-d? pixhex-d)
                              (if (number? y)
                                  (if (<= 0 y)
-                                     (list 3 (getpixhex.x pixhex-d) y (getpixhex.hex pixhex-d) (getpixhex.depth pixhex-d))
+                                     (list (getpixhex.x pixhex-d) y (getpixhex.hex pixhex-d) (getpixhex.depth pixhex-d))
                                      pixhex-d
                                      )
                                  pixhex-d
@@ -164,10 +164,10 @@
 (define changepixhex.hex (lambda (pixhex-d hex)
                          (if (pixhex-d? pixhex-d)      ;Comprobamos que la entrada 1 sea un pixhex-d
                              (if (string? hex)         ;Comprobamos que la entrada 2 sea un string para no agregar algo que no debe agregarse
-                                 (list 3 (getpixhex.x pixhex-d) (getpixhex.y pixhex-d) hex (getpixhex.depth pixhex-d))   ;Si todo se cumple retornamos el pixhex-d con el valor cambiado
+                                 (list (getpixhex.x pixhex-d) (getpixhex.y pixhex-d) hex (getpixhex.depth pixhex-d))   ;Si todo se cumple retornamos el pixhex-d con el valor cambiado
                                  pixhex-d              ;Si la parte hexadecimal no es un string se retorna el pixhex-d sin cambiar
                                  )
-                             (list -1 -1 -1 "" -1)        ;Si lo que entro no es un pixhex-d entonces retornamos la representación de pixhex-d erroneo
+                             (list -1 -1 "" -1)        ;Si lo que entro no es un pixhex-d entonces retornamos la representación de pixhex-d erroneo
                              )))
 
 ;Función que cambia el valor depth de un pixhex-d
@@ -177,12 +177,12 @@
                          (if (pixhex-d? pixhex-d)
                              (if (number? depth)
                                  (if (<= 0 depth)
-                                     (list 3 (getpixhex.x pixhex-d) (getpixhex.y pixhex-d) (getpixhex.hex pixhex-d) depth)
+                                     (list (getpixhex.x pixhex-d) (getpixhex.y pixhex-d) (getpixhex.hex pixhex-d) depth)
                                      pixhex-d
                                      )
                                  pixhex-d
                                  )
-                             (list -1 -1 -1 "" -1)
+                             (list -1 -1 "" -1)
                              )))
 
 

@@ -87,14 +87,26 @@
 ;Entrada: pixel
 ;Salida: int
 (define getpixel.x (lambda (pixel)
-                     (cadr pixel)
+                     (if (pixbit-d? pixel)
+                         (getpixbit.x pixel)
+                         (if (pixrgb-d? pixel)
+                             (getpixrgb.x pixel)
+                             (getpixhex.x pixel)
+                             )
+                         )
                      ))
 
 ;Función que obtiene la coordenada y de cualquier tipo de pixel
 ;Entrada: pixel
 ;Salida: int
 (define getpixel.y (lambda (pixel)
-                     (caddr pixel)
+                     (if (pixbit-d? pixel)
+                         (getpixbit.y pixel)
+                         (if (pixrgb-d? pixel)
+                             (getpixrgb.y pixel)
+                             (getpixhex.y pixel)
+                             )
+                         )
                      ))
 
 ;Función que obtiene la profundidad de cualquier tipo de pixel

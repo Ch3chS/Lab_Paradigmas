@@ -16,7 +16,7 @@
 
 ;La representación estará dada por una lista la cual constara con el formato (int x int x int x int x int x int x int) de la siguiente forma:
 
-;(2, coordenada x>0, coordenada y>0, 0 <= r <= 255, 0 <= g <= 255, 0 <= b <= 255, profundidad>0)     ;El primer 2 indica que el pixel se trata de un pixrgb.
+;(coordenada x>0, coordenada y>0, 0 <= r <= 255, 0 <= g <= 255, 0 <= b <= 255, profundidad>0)     ;El primer 2 indica que el pixel se trata de un pixrgb.
 
 ;Especificación:
 ;constructor: pixrgb-d(x y r g b depth)
@@ -53,13 +53,13 @@
 (define pixrgb-d (lambda (x y r g b depth)
                    (if (pixrgb-d? (pixrgbcont x y r g b depth))
                        (pixrgbcont x y r g b depth)
-                       (list -1 -1 -1 -1 -1 -1 -1)               ;Esta será la representación de un pixrgb erroneo (para cumplir con el recorrido)
+                       (list -1 -1 -1 -1 -1 -1)               ;Esta será la representación de un pixrgb erroneo (para cumplir con el recorrido)
                        )))
 
 ;Función que crea una lista a partir de ciertos parametros (idealmente un pixrgb-d)
 ;Dominio: int x int x int x int x int x int
 ;Recorrido: lista
-(define pixrgbcont (lambda (x y r g b depth) (list 2 x y r g b depth)))
+(define pixrgbcont (lambda (x y r g b depth) (list x y r g b depth)))
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -71,13 +71,13 @@
 ;Recorrido: booleano
 (define pixrgb-d? (lambda (pixrgb-d)
                     ;Comprobar que sea una lista y que no sea igual a la representación de un pixrgb erroneo
-                    (if (and (list? pixrgb-d) (not (equal? pixrgb-d (list -1 -1 -1 -1 -1 -1 -1))))
-                        (if (= (length pixrgb-d) 7)
+                    (if (and (list? pixrgb-d) (not (equal? pixrgb-d (list -1 -1 -1 -1 -1 -1))))
+                        (if (= (length pixrgb-d) 6)
                             ;Comprobar que todos sean números
-                            (if (and (number? (car pixrgb-d)) (and (number? (cadr pixrgb-d)) (and (number? (caddr pixrgb-d)) (and (number? (cadddr pixrgb-d)) (and (number? (car(cddddr pixrgb-d))) (and (number? (cadr(cddddr pixrgb-d))) (number? (caddr(cddddr pixrgb-d)))))))))
+                            (if (and (number? (car pixrgb-d)) (and (number? (cadr pixrgb-d)) (and (number? (caddr pixrgb-d)) (and (number? (cadddr pixrgb-d)) (and (number? (car(cddddr pixrgb-d))) (number? (cadr(cddddr pixrgb-d))))))))
 
                                 ;Comprobar que r,g,b esten entre 0 y 255 y que x,y,depth sean iguales o mayores que 0
-                                (if (and (= 2 (car pixrgb-d)) (and (and (and (<= 0 (cadr pixrgb-d)) (<= 0 (caddr pixrgb-d))) (and (<= 0 (cadddr pixrgb-d)) (>= 255 (cadddr pixrgb-d)))) (and (and (<= 0 (car (cddddr pixrgb-d))) (>= 255 (car (cddddr pixrgb-d)))) (and (and (<= 0 (cadr(cddddr pixrgb-d))) (>= 255 (cadr(cddddr pixrgb-d)))) (<= 0 (caddr(cddddr pixrgb-d)))))))
+                                (if (and (and (and (<= 0 (car pixrgb-d)) (<= 0 (cadr pixrgb-d))) (and (<= 0 (caddr pixrgb-d)) (>= 255 (caddr pixrgb-d)))) (and (and (<= 0 (cadddr pixrgb-d)) (>= 255 (cadddr pixrgb-d))) (and (and (<= 0 (car(cddddr pixrgb-d))) (>= 255 (car(cddddr pixrgb-d)))) (<= 0 (cadr(cddddr pixrgb-d))))))
                                     #t
                                     #f
                                     )
@@ -97,7 +97,7 @@
 ;Recorrido: int
 (define getpixrgb.x (lambda (pixrgb-d)
                       (if (pixrgb-d? pixrgb-d)   ;Comprobamos que la entrada sea un pixrgb-d
-                          (cadr pixrgb-d)         ;Si lo es entregamos lo requerido
+                          (car pixrgb-d)         ;Si lo es entregamos lo requerido
                           -1                     ;Caso contrario entregamos un -1
                           )))                    ;Lo anterior se repite en todas las funciones selectoras
 
@@ -106,7 +106,7 @@
 ;Recorrido: int
 (define getpixrgb.y (lambda (pixrgb-d)
                       (if (pixrgb-d? pixrgb-d)
-                          (caddr pixrgb-d)
+                          (cadr pixrgb-d)
                           -1
                           )))
 
@@ -115,7 +115,7 @@
 ;Recorrido: int
 (define getpixrgb.r (lambda (pixrgb-d)
                       (if (pixrgb-d? pixrgb-d)
-                          (cadddr pixrgb-d)
+                          (caddr pixrgb-d)
                           -1
                           )))
 
@@ -124,7 +124,7 @@
 ;Recorrido: int
 (define getpixrgb.g (lambda (pixrgb-d)
                       (if (pixrgb-d? pixrgb-d)
-                          (car (cddddr pixrgb-d))
+                          (cadddr pixrgb-d)
                           -1
                           )))
 
@@ -133,7 +133,7 @@
 ;Recorrido: int
 (define getpixrgb.b (lambda (pixrgb-d)
                       (if (pixrgb-d? pixrgb-d)
-                          (cadr(cddddr pixrgb-d))
+                          (car(cddddr pixrgb-d))
                           -1
                           )))
 
@@ -142,7 +142,7 @@
 ;Recorrido: int
 (define getpixrgb.depth (lambda (pixrgb-d)
                       (if (pixrgb-d? pixrgb-d)
-                          (caddr(cddddr pixrgb-d))
+                          (cadr(cddddr pixrgb-d))
                           -1
                           )))
 
@@ -158,12 +158,12 @@
                          (if (pixrgb-d? pixrgb-d)      ;Comprobamos que la entrada 1 sea un pixrgb-d
                              (if (number? x)           ;Comprobamos que la entrada 2 sea un número
                                  (if (<= 0 x)          ;Comprobamos que este número sea mayot o igual a 0
-                                     (list 2 x (getpixrgb.y pixrgb-d) (getpixrgb.r pixrgb-d) (getpixrgb.g pixrgb-d) (getpixrgb.b pixrgb-d) (getpixrgb.depth pixrgb-d)) ;Si cumple con todo entregamos el pixrgb-d con el cambio
+                                     (list x (getpixrgb.y pixrgb-d) (getpixrgb.r pixrgb-d) (getpixrgb.g pixrgb-d) (getpixrgb.b pixrgb-d) (getpixrgb.depth pixrgb-d)) ;Si cumple con todo entregamos el pixrgb-d con el cambio
                                      pixrgb-d
                                  )
                                  pixrgb-d             ;Si la entrada 2 no es un número o de serlo es menor que 0 entonces entregamos el pixrgb-d sin cambios
                                  )
-                             (list -1 -1 -1 -1 -1 -1 -1) ;Si la entrada 1 no fue un pixbit-d entonces entregamos la representación de un pixrgb-d erroneo para respetar el recorrido
+                             (list -1 -1 -1 -1 -1 -1) ;Si la entrada 1 no fue un pixbit-d entonces entregamos la representación de un pixrgb-d erroneo para respetar el recorrido
                              )))                      ;Todo lo anterior se repite en las funciones changepixrgb-y y changepixrgb-depth
 
 ;Función que cambia el valor y de un pixrgb-d
@@ -173,12 +173,12 @@
                          (if (pixrgb-d? pixrgb-d)
                              (if (number? y)
                                  (if (<= 0 y)
-                                     (list 2 (getpixrgb.x pixrgb-d) y (getpixrgb.r pixrgb-d) (getpixrgb.g pixrgb-d) (getpixrgb.b pixrgb-d) (getpixrgb.depth pixrgb-d))
+                                     (list (getpixrgb.x pixrgb-d) y (getpixrgb.r pixrgb-d) (getpixrgb.g pixrgb-d) (getpixrgb.b pixrgb-d) (getpixrgb.depth pixrgb-d))
                                      pixrgb-d
                                  )
                                  pixrgb-d
                                  )
-                             (list -1 -1 -1 -1 -1 -1 -1)
+                             (list -1 -1 -1 -1 -1 -1)
                              )))
 
 ;Función que cambia el valor r de un pixrgb-d
@@ -188,12 +188,12 @@
                          (if (pixrgb-d? pixrgb-d)              ;Comprobamos que la entrada 1 sea un pixrgb-d
                              (if (number? r)                   ;Comprobamos que la entrada 2 sea un número
                                  (if (and (<= 0 r) (>= 255 r)) ;Comprobamos que este número este entre 0 y 255 (incluyendo ambos)
-                                     (list 2 (getpixrgb.x pixrgb-d) (getpixrgb.y pixrgb-d) r (getpixrgb.g pixrgb-d) (getpixrgb.b pixrgb-d) (getpixrgb.depth pixrgb-d)) ;Si se cumple todo entregamos el pixrgb-d con el cambio
+                                     (list (getpixrgb.x pixrgb-d) (getpixrgb.y pixrgb-d) r (getpixrgb.g pixrgb-d) (getpixrgb.b pixrgb-d) (getpixrgb.depth pixrgb-d)) ;Si se cumple todo entregamos el pixrgb-d con el cambio
                                      pixrgb-d
                                  )
                                  pixrgb-d                      ;Si la entrada 2 no es un número o de serlo no cumple con el rango entonces retornamos el pixrgb-d sin el cambio
                                  )
-                             (list -1 -1 -1 -1 -1 -1 -1)          ;Si la entrada 1 no es un pixrgb-d valido entonces retornamos la representación de pixrgb-d erroneo
+                             (list -1 -1 -1 -1 -1 -1)          ;Si la entrada 1 no es un pixrgb-d valido entonces retornamos la representación de pixrgb-d erroneo
                              )))                               ;Todo lo anterior se repite en las funciones changepixrgb-g y changepixrgb-b
 
 ;Función que cambia el valor g de un pixrgb-d
@@ -203,12 +203,12 @@
                          (if (pixrgb-d? pixrgb-d)
                              (if (number? g)
                                  (if (and (<= 0 g) (>= 255 g))
-                                     (list 2 (getpixrgb.x pixrgb-d) (getpixrgb.y pixrgb-d) (getpixrgb.r pixrgb-d) g (getpixrgb.b pixrgb-d) (getpixrgb.depth pixrgb-d))
+                                     (list (getpixrgb.x pixrgb-d) (getpixrgb.y pixrgb-d) (getpixrgb.r pixrgb-d) g (getpixrgb.b pixrgb-d) (getpixrgb.depth pixrgb-d))
                                      pixrgb-d
                                  )
                                  pixrgb-d
                                  )
-                             (list -1 -1 -1 -1 -1 -1 -1)
+                             (list -1 -1 -1 -1 -1 -1)
                              )))
 
 ;Función que cambia el valor b de un pixrgb-d
@@ -218,12 +218,12 @@
                          (if (pixrgb-d? pixrgb-d)
                              (if (number? b)
                                  (if (and (<= 0 b) (>= 255 b))
-                                     (list 2 (getpixrgb.x pixrgb-d) (getpixrgb.y pixrgb-d) (getpixrgb.r pixrgb-d) (getpixrgb.g pixrgb-d) b (getpixrgb.depth pixrgb-d))
+                                     (list (getpixrgb.x pixrgb-d) (getpixrgb.y pixrgb-d) (getpixrgb.r pixrgb-d) (getpixrgb.g pixrgb-d) b (getpixrgb.depth pixrgb-d))
                                      pixrgb-d
                                  )
                                  pixrgb-d
                                  )
-                             (list -1 -1 -1 -1 -1 -1 -1)
+                             (list -1 -1 -1 -1 -1 -1)
                              )))
 
 ;Función que cambia el valor depth de un pixrgb-d
@@ -233,12 +233,12 @@
                          (if (pixrgb-d? pixrgb-d)
                              (if (number? depth)
                                  (if (<= 0 depth)
-                                     (list 2 (getpixrgb.x pixrgb-d) (getpixrgb.y pixrgb-d) (getpixrgb.r pixrgb-d) (getpixrgb.g pixrgb-d) (getpixrgb.b pixrgb-d) depth)
+                                     (list (getpixrgb.x pixrgb-d) (getpixrgb.y pixrgb-d) (getpixrgb.r pixrgb-d) (getpixrgb.g pixrgb-d) (getpixrgb.b pixrgb-d) depth)
                                      pixrgb-d
                                  )
                                  pixrgb-d
                                  )
-                             (list -1 -1 -1 -1 -1 -1 -1)
+                             (list -1 -1 -1 -1 -1 -1)
                              )))
 
 ;--------------------------------------------------------------------------------------------------------------------------------------------------

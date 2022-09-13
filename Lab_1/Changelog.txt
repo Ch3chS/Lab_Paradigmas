@@ -25,3 +25,4 @@ Código:
 	01/09/2022: Función decompress agregada
 	10/09/2022: Archivo de pruebas terminado
 	12/09/2022: Proyecto terminado (falta pulir)
+	13/09/2022: Pulidos TDA pixbit y pixhex
