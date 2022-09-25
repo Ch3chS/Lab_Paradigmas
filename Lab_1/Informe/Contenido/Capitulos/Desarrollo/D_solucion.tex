@@ -36,29 +36,35 @@ específicos.
     usado en la imagen, cuyo tipo dependerá del tipo de imagen que sea (bitmap, pixmap o hexmap).\\
 
     Los pixeles en sí estarán un poco más adelante, pero algo que los 3 tipos de estos tendrán en común, es que serán implementados con listas 
+<<<<<<< HEAD
     donde el segundo y tercer elemento corresponden a la posición (x,y) del pixel y el último elemento de la lista
     corresponderá a la profundidad del pixel, donde, estos 3 valores mencionados, son enteros positivos.\\
+=======
+    donde el primer y segundo elemento corresponden a la posición (x,y) del pixel y el último elemento de la lista
+    corresponderá a la profundidad del pixel, donde, estos 3 valores mencionados son enteros positivos.\\
+>>>>>>> 8e23d0c5baa17fd80f687b0fed619b5925b384f0
 
-    La gran diferencia se encontrará en los datos que hay entre medio de los valores (x,y) y depth (profundidad), además del primer elemento
-    el cual será un identificador de tipo de pixel (1,2 o 3); los pixeles quedarán de la siguiente forma:
+    La gran diferencia se encontrará en los datos que hay entre medio de los valores (x,y) y depth (profundidad)
+    los cuales corresponden al color del pixel; 
+    los TDA de pixeles quedarían de la siguiente forma:
     \begin{itemize}
-        \item Pixbit-d (1): Este tipo de pixel tendrá un bit entre medio de tipo entero, el cual solo podrá 
+        \item Pixbit-d: Este tipo de pixel tendrá un bit entre medio de tipo entero, el cual solo podrá 
         tomar los valores 0 y 1. De esta forma un pixbit-d será una lista de la forma:
         \begin{equation*}
-            '(int ,int, int, int, int) = (1, x \geq 0, y \geq 0, bit(0|1), depth \geq 0)
+            '(int, int, int, int) = (x \geq 0, y \geq 0, bit(0|1), depth \geq 0)
         \end{equation*}
         
-        \item Pixrgb-d (2): Este tipo de pixel tendrá además tendrá 3 enteros entre 0 y 255 que representarán la 
+        \item Pixrgb-d: Este tipo de pixel tendrá además tendrá 3 enteros entre 0 y 255 que representarán la 
         cantidad de cada color que tiene el pixel siendo r = rojo (red), g = verde (green) y b = azul (blue)
         quedandonos una lista de la forma:
         \begin{equation*}
-            '(int, int, int, int, int, int, int) = (2, x \geq 0, y \geq 0, 0 \leq r \leq 255, 0 \leq g \leq 255, 0 \leq b \leq 255, depth \geq 0)
+            '(int, int, int, int, int, int) = (x \geq 0, y \geq 0, 0 \leq r \leq 255, 0 \leq g \leq 255, 0 \leq b \leq 255, depth \geq 0)
         \end{equation*}
         
-        \item Pixhex-d (3): Este tipo de pixel tendrá un string con formato \#XXXXXX donde las X pueden tomar valores de un dígito hexadecimal (entre 0 y F(15))
+        \item Pixhex-d: Este tipo de pixel tendrá un string con formato \#XXXXXX donde las X pueden tomar valores de un dígito hexadecimal (entre 0 y F(15))
         donde las 2 primeras X es la cantidad de rojo, las 2 de al medio son de verde y las 2 últimas son de azul; la representación quedaría de la forma:
         \begin{equation*}
-            '(int, int, int, string, int) = (3, x \geq 0, y \geq 0, hex, depth \geq 0)
+            '(int, int, string, int) = (x \geq 0, y \geq 0, hex, depth \geq 0)
         \end{equation*}
     \end{itemize}
 
