@@ -1,4 +1,4 @@
-Comenzando ahora con el diseño de la solución para la problemática de este semestre se realizará la definición y especificación
+Comenzando ahora con el diseño de la solución para la problemática de este semestre, se realizará la definición y especificación
 de los distintos TDAs para luego ver como puede ser la posible implementación de los mismos y lo que se realizará para los problemas
 específicos.
 
@@ -6,8 +6,8 @@ específicos.
  Empezando con los TDAs el enfoque será que una imagen esta compuesta de pixeles los cuales
   son de alguno de los siguientes 3 tipos, pixbit-d, pixrgb-d o pixhex-d; haciendo los TDAs de estos 3 tipos
   de pixel junto con el TDA imagen podríamos lograr la mayoría de los requisitos específicos sin problema, sin 
-  embargo para un manejo de ciertos requisitos específicos como el de que se pase una imagen de color rgb a hexadecimal
-  donde no entraría en ninguno de los TDAs de pixels especificamente podríamos definir un quinto TDA "pixeles" donde hayan
+  embargo para un manejo de ciertos requisitos específicos como el de que se pase una imagen de color RGB a hexadecimal
+  donde no entraría en ninguno de los TDAs de pixeles específicamente, podríamos definir un quinto TDA "pixeles" donde hayan
   funciones de 2 o más tipo de pixeles, o, en otro caso, hagan uso de un conjunto de pixeles del mismo tipo. Finalmente se definiría
   un último TDA histogram para el requisito con el mismo nombre.\\
 
@@ -15,7 +15,7 @@ específicos.
     Ya sabiendo cuales son los TDA a implementar se procederá con su definición:
     \begin{itemize}
       \item TDA image: Una imagen será aquel conjunto de pixeles con un ancho y un alto específicos
-        que puede estar o no comprimida por lo cual se debe poder saber cual es el color más usado en la misma.
+        que puede estar o no comprimida, por lo cual, se debe poder saber cual es el color más usado en la misma.
       \item TDA pixeles: Será aquel conjunto con bajo grado de especificación donde se podrán realizar operaciones con 2 o más tipos de pixeles, ó,
         con 2 o más pixeles del mismo tipo.
       \item TDA pixbit-d: Será aquel pixel con una posición específica en una imagén de 3 dimensiones con 2 posibles colores, blanco o negro.
@@ -30,14 +30,14 @@ específicos.
     de manera más detallada debido al poco espacio de este medio.
 
   \subsubsection{Implementación}
-    La implementación de una imagen será con una lista que contendrá un bit (int 0|1) para saber si esta comprimida o no
+    La implementación de una imagen será con una lista que contendrá un bit (int 0 ó 1) para saber si esta comprimida o no
     donde 1 será comprimida y 0 no; tendrá también 2 enteros positivos que son el ancho y el alto de la misma, junto
     con una lista con los diferentes pixeles que tiene; por último tendrá un elemento con el color más
     usado en la imagen, cuyo tipo dependerá del tipo de imagen que sea (bitmap, pixmap o hexmap).\\
 
     Los pixeles en sí estarán un poco más adelante, pero algo que los 3 tipos de estos tendrán en común, es que serán implementados con listas 
     donde el segundo y tercer elemento corresponden a la posición (x,y) del pixel y el último elemento de la lista
-    corresponderá a la profundidad del pixel, donde, estos 3 valores mencionados son enteros positivos.\\
+    corresponderá a la profundidad del pixel, donde, estos 3 valores mencionados, son enteros positivos.\\
 
     La gran diferencia se encontrará en los datos que hay entre medio de los valores (x,y) y depth (profundidad), además del primer elemento
     el cual será un identificador de tipo de pixel (1,2 o 3); los pixeles quedarán de la siguiente forma:

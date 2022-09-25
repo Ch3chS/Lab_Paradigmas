@@ -1,3 +1,30 @@
 \begin{thebibliography}{}
 
+\bibitem [\protect \citeauthoryear {%
+Ramiro%
+}{%
+Ramiro%
+}{%
+{\protect \APACyear {2019}}%
+}]{%
+funcional}
+\APACinsertmetastar {%
+funcional}%
+\begin{APACrefauthors}%
+Ramiro, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {La Programación Funcional: Un Poderoso Paradigma} {La
+  programación funcional: Un poderoso paradigma}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{}{}{3}{63-77}.
+\newblock
+\begin{APACrefURL}
+  \url{http://revistas.ucasal.edu.ar/index.php/CI/article/view/182}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
 \end{thebibliography}

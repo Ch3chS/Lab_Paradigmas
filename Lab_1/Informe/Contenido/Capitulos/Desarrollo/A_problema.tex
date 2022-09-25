@@ -1,26 +1,26 @@
-Ya entendiendo  por encima el problema y el paradigma a utilizar para solucionarlo profundizaremos
- en el mismo, ya que, conociendo bien el problema y sus requisitos especifíficos llegaremos
+Ya entendiendo  por encima el problema y el paradigma a utilizar, para solucionarlo profundizaremos
+ en el mismo, ya que, conociendo bien el problema y sus requisitos específicos llegaremos
  a una mejor solución.
 
 \begin{enumerate}
     \item TDAs: El primer desafio será diseñar los tipos de datos abstractos que nos permitan alcanzar la solución de la manera más
     eficiente posible, por lo que este primer requisito es más que nada de diseño de la solución.
     \item Contructor de imágenes: Ya habiendo mencionado los TDAs el que principalmente se llevará nuestra atención será aquel que 
-    represente una imagen como tal, ya que, al implementarlo debemos tener diferentes consideraciones como:
+    represente una imagen como tal, ya que, al implementarlo, debemos tener diferentes consideraciones como:
     \begin{itemize}
         \item Tipo de imagen: En un principio se deberían tener 3 tipos de imagen correspondientes a bitmap, pixmap y hexmax y que
         el programa pueda reconocer de que tipo se trata; la implementación de lo antes mencionado se verá en la siguiente sección.
         \item Debe ser posible también poder cambiar entre imágenes tipo pixmap y hexmap (RGB y hexadecimal).
-        \item ¿Está comprimida?: Es necesario si una imagen está o no comprimida
+        \item ¿Está comprimida?: Es necesario saber si una imagen está o no comprimida
         \item Comprimir y descomprimir: Como ya se dijo que una imagen puede estar o no comprimida entonces deben haber funciones que compriman
      y descompriman la imagen como tal, dependiendo de la implementación podría verse también como requisito una función que nos diga 
      cuál es el color más usado en la imagen (Histograma).
     \end{itemize}
     
-    \item Cambiar dirección o rotar: Otro requisito especifífico a abordar es dar la posibilidad de invetir la imagen ya sea en el eje X o Y, 
+    \item Cambiar dirección o rotar: Otro requisito especifífico a abordar, es dar la posibilidad de invetir la imagen ya sea en el eje X o Y, 
     además de poder rotar esta en 90° hacia la derecha o izquierda.
     \item Recortar: También se debe dar la posibilidad de recortar la imagen para obtener una nueva imagen de un subsector de la original.
-    \item Invertir colores: Como el nombre lo dice, se debe ser capaz de inverit los colores independiente del tipo de imagen.
+    \item Invertir colores: Como el nombre lo dice, se debe ser capaz de invertir los colores independiente del tipo de imagen.
     \item Ajustar canal: Debe también darse la posibilidad de ajustar el canal de una imagen con pixeles RGB-D (con profundidad).
     \item Imagen a string: Debe también cubrirse la posibilidad de que la imagen pueda ser representada como un conjunto de caracteres.
     \item Separar en capas: La imagen debe tener profundidad, y para esto, se deben tener varias capas entre las que le es posible separarse.
