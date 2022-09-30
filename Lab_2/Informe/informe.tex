@@ -1,0 +1,63 @@
+\documentclass[10pt,letterpaper,openany]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage[left=2.54cm, right=2.54cm, top=2.54cm, bottom=2.54cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{apacite}
+\usepackage{float}
+
+\title{Informe}
+\author{Sergio Espinoza}
+
+\begin{document}
+    \include{Contenido/Portada.tex}
+    
+    \tableofcontents
+    \listoftables
+    \newpage
+
+    %------------------------------------------------------------------------
+
+    
+    \section{Introducción}
+    En este informe se abordará el laboratorio número 2 de la asignatura Paradigmas de programación
+    con el formato expuesto en el indice del mismo. A continuación, se darán breves descripciones
+    de los dos grandes pilares a ver para encontrar la posterior resolución.  
+        \subsection{Descripción del problema}
+            \input{Contenido/Capitulos/Introduccion/D_problema.tex}
+        \subsection{Descripción del paradigma}
+            \input{Contenido/Capitulos/Introduccion/D_paradigma.tex}
+
+    %------------------------------------------------------------------------
+
+    \section{Análisis del problema}
+        \input{Contenido/Capitulos/Desarrollo/A_problema.tex}
+
+    \section{Diseño de la solución}\label{sec:diseño}
+        \input{Contenido/Capitulos/Desarrollo/D_solucion.tex}
+
+    \section{Consideraciones de implementación}
+        \input{Contenido/Capitulos/Desarrollo/C_implementación.tex}
+
+    \section{Instrucciones de uso}
+        \input{Contenido/Capitulos/Resultados/I_uso.tex}
+
+    \section{Resultados obtenidos}
+        \input{Contenido/Capitulos/Resultados/R_obtenidos.tex}
+
+    \section{Conclusión}
+        \input{Contenido/Capitulos/Resultados/Conclusión.tex}
+
+    \newpage
+    \bibliographystyle{apacite}
+    \bibliography{Bibliografia.bib}
+    \newpage
+      
+    \input{Anexos.tex}
+
+\end{document}

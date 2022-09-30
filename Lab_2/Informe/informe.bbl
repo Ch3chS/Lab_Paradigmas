@@ -1,0 +1,30 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Taltavull%
+\ \BBA {} Antoni%
+}{%
+Taltavull%
+\ \BBA {} Antoni%
+}{%
+{\protect \APACyear {2015}}%
+}]{%
+logica}
+\APACinsertmetastar {%
+logica}%
+\begin{APACrefauthors}%
+Taltavull, C.%
+\BCBT {}\ \BBA {} Antoni, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2015}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Programación lógica} {Programación lógica}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{}{}{}{10--12}.
+\newblock
+\begin{APACrefURL} \url{http://hdl.handle.net/2445/64643} \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

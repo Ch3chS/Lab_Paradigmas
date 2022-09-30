@@ -4,6 +4,7 @@ Informe:
     24/08/2022: TDAs actualizados
 	11/09/2022: Avances importantes en todo el informe (solo falta completar las tablas)
 	12/09/2022: Informe terminado (falta pulir)
+	14/09/2022: TDAs actualizados
 
 Código:
 	20/08/2022: Agregado TDA pixbit
