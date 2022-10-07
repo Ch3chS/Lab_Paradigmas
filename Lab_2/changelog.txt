@@ -5,4 +5,5 @@ Código:
 	01/10/2022: Constructores TDAs pixbit, pixhex y pixrgb listos
 	02/10/2022: Image agregado
 	06/10/2022: Bitmap, Hexmap y Pixmap agregadas
+	07/10/2022: imageFlipH agregado
 	
