@@ -70,16 +70,18 @@ imageIsHexmap([Width,Height,Pixels]):- pixhex_list(Pixels).
 
 % ------------------------------------- 7. flipH --------------------------------------------------------
 
-imageFlipH([Width,Height,[]], [Width,Heigh,[]]).
+imageFlipH([Width,Height,[]], [Width,Height,[]]).
 imageFlipH([Width,Height,[[X,Y,Color,Depth]|Pixels]],[Width,Height,[[NewX,Y,Color,Depth]|P1]]):- 
-NewX is Width-1-X,imageFlipH([Width,Height,Pixels],[Width, Heigh, P1]).
+NewX is Width-1-X,imageFlipH([Width,Height,Pixels],[Width, Height, P1]).
 
 % -------------------------------------------------------------------------------------------------------
 
 
 % ------------------------------------- 8. flipV --------------------------------------------------------
 
-
+imageFlipV([Width,Height,[]], [Width,Height,[]]).
+imageFlipV([Width,Height,[[X,Y,Color,Depth]|Pixels]],[Width,Height,[[X,NewY,Color,Depth]|P1]]):- 
+NewY is Height-1-Y,imageFlipV([Width,Height,Pixels],[Width, Height, P1]).
 
 % -------------------------------------------------------------------------------------------------------
 
