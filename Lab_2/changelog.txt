@@ -8,3 +8,4 @@ Código:
 	07/10/2022: imageFlipH agregado
 	08/10/2022: imageFlipV agregado
 	09/10/2022: imageCrop agregado
+	10/10/2022: imageRGBToHex agregado

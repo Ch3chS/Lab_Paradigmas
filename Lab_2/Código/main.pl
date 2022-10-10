@@ -50,14 +50,14 @@ imageIsBitmap([_,_,Pixels]):- pixbit_list(Pixels).
 
 % ------------------------------------- 4. IsPixmap? ----------------------------------------------------
 
-imageIsPixmap([Width,Height,Pixels]):- pixrgb_list(Pixels).
+imageIsPixmap([_,_,Pixels]):- pixrgb_list(Pixels).
 
 % -------------------------------------------------------------------------------------------------------
 
 
 % ------------------------------------- 5. IsHexmap? ----------------------------------------------------
 
-imageIsHexmap([Width,Height,Pixels]):- pixhex_list(Pixels).
+imageIsHexmap([_,_,Pixels]):- pixhex_list(Pixels).
 
 % -------------------------------------------------------------------------------------------------------
 
@@ -88,15 +88,15 @@ NewY is Height-1-Y,imageFlipV([Width,Height,Pixels],[Width, Height, P1]).
 
 % ----------------------------------------- 9. crop -----------------------------------------------------
 
-discardPixels([],X1,Y1,X2,Y2,[]).
+discardPixels([],_,_,_,_,[]).
 
-discardPixels([[X,Y,Color,Depth]|Pixels],X1,Y1,X2,Y2,P1):- ((X2 < X; X < X1); (Y2 < Y; Y < Y1)),
+discardPixels([[X,Y,_,_]|Pixels],X1,Y1,X2,Y2,P1):- ((X2 < X; X < X1); (Y2 < Y; Y < Y1)),
 discardPixels(Pixels,X1,Y1,X2,Y2,P1).
 
 discardPixels([[X,Y,Color,Depth]|Pixels],X1,Y1,X2,Y2,[[X,Y,Color,Depth]|P1]):- X1 @=< X, X @=< X2, Y1 @=< Y, Y @=< Y2,
 discardPixels(Pixels,X1,Y1,X2,Y2,P1).
 
-imageCrop([Width,Height,Pixels],X1,Y1,X2,Y2,[Width2,Height2,Pixels2]):- Width2 is X2 - X1 + 1, Height2 is Y2 - Y1 + 1,
+imageCrop([_,_,Pixels],X1,Y1,X2,Y2,[Width2,Height2,Pixels2]):- Width2 is X2 - X1 + 1, Height2 is Y2 - Y1 + 1,
 discardPixels(Pixels,X1,Y1,X2,Y2,Pixels2).
 
 % -------------------------------------------------------------------------------------------------------
@@ -104,7 +104,14 @@ discardPixels(Pixels,X1,Y1,X2,Y2,Pixels2).
 
 % ------------------------------------- 10. imageRGBToHex -----------------------------------------------
 
+pixrgbToPixhex([X,Y,Color,Depth],[X,Y,NewColor,Depth]):- hex_bytes(Hex, Color), 
+string_concat('#',Hex,NewColor).
 
+pixelsrgbToPixelshex([],[]).
+pixelsrgbToPixelshex([Pixel|Pixels],[P1|P2]):- pixrgbToPixhex(Pixel,P1),
+pixelsrgbToPixelshex(Pixels,P2).
+
+imageRGBToHex([Width,Height,Pixels], [Width,Height,NewPixels]):- pixelsrgbToPixelshex(Pixels,NewPixels).
 
 % -------------------------------------------------------------------------------------------------------
 
