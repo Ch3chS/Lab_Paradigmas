@@ -1,44 +1,13 @@
 :- use_module('./TDAs/TDA_histogram_20614346_EspinozaGonzalez.pl').
-
-%pixbit
-
-pixbit-d(X,Y,Bit,Depth,[X,Y,Bit,Depth]) :- integer(X), integer(Y), integer(Bit), integer(Depth),
- 0 @=< X, 0 @=< Y, (Bit==0;Bit==1), 0 @=< Depth.
-
-pixbit_list([]).
-pixbit_list([A|Pixels]):- pixbit-d(_,_,_,_,A), pixbit_list(Pixels).
+:- use_module('./TDAs/TDA_pixbit-d.pl').
+:- use_module('./TDAs/TDA_pixhex-d.pl').
+:- use_module('./TDAs/TDA_pixrgb-d.pl').
 
 
-
-%pixhex
-
-% Falta comprobar que Hex sea un string
-pixhex-d(X,Y,Hex,Depth,[X,Y,Hex,Depth]):- integer(X), integer(Y), integer(Depth),
- 0 @=< X, 0 @=< Y, 0 @=< Depth.
-
-
-pixhex_list([]).
-pixhex_list([A|Pixels]):- pixhex-d(_,_,_,_,A), pixhex_list(Pixels).
-
-
-
-%pixrgb
-
-pixrgb-d(X,Y,R,G,B,Depth,[X,Y,[R,G,B],Depth]) :- integer(X), integer(Y), integer(R), integer(G), integer(B), integer(Depth),
- 0 @=< X, 0 @=< Y, 0 @=< R, R @=< 255, 0 @=< G, G @=< 255, 0 @=< B, B @=< 255, 0 @=< Depth.
-
-pixrgb_list([]).
-pixrgb_list([A|Pixels]):- pixrgb-d(_,_,_,_,_,_,A), pixrgb_list(Pixels).
-
-
-
-
-
-% Funciones principales
 
 % ---------------------------------- 2. Constructor Image -----------------------------------------------
 
-image(Width, Height, Pixels, [0, Width, Height, Pixels, MostUsed]):- mostUsed(Pixels, MostUsed).
+image(Width, Height, Pixels, [0, Width, Height, Pixels, MostUsed]):- mostUsed(Pixels, MostUsed),!.
 
 % -------------------------------------------------------------------------------------------------------
 
@@ -98,7 +67,7 @@ discardPixels(Pixels,X1,Y1,X2,Y2,P1).
 discardPixels([[X,Y,Color,Depth]|Pixels],X1,Y1,X2,Y2,[[X,Y,Color,Depth]|P1]):- X1 @=< X, X @=< X2, Y1 @=< Y, Y @=< Y2,
 discardPixels(Pixels,X1,Y1,X2,Y2,P1).
 
-imageCrop([0,_,_,Pixels,MostUsed],X1,Y1,X2,Y2,I2):- Width2 is X2 - X1 + 1, Height2 is Y2 - Y1 + 1,
+imageCrop([0,_,_,Pixels,_],X1,Y1,X2,Y2,I2):- Width2 is X2 - X1 + 1, Height2 is Y2 - Y1 + 1,
 discardPixels(Pixels,X1,Y1,X2,Y2,Pixels2), image(Width2,Height2,Pixels2,I2).
 
 % -------------------------------------------------------------------------------------------------------
@@ -113,7 +82,7 @@ pixelsrgbToPixelshex([],[]).
 pixelsrgbToPixelshex([Pixel|Pixels],[P1|P2]):- pixrgbToPixhex(Pixel,P1),
 pixelsrgbToPixelshex(Pixels,P2).
 
-imageRGBToHex([0,Width,Height,Pixels,MostUsed], I2):- pixelsrgbToPixelshex(Pixels,NewPixels),
+imageRGBToHex([0,Width,Height,Pixels,_], I2):- pixelsrgbToPixelshex(Pixels,NewPixels),
 image(Width,Height,NewPixels,I2).
 
 % -------------------------------------------------------------------------------------------------------
@@ -128,28 +97,35 @@ imageToHistogram([0,_,_,Pixels,_],Histogram):- histogram(Pixels, Histogram).
 
 % ------------------------------------- 12. rotate90 ----------------------------------------------------
 
+swapXY([],[]).
+swapXY([[X,Y,Color,Depth]|Pixels],[[Y,X,Color,Depth]|P1]):- swapXY(Pixels,P1).
 
+imageRotate90(Image, RotatedImage):- imageFlipV(Image,[0,Width,Height,Pixels,_]), 
+swapXY(Pixels, RotatedPixels), image(Height,Width,RotatedPixels,RotatedImage).
 
 % -------------------------------------------------------------------------------------------------------
 
 
 % ------------------------------------ 13. Compress -----------------------------------------------------
 
-
+imageCompress([0,Width,Height,Pixels,MostUsed], [1,Width,Height,NewPixels,MostUsed]):-
+delete(Pixels,[_,_,MostUsed,_],NewPixels).
 
 % -------------------------------------------------------------------------------------------------------
 
 
 % ------------------------------------- 14. changePixel -------------------------------------------------
 
-
+imageChangePixel([0,Width,Height,Pixels,_],[X,Y,Color,Depth],NewImage):- delete(Pixels,[X,Y,_,_],Pixels2),
+append(Pixels2,[[X,Y,Color,Depth]],Pixels3),sort(Pixels3,NewPixels) ,image(Width,Height,NewPixels,NewImage).
 
 % -------------------------------------------------------------------------------------------------------
 
 
 % ------------------------------------- 15. invertColorRGB ----------------------------------------------
 
-
+imageInvertColorRGB([X,Y,[R,G,B],Depth],[X,Y,[NewR,NewG,NewB],Depth]):- NewR is 255 - R,
+NewG is 255 - G,NewB is 255 - B.
 
 % -------------------------------------------------------------------------------------------------------
 
@@ -163,14 +139,14 @@ imageToHistogram([0,_,_,Pixels,_],Histogram):- histogram(Pixels, Histogram).
 
 % ------------------------------------- 17. depthLayers--------------------------------------------------
 
-
+% imageDepthLayers(Image, ImageList).
 
 % -------------------------------------------------------------------------------------------------------
 
 
 % ------------------------------------- 18. decompress --------------------------------------------------
 
-
+% imageDecompress(CompressedImage, Image).
 
 % -------------------------------------------------------------------------------------------------------
 
