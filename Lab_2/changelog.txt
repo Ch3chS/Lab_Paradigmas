@@ -11,3 +11,5 @@ Código:
 	10/10/2022: imageRGBToHex agregado
 	11/10/2022: IsCompress y Histogram agregados
 	12/10/2022: Rotate90, Compress, ChangePixel, invertColorRGB agregados
+	13/10/2022: imageToString agregado
+	

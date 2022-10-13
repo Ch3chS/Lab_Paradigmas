@@ -132,21 +132,35 @@ NewG is 255 - G,NewB is 255 - B.
 
 % ------------------------------------- 16. image->string------------------------------------------------
 
+discardPixelsOutRow([],_,[]):-!.
 
+discardPixelsOutRow([[X,Y,Color,Depth]|Pixels],Row,[[X,Y,Color,Depth]|P1]):- Y == Row,
+discardPixelsOutRow(Pixels,Row,P1).
+
+discardPixelsOutRow([[X,Y,_,_]|Pixels],Row,P1):- discardPixelsOutRow(Pixels,Row,P1).
+
+colToString([],""):-!.
+colToString([[_,_,Color,_]|Pixels], StringOut):-  colToString(Pixels,String), atomics_to_string([Color,"\t",String],StringOut).
+
+rowToString(Height,Height,_,""):-!.
+rowToString(Row,Height,Pixels,StringOut):- Row < Height, Row2 is Row + 1, discardPixelsOutRow(Pixels,Row,PixelsInRow),
+colToString(PixelsInRow,RowString), rowToString(Row2,Height,Pixels,String), atomics_to_string([RowString,"\n" ,String],StringOut).
+
+imageToString([0,_,Height,Pixels,_],String):- rowToString(0,Height,Pixels,String),!.
 
 % -------------------------------------------------------------------------------------------------------
 
 
 % ------------------------------------- 17. depthLayers--------------------------------------------------
 
-% imageDepthLayers(Image, ImageList).
+
 
 % -------------------------------------------------------------------------------------------------------
 
 
 % ------------------------------------- 18. decompress --------------------------------------------------
 
-% imageDecompress(CompressedImage, Image).
+
 
 % -------------------------------------------------------------------------------------------------------
 
