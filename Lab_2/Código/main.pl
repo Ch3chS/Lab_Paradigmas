@@ -7,7 +7,7 @@
 
 % ---------------------------------- 2. Constructor Image -----------------------------------------------
 
-image(Width, Height, Pixels, [0, Width, Height, Pixels, MostUsed]):- mostUsed(Pixels, MostUsed),!.
+image(Width, Height, Pixels, [0, Width, Height, Pixels1, MostUsed]):- mostUsed(Pixels, MostUsed), sort(Pixels, Pixels1),!.
 
 % -------------------------------------------------------------------------------------------------------
 
@@ -137,7 +137,7 @@ discardPixelsOutRow([],_,[]):-!.
 discardPixelsOutRow([[X,Y,Color,Depth]|Pixels],Row,[[X,Y,Color,Depth]|P1]):- Y == Row,
 discardPixelsOutRow(Pixels,Row,P1).
 
-discardPixelsOutRow([[X,Y,_,_]|Pixels],Row,P1):- discardPixelsOutRow(Pixels,Row,P1).
+discardPixelsOutRow([[_,_,_,_]|Pixels],Row,P1):- discardPixelsOutRow(Pixels,Row,P1).
 
 colToString([],""):-!.
 colToString([[_,_,Color,_]|Pixels], StringOut):-  colToString(Pixels,String), atomics_to_string([Color,"\t",String],StringOut).
@@ -153,7 +153,15 @@ imageToString([0,_,Height,Pixels,_],String):- rowToString(0,Height,Pixels,String
 
 % ------------------------------------- 17. depthLayers--------------------------------------------------
 
+discardPixelsOutDepth([],_,[]):-!.
+discardPixelsOutDepth([[X,Y,Color,Depth]|Pixels],D1,[[X,Y,Color,Depth]|P1]):- Depth == D1,
+discardPixelsOutDepth(Pixels,D1,P1).
+discardPixelsOutDepth([[_,_,_,_]|Pixels],D1,P1):- discardPixelsOutDepth(Pixels,D1,P1).
 
+imageDepthLayers([0,_,_,[],_],[]):-!.
+imageDepthLayers([0,Width,Height,[[X,Y,Color,Depth]|Pixels],_], [Image|ImageList]):- discardPixelsOutDepth(Pixels,Depth,DPixels),
+image(Width,Height,[[X,Y,Color,Depth]|DPixels],Image), subtract(Pixels,DPixels,RestPixels),
+imageDepthLayers([0,Width,Height,RestPixels,_],ImageList),!.
 
 % -------------------------------------------------------------------------------------------------------
 
