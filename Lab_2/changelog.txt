@@ -14,3 +14,4 @@ Código:
 	13/10/2022: imageToString agregado
 	14/10/2022: imageDepthLayers agregado
 	15/10/2022: imageDecompress agregado
+	16/10/2022: imageToString mejorado

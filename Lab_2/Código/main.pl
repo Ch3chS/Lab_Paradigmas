@@ -135,16 +135,18 @@ NewG is 255 - G,NewB is 255 - B.
 discardPixelsOutRow([],_,[]):-!.
 
 discardPixelsOutRow([[X,Y,Color,Depth]|Pixels],Row,[[X,Y,Color,Depth]|P1]):- Y == Row,
-discardPixelsOutRow(Pixels,Row,P1).
+discardPixelsOutRow(Pixels,Row,P1),!.
 
-discardPixelsOutRow([[_,_,_,_]|Pixels],Row,P1):- discardPixelsOutRow(Pixels,Row,P1).
+discardPixelsOutRow([[_,_,_,_]|Pixels],Row,P1):- discardPixelsOutRow(Pixels,Row,P1),!.
 
 colToString([],""):-!.
-colToString([[_,_,Color,_]|Pixels], StringOut):-  colToString(Pixels,String), atomics_to_string([Color,"\t",String],StringOut).
+colToString([[X,Y,[R, G, B],Depth]|Pixels], StringOut):- pixrgb(X,Y,R,G,B,Depth,_), colToString(Pixels,String), 
+atomics_to_string(["[",R," ",G," ",B,"]","\t",String],StringOut),!.
+colToString([[_,_,Color,_]|Pixels], StringOut):- colToString(Pixels,String), atomics_to_string([Color,"\t",String],StringOut),!.
 
 rowToString(Height,Height,_,""):-!.
 rowToString(Row,Height,Pixels,StringOut):- Row < Height, Row2 is Row + 1, discardPixelsOutRow(Pixels,Row,PixelsInRow),
-colToString(PixelsInRow,RowString), rowToString(Row2,Height,Pixels,String), atomics_to_string([RowString,"\n" ,String],StringOut).
+colToString(PixelsInRow,RowString), rowToString(Row2,Height,Pixels,String), atomics_to_string([RowString,"\n" ,String],StringOut),!.
 
 imageToString([0,_,Height,Pixels,_],String):- rowToString(0,Height,Pixels,String),!.
 
