@@ -13,3 +13,4 @@ Código:
 	12/10/2022: Rotate90, Compress, ChangePixel, invertColorRGB agregados
 	13/10/2022: imageToString agregado
 	14/10/2022: imageDepthLayers agregado
+	15/10/2022: imageDecompress agregado

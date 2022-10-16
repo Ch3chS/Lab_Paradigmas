@@ -168,7 +168,18 @@ imageDepthLayers([0,Width,Height,RestPixels,_],ImageList),!.
 
 % ------------------------------------- 18. decompress --------------------------------------------------
 
+restoreRow(Col,_,Width,_,_,[]):- Width == Col,!.
+restoreRow(Col,Row,Width,RowPixels,MostUsed,[[Col,Row,Color,Depth]|P1]):- Col < Width, Col2 is Col + 1, select([Col,Row,Color,Depth],RowPixels,RowPixels2),
+restoreRow(Col2,Row,Width,RowPixels2,MostUsed,P1),!.
+restoreRow(Col,Row,Width,RowPixels,MostUsed,[[Col,Row,MostUsed,0]|P1]):- Col < Width, Col2 is Col + 1,
+restoreRow(Col2,Row,Width,RowPixels,MostUsed,P1),!.
 
+restorePixels(Row,_,Height,_,_,[]):- Height == Row,!.
+restorePixels(Row,Width,Height,PixelsIn,MostUsed,PixelsOut):- Row < Height,Row2 is Row + 1, discardPixelsOutRow(PixelsIn,Row,RowPixels),
+restoreRow(0,Row,Width,RowPixels,MostUsed,PixelsCol), append(PixelsCol,P1,PixelsOut), restorePixels(Row2,Width,Height,PixelsIn,MostUsed,P1),!.
+
+imageDecompress([1,Width,Height,Pixels,MostUsed], Image):- restorePixels(0, Width,Height,Pixels,MostUsed,FullPixels),
+image(Width,Height,FullPixels,Image),!.
 
 % -------------------------------------------------------------------------------------------------------
 
