@@ -5,7 +5,7 @@
 
 histogram([],[]):-!.
 histogram([[_,_,Color,_]|Pixels],[[Color,Repeats]|H1]):- countColor(Color, Pixels, 1, Repeats),
-delete(Pixels, [_,_,Color,_], SubPixels),histogram(SubPixels, H1).
+delete(Pixels, [_,_,Color,_], SubPixels),histogram(SubPixels, H1),!.
 
 countColor(Color,Pixels,CountIn,CountOut):- select([_,_,Color,_], Pixels, NewPixels),
 CountIn2 is CountIn + 1, countColor(Color,NewPixels,CountIn2,CountOut).

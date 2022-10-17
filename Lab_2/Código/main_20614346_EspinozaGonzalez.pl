@@ -1,8 +1,8 @@
+:- module(main, [image/4, imageIsBitmap/1, imageIsPixmap/1, imageIsHexmap/1, imageIsCompressed/1, imageFlipH/2, imageFlipV/2, imageCrop/6, imageRGBToHex/2, imageToHistogram/2, imageRotate90/2, imageCompress/2, imageChangePixel/3, imageInvertColorRGB/2, imageToString/2, imageDepthLayers/2, imageDecompress/2]).
 :- use_module('./TDAs/TDA_histogram_20614346_EspinozaGonzalez.pl').
-:- use_module('./TDAs/TDA_pixbit-d.pl').
-:- use_module('./TDAs/TDA_pixhex-d.pl').
-:- use_module('./TDAs/TDA_pixrgb-d.pl').
-
+:- use_module('./TDAs/TDA_pixbit_20614346_EspinozaGonzalez.pl').
+:- use_module('./TDAs/TDA_pixhex_20614346_EspinozaGonzalez.pl').
+:- use_module('./TDAs/TDA_pixrgb_20614346_EspinozaGonzalez.pl').
 
 
 % ---------------------------------- 2. Constructor Image -----------------------------------------------
