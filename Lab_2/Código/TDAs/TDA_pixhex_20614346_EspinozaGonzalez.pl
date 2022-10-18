@@ -1,7 +1,7 @@
 :- module(pixhex, [pixhex/5, pixhex_list/1]).
 
 % Falta comprobar que Hex sea un string
-pixhex(X,Y,Hex,Depth,[X,Y,Hex,Depth]):- integer(X), integer(Y), integer(Depth),
+pixhex(X,Y,Hex,Depth,[X,Y,Hex,Depth]):- integer(X), integer(Y), string(Hex), integer(Depth),
  0 @=< X, 0 @=< Y, 0 @=< Depth.
 
 

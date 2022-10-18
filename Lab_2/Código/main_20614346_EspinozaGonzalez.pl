@@ -7,7 +7,9 @@
 
 % ---------------------------------- 2. Constructor Image -----------------------------------------------
 
-image(Width, Height, Pixels, [0, Width, Height, Pixels1, MostUsed]):- mostUsed(Pixels, MostUsed), sort(Pixels, Pixels1),!.
+image(Width, Height, Pixels, [0, Width, Height, Pixels1, MostUsed]):- number(Width), number(Height), is_list(Pixels),
+ 0 @=< Width, 0 @=< Height, mostUsed(Pixels, MostUsed), sort(Pixels, Pixels1),
+ (pixbit_list(Pixels);pixrgb_list(Pixels);pixhex_list(Pixels)),!.
 
 % -------------------------------------------------------------------------------------------------------
 

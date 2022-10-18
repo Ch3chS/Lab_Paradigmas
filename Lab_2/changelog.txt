@@ -16,3 +16,4 @@ Código:
 	15/10/2022: imageDecompress agregado
 	16/10/2022: imageToString mejorado
 	17/10/2022: Archivo de pruebas iniciado y cambios en los nombres de los archivos al formato correcto
+	18/10/2022: Mejoras de tipo en image y pixhex
