@@ -4,23 +4,18 @@ específicos.
 
 \subsection{TDAs}
  Empezando con los TDAs el enfoque será que una imagen esta compuesta de pixeles los cuales
-  son de alguno de los siguientes 3 tipos, pixbit-d, pixrgb-d o pixhex-d; haciendo los TDAs de estos 3 tipos
-  de pixel junto con el TDA imagen podríamos lograr la mayoría de los requisitos específicos sin problema, sin 
-  embargo para un manejo de ciertos requisitos específicos como el de que se pase una imagen de color RGB a hexadecimal
-  que no entraría en ninguno de los TDAs de pixeles específicamente, podríamos definir un quinto TDA "pixeles" donde hayan
-  funciones de 2 o más tipo de pixeles, o, en otro caso, hagan uso de un conjunto de pixeles del mismo tipo. Finalmente se definiría
-  un último TDA histogram para el requisito con el mismo nombre.\\
+  son de alguno de los siguientes 3 tipos, pixbit, pixrgb o pixhex; realizando los TDAs de estos 3 tipos
+  de pixel junto con el TDA imagen se podría abordar la mayoría de los requisitos específicos sin problema, sin 
+  embargo para un manejo del requisito del histograma se definiría un último TDA llamado histogram.\\
 
   \subsubsection{Definición}
     Ya sabiendo cuales son los TDA a implementar se procederá con su definición:
     \begin{itemize}
       \item TDA image: Una imagen será aquel conjunto de pixeles con un ancho y un alto específicos
         que puede estar o no comprimida, por lo cual, se debe poder saber cual es el color más usado en la misma.
-      \item TDA pixeles: Será aquel conjunto con bajo grado de especificación donde se podrán realizar operaciones con 2 o más tipos de pixeles, ó,
-        con 2 o más pixeles del mismo tipo.
-      \item TDA pixbit-d: Será aquel pixel con una posición específica en una imagén de 3 dimensiones con 2 posibles colores, blanco o negro.
-      \item TDA pixrgb-d: Será aquel pixel con una posición específica en una imagén de 3 dimensiones con color de tipo rgb.
-      \item TDA pixhex-d: Será aquel pixel con una posición específica en una imagén de 3 dimensiones con color de tipo hexadecimal.
+      \item TDA pixbit: Será aquel pixel con una posición específica en una imagén de 3 dimensiones con 2 posibles colores, blanco o negro.
+      \item TDA pixrgb: Será aquel pixel con una posición específica en una imagén de 3 dimensiones con color de tipo rgb.
+      \item TDA pixhex: Será aquel pixel con una posición específica en una imagén de 3 dimensiones con color de tipo hexadecimal.
       \item TDA histogram: Será el gráfico de cuantos pixeles de cada color hay contenidos en una imagén
     \end{itemize}
 
@@ -30,7 +25,8 @@ específicos.
     de manera más detallada debido al poco espacio de este medio.
 
   \subsubsection{Implementación}
-    La implementación de una imagen será con una lista que contendrá 2 enteros positivos que son el ancho y el alto de la misma, junto
+    La implementación de una imagen será con una lista que contendrá 1 bit de compresión, donde 0 será sin comprimir 
+    y 1 será comprimida, además de 2 enteros positivos que son el ancho y el alto de la misma, junto
     con una lista con los diferentes pixeles que tiene; por último tendrá un elemento con el color más
     usado en la imagen, cuyo tipo dependerá del tipo de imagen que sea (bitmap, pixmap o hexmap).\\
 

@@ -2,14 +2,14 @@
 
 \begin{table}[H]
     \begin{center}
-    \begin{tabular}{| c | c | c | c | c | c | c | }
+    \begin{tabular}{| c | c | c | c | c | c | }
     \hline
-    X & Image & Histogram & Pixels & Pixbit-d & Pixrgb-d & Pixhex-d \\ \hline
-    Constructor & Sí & Sí & N/A & Sí & Sí & Sí \\
-    Pertenencia & Sí & No & N/A & Sí & Sí & Sí \\
-    Selectores & Sí & No & N/A & Sí & Sí & Sí \\
-    Modificadores & Sí & No & N/A & Sí & Sí & Sí \\
-    Otras funciones & Sí & No & N/A & No & No & No \\ \hline
+    X & Image & Histogram & Pixbit-d & Pixrgb-d & Pixhex-d \\ \hline
+    Constructor & Sí & Sí & Sí & Sí & Sí \\
+    Pertenencia & Sí & No & Si & Sí & Sí \\
+    Selectores & Sí & No & Si & Sí & Sí \\
+    Modificadores & Sí & No & Sí & Sí & Sí \\
+    Otras funciones & Sí & No & No & No & No \\ \hline
     \end{tabular}
     \caption{Especificación de TDAs}
     \label{tab:TDAs}
@@ -51,24 +51,24 @@
     \begin{tabular}{| c | c | c | c |}
     \hline
     Requisito & Completado? & Puntaje autoevaluación & Posible razón fallos \\ \hline \hline
-    1. TDAs & No & 0 & N/A \\ \hline
-    2. image & No & 0 & N/A \\ \hline
-    3. bitmap? & No & 0 & N/A \\ \hline
-    4. pixmap? & No & 0 & N/A \\ \hline
-    5. hexmap? & No & 0 & N/A \\ \hline
-    6. compressed? & No & 0 & N/A \\ \hline
-    7. flipH & No & 0 & N/A \\ \hline
-    8. flipV & No & 0 & N/A \\ \hline
-    9. crop & No & 0 & N/A \\ \hline
-    10. imgRGB-$>$imgHex & No & 0 & N/A \\ \hline
-    11. histogram & No & 0 & N/A \\ \hline
-    12. rotate90 & No & 0 & N/A \\ \hline
-    13. compress & No & 0 & N/A \\ \hline
-    14. changePixel & No & 0 & N/A \\ \hline
-    15. invertColorRGB & No & 0 & N/A \\ \hline
-    16. image-$>$string & No & 0 & N/A \\ \hline
-    17. depthLayers & No & 0 & N/A \\  \hline
-    18. decompress & No & 0 & N/A \\ \hline
+    1. TDAs & Si & 1 & N/A \\ \hline
+    2. image & Si & 1 & N/A \\ \hline
+    3. bitmap? & Si & 1 & N/A \\ \hline
+    4. pixmap? & Si & 1 & N/A \\ \hline
+    5. hexmap? & Si & 1 & N/A \\ \hline
+    6. compressed? & Si & 1 & N/A \\ \hline
+    7. flipH & Si & 1 & N/A \\ \hline
+    8. flipV & Si & 1 & N/A \\ \hline
+    9. crop & Si & 1 & N/A \\ \hline
+    10. imgRGB-$>$imgHex & Si & 1 & N/A \\ \hline
+    11. histogram & Si & 1 & N/A \\ \hline
+    12. rotate90 & Si & 1 & N/A \\ \hline
+    13. compress & Si & 1 & N/A \\ \hline
+    14. changePixel & Si & 1 & N/A \\ \hline
+    15. invertColorRGB & Si & 1 & N/A \\ \hline
+    16. image-$>$string & Si & 1 & N/A \\ \hline
+    17. depthLayers & Si & 1 & N/A \\  \hline
+    18. decompress & Si & 0.5 & En sección 6 \\ \hline
     \end{tabular}
     \caption{Resultados obtenidos}
     \label{tab:Resultados}

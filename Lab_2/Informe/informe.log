@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.8.20)  30 SEP 2022 16:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.8.20)  18 OCT 2022 16:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -337,7 +337,12 @@ LaTeX Info: Redefining \% on input line 1.
 
 
 ] (Contenido/Capitulos/Introduccion/D_problema.tex) (Contenido/Capitulos/Introduccion/D_paradigma.tex) (Contenido/Capitulos/Desarrollo/A_problema.tex [2]) (Contenido/Capitulos/Desarrollo/D_solucion.tex
-Underfull \hbox (badness 10000) in paragraph at lines 6--13
+Underfull \hbox (badness 10000) in paragraph at lines 6--10
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--32
 
  []
 
@@ -346,32 +351,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 33--36
 
  []
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 37--40
+[3]) (Contenido/Capitulos/Desarrollo/C_implementación.tex) (Contenido/Capitulos/Resultados/I_uso.tex) (Contenido/Capitulos/Resultados/R_obtenidos.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--6
 
  []
 
-) (Contenido/Capitulos/Desarrollo/C_implementación.tex) (Contenido/Capitulos/Resultados/I_uso.tex) (Contenido/Capitulos/Resultados/R_obtenidos.tex) (Contenido/Capitulos/Resultados/Conclusión.tex) [4] (informe.bbl
+) (Contenido/Capitulos/Resultados/Conclusión.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--5
+
+ []
+
+[4]) [5] (informe.bbl
 Underfull \hbox (badness 7558) in paragraph at lines 16--29
 []\OT1/cmr/m/n/10 Taltavull, C., y An-to-ni, J.  (2015).  Pro-gra-ma-ci^^Son l^^Sogi-ca. , 10--12.  Des-car-ga-do de
  []
 
-) [5] (Anexos.tex) [6] [7] (informe.aux (Contenido/Portada.aux)
+) [6] (Anexos.tex) [7] [8] (informe.aux (Contenido/Portada.aux)
 LaTeX Info: Redefining \. on input line 9.
 LaTeX Info: Redefining \% on input line 9.
 ) ) 
 Here is how much of TeX's memory you used:
- 6547 strings out of 478338
- 108410 string characters out of 2836700
- 542677 words of memory out of 3000000
- 24850 multiletter control sequences out of 15000+600000
+ 6545 strings out of 478338
+ 108380 string characters out of 2836700
+ 540677 words of memory out of 3000000
+ 24848 multiletter control sequences out of 15000+600000
  474537 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,9n,77p,424b,386s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\Donex\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/Donex/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Donex/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Donex/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Donex/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Donex/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Donex/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Donex/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (8 pages, 147467 bytes).
+Output written on informe.pdf (9 pages, 149281 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
+ 75 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

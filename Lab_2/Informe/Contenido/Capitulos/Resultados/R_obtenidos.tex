@@ -1,5 +1,13 @@
 Los resultados de la implementación y sus requisitos especifíficos fueron resumidos 
 en el cuadro \ref{tab:Resultados} junto con cuales se completaron, el puntaje de 
-funcionamiento según la pauta dada de autoevaluación (entre 0 y 1) y la posible razón de los fallos; las pruebas 
+funcionamiento según la pauta dada de autoevaluación (entre 0 y 1); las pruebas 
 realizadas fueron consultas a la base de conocimientos en el archivo de pruebas que se subirá 
-a la plataforma github y uvirtual.
+a la plataforma github y uvirtual.\\
+
+Con respecto a la posible razón de los fallos en el requisito 18 (Descomprimir una imagen), 
+se debe a que, si bien se recuperan los pixeles con el color más usados en la posición (x,y) respectiva,
+se da por hecho que la profundidad de estos es 0 por lo que funcionaría bien en imagenes bidimensionales 
+pero no en las que se usaron; una idea para solucionar esto sería que, al comprimir la imagen,
+se almacene también una lista con las profundidades en orden, pero, la razón por la que no se quiso implementar 
+esto, es que, si tenemos que almacenar una lista completa para comprimir una imagen, pierde un poco el sentido de hacerlo, 
+ya que, aún se estaría ocupando un gran espacio.
