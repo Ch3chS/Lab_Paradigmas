@@ -4,6 +4,91 @@
 :- use_module('./TDAs/TDA_pixhex_20614346_EspinozaGonzalez.pl').
 :- use_module('./TDAs/TDA_pixrgb_20614346_EspinozaGonzalez.pl').
 
+% ---------------------------------------------- Documentación ------------------------------------------------
+
+% ----- Dominios -------
+% Natural:                  Número >= 0
+% Bit:                      Número == 0 ; Número == 1
+% RGB:                      Lista [0 <= Número <= 255, 0 <= Número <= 255, 0 <= Número <= 255]
+% Color:                    Bit ; String ; RGB
+% Pixel:                    Lista [Natural,Natural,Color,Natural]
+% Pixrgb:                   Lista [Natural,Natural,RGB,Natural]
+% PixHex:                   Lista [Natural,Natural,String,Natural]
+% Pixeles:                  Lista [Pixel|Pixeles]
+% Image:                    Lista [Bit, Natural, Natural, Pixels, Color]
+% Histogram:                Lista [] ; Lista [[Color,Natural]|Histogram]
+% Image_list:               Lista [] ; Lista [Image, Image_list]
+% String:                   String
+
+
+% ----- Predicados -----
+% image(Natural, Natural, Pixels, Image)                                   aridad: 4
+% imageIsBitmap(Image)                                                     aridad: 1
+% imageIsPixmap(Image)                                                     aridad: 1
+% imageIsHexmap(Image)                                                     aridad: 1
+% imageIsCompressed(Image)                                                 aridad: 1
+% imageFlipH(Image, Image)                                                 aridad: 2
+% imageFlipV(Image, Image)                                                 aridad: 2
+% imageCrop(Image, Natural, Natural, Natural, Natural, Image)              aridad: 6
+% imageRGBToHex(Image, Image)                                              aridad: 2
+% imageToHistogram(Image, Histogram)                                       aridad: 2
+% imageRotate90(Image, Image)                                              aridad: 2
+% imageCompress(Image, Image)                                              aridad: 2
+% imageChangePixel(Image, Pixel, Image)                                    aridad: 3
+% imageInvertColorRGB(Pixrgb, Pixrgb)                                      aridad: 2
+% imageToString(Image, String)                                             aridad: 2
+% imageDepthLayers(Image, Image_list)                                      aridad: 2
+% imageDecompress(Image, Image)                                            aridad: 2
+% discardPixels(Pixeles, X1, Y1, X2, Y2, Pixeles)                          aridad: 6
+% pixrgbToPixhex(Pixrgb, Pixhex)                                           aridad: 2
+% pixelsrgbToPixelshex(Pixeles, Pixeles)                                   aridad: 2
+% swapXY(Pixeles, Pixeles)                                                 aridad: 2
+% discardPixelsOutRow(Pixeles, Natural, Pixeles)                           aridad: 3
+% colToString(Pixeles, String)                                             aridad: 2
+% rowToString(Natural, Natural, Pixeles, String)                           aridad: 4
+% discardPixelsOutDepth(Pixeles, Natural, Pixeles)                         aridad: 3
+% restoreRow(Natural, Natural, Natural, Pixeles, Color, Pixeles)           aridad: 6
+% restorePixels(Natural, Natural, Natural, Pixeles, Color, Pixeles)        aridad: 6
+
+
+% ----- Metas ----------
+%     Primarias
+% image(Width, Height, Pixels, Image)
+% imageIsBitmap(Image)
+% imageIsPixmap(Image)
+% imageIsHexmap(Image)
+% imageIsCompressed(Image)
+% imageFlipH(ImageIn, ImageOut)
+% imageFlipV(ImageIn, ImageOut)
+% imageCrop(ImageIn, X1, Y1, X2, Y2, CroppedImage)
+% imageRGBToHex(Pixmap, Hexmap)
+% imageToHistogram(Image, Histogram)
+% imageRotate90(ImageIn, RotatedImage)
+% imageCompress(ImageIn, CompressedImage)
+% imageChangePixel(ImageIn, Pixel, ImageOut)
+% imageInvertColorRGB(Pixrgb, Pixrgb)
+% imageToString(Image, String)
+% imageDepthLayers(ImageIn, List_of_layers)
+% imageDecompress(CompressedImage, Image)
+
+%    Secundarias
+% discardPixels(PixelsIn, X1, Y1, X2, Y2, PixelsOut)
+% pixrgbToPixhex(Pixrgb, Pixhex)
+% pixelsrgbToPixelshex(RGB_Pixels, Hex_Pixels)
+% swapXY(PixelsIn, PixelsOut)
+% discardPixelsOutRow(PixelsIn, Row, PixelsOut)
+% colToString(Pixels, String)
+% rowToString(Row,Height,Pixels,StringOut)
+% discardPixelsOutDepth(PixelsIn, Depth, PixelsOut)
+% restoreRow(Column, Row, Width, Pixels_in_row, MostUsed, PixelsOut)
+% restorePixels(Row, Width, Height, PixelsIn, MostUsed, PixelsOut)
+ 
+% -------------------------------------------------------------------------------------------------------------
+
+
+% --------------------------------------------------------------------- Clausulas de Horn ------------------------------------------------------------------------
+
+% ------------------------------------------------------ Reglas ----------------------------------------------------------------
 
 % ---------------------------------- 2. Constructor Image -----------------------------------------------
 
