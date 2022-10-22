@@ -11,20 +11,38 @@ image3(I):- pixhex( 0, 0,"a", 1, PA), pixhex( 0, 1, "b", 2, PB), pixhex( 1, 0, "
 
 
 % 3. imageIsBitmap
-imageIsBitmap1(I):- image1(I) ,imageIsBitmap(I).
+imageIsBitmap1():- image1(I) ,imageIsBitmap(I),!.
+imageIsBitmap2():- image2(I) ,imageIsBitmap(I),!.
+imageIsBitmap3():- image3(I) ,imageIsBitmap(I),!.
 
 
 % 4. imageIsPixmap
+imageIsPixmap1():- image1(I) ,imageIsPixmap(I),!.
+imageIsPixmap2():- image2(I) ,imageIsPixmap(I),!.
+imageIsPixmap3():- image3(I) ,imageIsPixmap(I),!.
 
 % 5. imageIsHexmap
+imageIsHexmap1():- image1(I) ,imageIsHexmap(I),!.
+imageIsHexmap2():- image2(I) ,imageIsHexmap(I),!.
+imageIsHexmap3():- image3(I) ,imageIsHexmap(I),!.
 
 % 6. imageIsCompressed
+imageIsCompressed1():- image1(I),imageIsCompressed(I),!.
+imageIsCompressed2():- image2(I),imageIsCompressed(I),!.
+imageIsCompressed3():- image3(I),imageIsCompressed(I),!.
 
 % 7. imageFlipH
+imageFlipH1(I2):- image1(I1),imageFlipH(I1,I2),!.
+imageFlipH2(I2):- image2(I1),imageFlipH(I1,I2),!.
+imageFlipH3(I2):- image3(I1),imageFlipH(I1,I2),!.
 
 % 8. imageFlipV
+imageFlipV1(I2):- image1(I1),imageFlipV(I1,I2),!.
+imageFlipV2(I2):- image2(I1),imageFlipV(I1,I2),!.
+imageFlipV3(I2):- image3(I1),imageFlipV(I1,I2),!.
 
 % 9. imageCrop
+
 
 % 10. imageRGBToHex
 

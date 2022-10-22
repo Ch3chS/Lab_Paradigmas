@@ -19,3 +19,4 @@ Código:
 	18/10/2022: Mejoras de tipo en image y pixhex
 	19/10/2022: Informe casi terminado
 	20/10/2022: Documentación
+	22/10/2022: Archivo de pruebas avanzado
