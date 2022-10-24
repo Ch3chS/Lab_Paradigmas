@@ -21,3 +21,4 @@ Código:
 	20/10/2022: Documentación
 	22/10/2022: Archivo de pruebas avanzado
 	23/10/2022: Archivo de pruebas terminado (A menos que no coincida con el script de pruebas que aun no suben)
+	24/10/2022: Requisitos faltantes completados

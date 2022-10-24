@@ -1,0 +1,38 @@
+En el este documento se realizó una autoevaluación de lo realizado en el trabajo de laboratorio usando la siguiente escala:
+0: No realizado.
+0.25: Implementación con problemas mayores (funciona 25% de las veces o no funciona)
+0.5: Implementación con funcionamiento irregular (funciona 50% de las veces)
+0.75: Implementación con problemas menores (funciona 75% de las veces)
+1: Implementación completa sin problemas (funciona 100% de las veces)
+
+
+No funcionales:
+1. Autoevaluación      1
+2. Lenguaje            1
+3. Versión             1
+4. Standart            1
+5. Documentación       1
+6. Organización        1
+7. Historial           1
+8. Pruebas             1
+9. Prerrequisitos      1
+
+Funcionales:
+1. TDAs                1
+2. image               1
+3. bitmap?             1
+4. pixmap?             1
+5. hexmap?             1
+6. compressed?         1
+7. flipH               1
+8. flipV               1
+9. crop                1
+10. imgRGB->imgHex     1
+11. histogram          1
+12. rotate90           1
+13. compress           1
+14. changePixel        1
+15. invertColorRGB     1
+16. image->string      1
+17. depthLayers        1
+18. decompress        0.5

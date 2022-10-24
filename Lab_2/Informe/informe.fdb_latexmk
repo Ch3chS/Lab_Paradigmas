@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex informe"] 1666118340 "informe.aux" "informe.bbl" "informe" 1666475552
+["bibtex informe"] 1666118340 "informe.aux" "informe.bbl" "informe" 1666557235
   "Bibliografia.bib" 1664566031 304 f7a811ffa4504760fe6a2d1264085e27 ""
   "C:/Users/Donex/AppData/Local/Programs/MiKTeX/bibtex/bst/apacite/apacite.bst" 1374956328 146156 9d7b79dbf9d91133318126032cff8c27 ""
-  "Contenido/Portada.aux" 1666475551 540 b4ae4c3842cb01d2e668dc43fb65418b "pdflatex"
-  "informe.aux" 1666475551 2640 1d2968db9475750035d8e18cf8718ab2 "pdflatex"
+  "Contenido/Portada.aux" 1666557235 540 b4ae4c3842cb01d2e668dc43fb65418b "pdflatex"
+  "informe.aux" 1666557235 2640 1d2968db9475750035d8e18cf8718ab2 "pdflatex"
   (generated)
   "informe.bbl"
   "informe.blg"
-["pdflatex"] 1666475550 "c:/Users/Donex/Desktop/Lab_Paradigmas/Lab_2/Informe/informe.tex" "informe.pdf" "informe" 1666475552
+["pdflatex"] 1666557234 "c:/Users/Donex/Desktop/Lab_Paradigmas/Lab_2/Informe/informe.tex" "informe.pdf" "informe" 1666557235
   "Anexos.tex" 1666116740 2512 95438f4819fd37463edbc5d83665bbea ""
   "C:/Users/Donex/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1662919135 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Donex/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1661041891 11548 753f7a66dd23511f84f5504cbe050061 ""
@@ -80,19 +80,19 @@
   "Contenido/Capitulos/Desarrollo/C_implementación.tex" 1666475549 447 f98e0f559e5d2f5f69e41add4fd29ed5 ""
   "Contenido/Capitulos/Desarrollo/D_solucion.tex" 1666117266 4500 b97937152aa03f07c737ada746b82bff ""
   "Contenido/Capitulos/Introduccion/D_paradigma.tex" 1664567930 933 bd94bb5fbe42ae859daee078f456a651 ""
-  "Contenido/Capitulos/Introduccion/D_problema.tex" 1664141957 225 cbe01ad750ea26a399ccdeb45deb36e9 ""
+  "Contenido/Capitulos/Introduccion/D_problema.tex" 1666557123 381 ff8fcce14f2d1669fabcb820cfad40fd ""
   "Contenido/Capitulos/Resultados/Conclusión.tex" 1666121678 1009 35958a01212d8d7e04f96a8c7db8b0db ""
   "Contenido/Capitulos/Resultados/I_uso.tex" 1666117841 509 be6a6833a16d2f818cf0951768b1a165 ""
   "Contenido/Capitulos/Resultados/R_obtenidos.tex" 1666121540 1091 0203e0833fb9056390f29e59e5eb307e ""
   "Contenido/Imagenes/Logo color.png" 1660966825 28777 29ae04311183277b3a9b0f56d3ecdda0 ""
-  "Contenido/Portada.aux" 1666475551 540 b4ae4c3842cb01d2e668dc43fb65418b "pdflatex"
+  "Contenido/Portada.aux" 1666557235 540 b4ae4c3842cb01d2e668dc43fb65418b "pdflatex"
   "Contenido/Portada.tex" 1664562114 864 01def6a48810a779fe5110e71f2f41a5 ""
-  "c:/Users/Donex/Desktop/Lab_Paradigmas/Lab_2/Informe/informe.tex" 1666116707 2031 7f7f6b553c3b3f28842b872fea0e54d4 ""
-  "informe.aux" 1666475551 2640 1d2968db9475750035d8e18cf8718ab2 "pdflatex"
+  "c:/Users/Donex/Desktop/Lab_Paradigmas/Lab_2/Informe/informe.tex" 1666557233 2096 042d7343b024e0a7f76f4a1b1650cd91 ""
+  "informe.aux" 1666557235 2640 1d2968db9475750035d8e18cf8718ab2 "pdflatex"
   "informe.bbl" 1666118341 650 031fc8f3071afe0a7071690ea37327dc "bibtex informe"
-  "informe.lot" 1666475551 271 3bbe98f0a7ddaa2162dbbc5a49e51426 "pdflatex"
-  "informe.tex" 1666116707 2031 7f7f6b553c3b3f28842b872fea0e54d4 ""
-  "informe.toc" 1666475551 1059 039d7e2021717a6b256f833f61aed85c "pdflatex"
+  "informe.lot" 1666557235 271 3bbe98f0a7ddaa2162dbbc5a49e51426 "pdflatex"
+  "informe.tex" 1666557233 2096 042d7343b024e0a7f76f4a1b1650cd91 ""
+  "informe.toc" 1666557235 1059 039d7e2021717a6b256f833f61aed85c "pdflatex"
   (generated)
   "Contenido/Portada.aux"
   "informe.aux"

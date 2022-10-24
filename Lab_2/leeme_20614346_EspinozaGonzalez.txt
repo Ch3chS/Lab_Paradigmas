@@ -1,0 +1,1 @@
+Tan solo llenar la imagen completa al usar el predicado image.
