@@ -1,5 +1,26 @@
 En un principio se realizó todo pensando en que las imagenes deberían ser completamente ingresadas para que la compresión
 funcione  bien, sin embargo no es necesario que se ingresen en orden los pixeles, ya que, el constructor de la imagen se 
 encarga de eso; debido a esto no hay muchas instrucciones de uso como tal, más allá de que se cumpla el formato 
-de los ejemplos del cuadro \ref{tab:Ejemplos} y ingresar todos los pixeles, aunque claro, 
-hay muchos más ejemplos en el archivo de pruebas.
+de los ejemplos del cuadro \ref{tab:Ejemplos} e ingresar todos los pixeles, aunque claro, 
+hay muchos más ejemplos en el archivo de pruebas.\\
+
+Se debe tener en cuenta que (Se usaron pixrgb debido a que permiten usar todos los predicados):
+
+\begin{itemize}
+    \item Pixeles:
+    \begin{itemize}
+        \item P1: pixrgb(0,0,0,0,0,0,P1).
+        \item P2: pixrgb(0,1,255,255,255,10,P2).
+        \item P3: pixrgb(1,0,255,255,255,20,P3).
+        \item P4: pixrgb(1,1,0,122,255,30,P4).
+        \item MP3: invertColorRGB(P3,MP3).
+    \end{itemize}
+    \item Imagenes:
+    \begin{itemize}
+        \item I1: image(2,1,[P1, P3],I1).
+        \item I2: image(2,2,[P1,P2,P3,P4],I2).
+        \item CI2: imageCompress(I1,CI1).
+    \end{itemize}
+\end{itemize}
+
+Las imagenes de ejemplo son pequeñas para que quepan en la tabla.

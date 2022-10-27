@@ -19,27 +19,28 @@
 
 \begin{table}[H]
     \begin{center}
+    \scalebox{0.9}{
     \begin{tabular}{|c|c|c|}
     \hline
     Función & Uso & Resultado esperado \\ \hline
-    2. image & 0 & 0 \\ \hline
-    3. bitmap? & 0 & 0 \\ \hline
-    4. pixmap? & 0 & 0 \\ \hline
-    5. hexmap? & 0 & 0 \\ \hline
-    6. compressed? & 0 & 0 \\ \hline
-    7. flipH & 0 & 0 \\ \hline
-    8. flipV & 0 & 0 \\ \hline
-    9. crop & 0 & 0 \\ \hline
-    10. imgRGB-$>$imgHex & 0 &  0 \\ \hline
-    11. histogram & 0 & 0 \\ \hline
-    12. rotate90 & 0 & 0 \\ \hline
-    13. compress & 0 & 0 \\ \hline
-    14. changePixel & 0 & 0 \\ \hline
-    15. invertColorRGB & 0 & 0 \\ \hline
-    16. image-$>$string & 0 & 0 \\ \hline
-    17. depthLayers & 0 & 0 \\  \hline
-    18. decompress & 0 & 0 \\ \hline
-    \end{tabular}
+    2. image & image(1,2,[P1,P2],I). & I=[0,1,2,[[0,0,[0,0,0],0],[0,1,[255,255,255],10]],[0,0,0]] \\ \hline
+    3. bitmap? & imageIsBitmap(I1). & false \\ \hline
+    4. pixmap? & imageIsPixmap(I1). & I1=[0,2,1,[[0,0,[0,0,0],0],[1,0,[255,255,255],20]],[0,0,0]] \\ \hline
+    5. hexmap? & imageIsPixmap(I1). & false \\ \hline
+    6. compressed? & imageIsCompressed(I1). & false \\ \hline
+    7. flipH & imageFlipH(I1,I3). & I3=[0,2,1,[[0,0,[255,255,255],20],[1,0,[0,0,0],0]],[0,0,0]] \\ \hline
+    8. flipV & imageFlipV(I1,I3). & I3=[0,2,1,[[0,0,[0,0,0],0],[1,0,[255,255,255],20]],[0,0,0]] \\ \hline
+    9. crop & imageCrop(I1,0,0,0,0,I2). & I3=[0,1,1,[[0,0,[0,0,0],0]],[0,0,0]] \\ \hline
+    10. imgRGB-$>$imgHex & imageRGBToHex(I1,I3). & I3=[0,2,1,[[0,0,"\#000000",0],[1,0,"\#ffffff",20]],"\#000000"] \\ \hline
+    11. histogram & imageToHistogram(I2,H). & H=[[[0,0,0],1],[[255,255,255],2],[[0,122,255],1]] \\ \hline
+    12. rotate90 & imageRotate90(I1,I3). & I3=[0,1,2,[[0,0,[0,0,0],0],[0,1,[255,255,255],20]],[0,0,0]] \\ \hline
+    13. compress & imageCompress(I2,I3). & I3=[1,2,2,[[0,0,[0,0,0],0],[1,1,[0,122,255],30]],[255,255,255]] \\ \hline
+    14. changePixel & imageChangePixel(I1,MP3,I3). & [0,2,1,[[0,0,[0,0,0],0],[1,0,[0,0,0],20]],[0,0,0]] \\ \hline
+    15. invertColorRGB & imageInvertColorRGB(P4,MP4) & MP4=[1,1,[255,133,0],30] \\ \hline
+    16. image-$>$string & imageToString(I1,Str). & Str="[0,0,0]$\backslash{t}$[255,255,255]$\backslash{t}$$\backslash{n}$" \\ \hline
+    17. depthLayers & imageDepthLayers(I1,IL). & IL=[[0,2,1,[0,0,[0,0,0],0],[0,0,0]],[0,2,1,[1,0,[255,255,255],20],[255,255,255]]] \\  \hline
+    18. decompress & imageDecompress(CI1,I3). & I3=[0,2,1,[[0,0,[0,0,0],0],[1,0,[255,255,255],20]],[0,0,0]] \\ \hline
+    \end{tabular}}
     \caption{Ejemplos de uso}
     \label{tab:Ejemplos}
     \end{center}
