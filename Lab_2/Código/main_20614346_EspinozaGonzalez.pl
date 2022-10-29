@@ -128,18 +128,22 @@ imageIsCompressed([1,_,_,_,_]).
 
 % ------------------------------------- 7. flipH --------------------------------------------------------
 
-imageFlipH([0,Width,Height,[],MostUsed], [0,Width,Height,[],MostUsed]).
-imageFlipH([0,Width,Height,[[X,Y,Color,Depth]|Pixels],MostUsed],[0,Width,Height,[[NewX,Y,Color,Depth]|P1],MostUsed]):- 
-NewX is Width-1-X,imageFlipH([0,Width,Height,Pixels,MostUsed],[0,Width, Height, P1,MostUsed]).
+imageFlipH0([0,Width,Height,[],MostUsed], [0,Width,Height,[],MostUsed]).
+imageFlipH0([0,Width,Height,[[X,Y,Color,Depth]|Pixels],MostUsed],[0,Width,Height,[[NewX,Y,Color,Depth]|P1],MostUsed]):- 
+NewX is Width-1-X,imageFlipH0([0,Width,Height,Pixels,MostUsed],[0,Width, Height, P1,MostUsed]).
+
+imageFlipH(I, [0,Width,Height,Pixels1,MostUsed]):- imageFlipH0(I,[0,Width,Height,Pixels,MostUsed]), sort(Pixels, Pixels1).
 
 % -------------------------------------------------------------------------------------------------------
 
 
 % ------------------------------------- 8. flipV --------------------------------------------------------
 
-imageFlipV([0,Width,Height,[],MostUsed], [0,Width,Height,[],MostUsed]).
-imageFlipV([0,Width,Height,[[X,Y,Color,Depth]|Pixels],MostUsed],[0,Width,Height,[[X,NewY,Color,Depth]|P1],MostUsed]):- 
-NewY is Height-1-Y,imageFlipV([0,Width,Height,Pixels,MostUsed],[0,Width, Height, P1,MostUsed]).
+imageFlipV0([0,Width,Height,[],MostUsed], [0,Width,Height,[],MostUsed]).
+imageFlipV0([0,Width,Height,[[X,Y,Color,Depth]|Pixels],MostUsed],[0,Width,Height,[[X,NewY,Color,Depth]|P1],MostUsed]):- 
+NewY is Height-1-Y,imageFlipV0([0,Width,Height,Pixels,MostUsed],[0,Width, Height, P1,MostUsed]).
+
+imageFlipV(I, [0,Width,Height,Pixels1,MostUsed]):- imageFlipV0(I,[0,Width,Height,Pixels,MostUsed]), sort(Pixels, Pixels1).
 
 % -------------------------------------------------------------------------------------------------------
 
@@ -151,8 +155,8 @@ discardPixels([],_,_,_,_,[]).
 discardPixels([[X,Y,_,_]|Pixels],X1,Y1,X2,Y2,P1):- ((X2 < X; X < X1); (Y2 < Y; Y < Y1)),
 discardPixels(Pixels,X1,Y1,X2,Y2,P1).
 
-discardPixels([[X,Y,Color,Depth]|Pixels],X1,Y1,X2,Y2,[[X,Y,Color,Depth]|P1]):- X1 @=< X, X @=< X2, Y1 @=< Y, Y @=< Y2,
-discardPixels(Pixels,X1,Y1,X2,Y2,P1).
+discardPixels([[X,Y,Color,Depth]|Pixels],X1,Y1,X2,Y2,[[X3,Y3,Color,Depth]|P1]):- X1 @=< X, X @=< X2, Y1 @=< Y, Y @=< Y2,
+ X3 is X - X1, Y3 is Y - Y1, discardPixels(Pixels,X1,Y1,X2,Y2,P1).
 
 imageCrop([0,_,_,Pixels,_],X1,Y1,X2,Y2,I2):- Width2 is X2 - X1 + 1, Height2 is Y2 - Y1 + 1,
 discardPixels(Pixels,X1,Y1,X2,Y2,Pixels2), image(Width2,Height2,Pixels2,I2).
